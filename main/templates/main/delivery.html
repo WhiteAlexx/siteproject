@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block modal_cart %}
+{% include "includes/cart_button.html" %}
+{% endblock  %}
+
+{% block trading %}
+	<div class="dlvr rounded my-4">
+		<h2> {{ cntnt }}</h2>
+		<p>{{ text_on_page}}</p>
+	</div>
+{% endblock  %}
+
+{% block content %}
+<div class="col-lg-3 col-md-12">
+    <div class="row px-2">
+        <div class="col-lg-12 sidebar rounded my-4">
+            <h5 class="sbttl">Здесь какие-нибудь новости</h5>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim ut doloremque aspernatur
+                voluptate, quos cupiditate, suscipit culpa totam dolore, corporis veritatis animi
+                reprehenderit odit quis corrupti! <a href="#">Learm More>>></a></p>
+        </div>
+        <div class="col-lg-12 sidebar rounded my-4">
+            <h5 class="sbttl">Здесь какая-нибудь интересная информация</h5>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique totam, reiciendis
+                perferendis molestias provident eveniet sequi, nisi facilis reprehenderit omnis
+                perspiciatis autem corporis fuga eaque modi libero? Sed odio delectus assumenda
+                accusantium, est rem nam optio rerum cum suscipit quo. <a href="#">Learm More>>></a></p>
+        </div>
+        <div class="col-lg-12 sidebar rounded my-4">
+            <h5 class="sbttl">Здесь какая-нибудь полезная информация</h5>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus unde esse
+                consequuntur enim? <a href="#">Learm More>>></a></p>
+        </div>
+    </div>
+</div>
+{% endblock  %}
+
+
+

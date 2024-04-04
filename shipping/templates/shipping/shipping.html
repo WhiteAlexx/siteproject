@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block modal_cart %}
+{% include "includes/cart_button.html" %}
+{% endblock  %}
+
+{% block trading %}
+
+{% for product in shipp %}
+    {% comment %} {% if product.category.name == "Товары в пути" %} {% endcomment %}
+        <div class="col-lg-4 col-md-6 p-4">
+            <div class="card rounded">
+                {% if product.image %}
+                    <a href="{% url "shipping:product" product.slug %}"><img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}"></a>
+                {% else %}
+                    <a href="{% url "shipping:product" product.slug %}"><img src="{% static "deps/images/Not found image.png" %}" class="card-img-top" alt="{{ product.name }}"></a>
+                {% endif %}
+                <div class="card-body">
+                    <h6 class="card-title text-truncate"><a href="{% url "shipping:product" product.slug %}">{{product.name}}</a></h6>
+                    {% comment %} <p class="card-text">{{product.description}}</p> {% endcomment %}
+                    {% comment %} <p class="product_id">slug: {{ product.display_id }}</p> {% endcomment %}
+                    <div class="d-flex justify-content-between">
+                        {% if product.discount %}
+                            <p><s>{{product.price}}</s></p>
+                            <p><strong>{{product.sell_price}} Р/{{product.unit}}</strong></p>
+                            <span class="badge bg-warning text-dark">Скидка {{product.discount}} %</span>
+                        {% else %}
+                            <p><strong>{{product.price}} Р/{{product.unit}}</strong></p>
+                        {% endif %}
+
+                        <a href="{% url "carts:cart_add" %}" class="btn add-to-cart"
+                        data-product-id="{{ product.id }}">
+                            {% csrf_token %}
+                            <img class="mx-1" src="{% static "deps/icons/cart-plus.svg" %}" alt="Catalog Icon" width="32" height="32">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% comment %} {% endif %} {% endcomment %}
+{% endfor %}
+
+<!-- Пагинация -->
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center my-4">
+        <div class="custom-shadow d-flex">
+            <li class="page-item disabled">
+              <a class="page-link">Previous</a>
+            </li>
+            {% for page in shipp.paginator.page_range %}
+                <li class="page-item"><a class="page-link" href="{% url "shipping:index" page %}">{{ page }}</a></li>
+            {% endfor %}
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+        </div>
+    </ul>
+</nav>
+
+{% endblock  %}
+
+{% block content %}
+<div class="col-lg-3 col-md-12">
+    <div class="row px-2">
+        <div class="col-lg-12 sidebar rounded my-4">
+            <h5 class="sbttl">Здесь какие-нибудь новости</h5>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim ut doloremque aspernatur
+                voluptate, quos cupiditate, suscipit culpa totam dolore, corporis veritatis animi
+                reprehenderit odit quis corrupti! <a href="#">Learm More>>></a></p>
+        </div>
+        <div class="col-lg-12 sidebar rounded my-4">
+            <h5 class="sbttl">Здесь какая-нибудь интересная информация</h5>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique totam, reiciendis
+                perferendis molestias provident eveniet sequi, nisi facilis reprehenderit omnis
+                perspiciatis autem corporis fuga eaque modi libero? Sed odio delectus assumenda
+                accusantium, est rem nam optio rerum cum suscipit quo. <a href="#">Learm More>>></a></p>
+        </div>
+        <div class="col-lg-12 sidebar rounded my-4">
+            <h5 class="sbttl">Здесь какая-нибудь полезная информация</h5>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus unde esse
+                consequuntur enim? <a href="#">Learm More>>></a></p>
+        </div>
+    </div>
+</div>
+{% endblock  %}

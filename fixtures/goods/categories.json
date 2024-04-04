@@ -1,0 +1,50 @@
+[
+    {
+        "model": "goods.categories",
+        "pk": 4,
+        "fields": {
+            "name": "Товары в наличии",
+            "slug": "tovary"
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 5,
+        "fields": {
+            "name": "Распродажа",
+            "slug": "rasprodazha"
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 6,
+        "fields": {
+            "name": "Популярное",
+            "slug": "populyarnoe"
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 7,
+        "fields": {
+            "name": "Новинки",
+            "slug": "novinki"
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 8,
+        "fields": {
+            "name": "Остатки",
+            "slug": "ostatki"
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 9,
+        "fields": {
+            "name": "Товары в пути",
+            "slug": "tovary-v-puti"
+        }
+    }
+]

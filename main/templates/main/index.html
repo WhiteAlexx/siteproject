@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block modal_cart %}
+{% include "includes/cart_button.html" %}
+{% endblock  %}
+
+{% block trading %}
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+            class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+            aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+            aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+            aria-label="Slide 4"></button>
+
+    </div>
+    <div class="carousel-inner rounded my-4">
+        {% for category in categories %}
+            {% if forloop.counter == 1 %}
+                <div class="carousel-item active">
+                    <div class="d-block w-100">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <a href="{% url "catalog:index" category.slug %}"><img src="{% static "deps/images/1.png" %}" class="w-100" alt="{{ category.name }}"></a>
+                            </div>
+                            <div class="col-lg-6 col-md-6 sld-txt">
+                                <a href="{% url "catalog:index" category.slug %}">
+                                    <h2>{{ category.name }}</h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if forloop.counter != 1 %}
+                <div class="carousel-item">
+                    <div class="d-block w-100">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <a href="{% url "catalog:index" category.slug %}"><img src="{% static "deps/images/1.png" %}" class="w-100" alt="{{ category.name }}"></a>
+                            </div>
+                            <div class="col-lg-6 col-md-6 sld-txt">
+                                <a href="{% url "catalog:index" category.slug %}">
+                                    <h2>{{ category.name }}</h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}    
+        {% endfor %}
+
+    </div>
+    <button class="carousel-control-prev" type="button"
+        data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button"
+        data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<div class="col-lg-12 col-md-12 text-center mt-4">
+    <a href="{% url "catalog:index" 'tovary' %}"><button type="button" class="btn btn-outline-primary btn-lg my-5">Все товары</button></a>
+    <a href="{% url "shipping:index" %}"><button type="button" class="btn btn-outline-primary btn-lg my-5">В пути</button></a>
+</div>
+{% endblock  %}
+
+{% block content %}
+<div class="col-lg-3 col-md-12">
+    <div class="row px-2">
+        <div class="col-lg-12 sidebar rounded my-4">
+            <h5 class="sbttl">Здесь какие-нибудь новости</h5>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim ut doloremque aspernatur
+                voluptate, quos cupiditate, suscipit culpa totam dolore, corporis veritatis animi
+                reprehenderit odit quis corrupti! <a href="#">Learm More>>></a></p>
+        </div>
+        <div class="col-lg-12 sidebar rounded my-4">
+            <h5 class="sbttl">Здесь какая-нибудь интересная информация</h5>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique totam, reiciendis
+                perferendis molestias provident eveniet sequi, nisi facilis reprehenderit omnis
+                perspiciatis autem corporis fuga eaque modi libero? Sed odio delectus assumenda
+                accusantium, est rem nam optio rerum cum suscipit quo. <a href="#">Learm More>>></a></p>
+        </div>
+        <div class="col-lg-12 sidebar rounded my-4">
+            <h5 class="sbttl">Здесь какая-нибудь полезная информация</h5>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus unde esse
+                consequuntur enim? <a href="#">Learm More>>></a></p>
+        </div>
+    </div>
+</div>
+{% endblock  %}
