@@ -1,30 +1,26 @@
 {% load static %}
 
+
+
+
 <input type="checkbox" name="select_all" id="id_select_all" checked>   
 <label class="text-black" for="id_select_all"><strong>Выбрать все</strong></label>                        
-
-
-
 
 <div class="card mb-3 text-bg-light shadow-lg">
     {% for cart in carts %}
         <div class="card-header">
             <h5 class="card-title">{{ cart.product.name }} ({{ cart.product.unit }})</h5>
-            {% comment %} {% if order %} {% endcomment %}
-                <img src="{{ cart.image_for_order }}" alt="{{ cart.product.name }}">
-            {% comment %} {% endif %} {% endcomment %}
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <div class="row text-center">
                     <div class="col p-0">
+                        {% comment %} <span> {% endcomment %}
+                            <input type="checkbox" name="select_buy" id="id_select_buy" checked>
+                        {% comment %} </span> {% endcomment %}
+                    </div>    
+                    <div class="col p-0">
                         <div class="input-group">
-                            <span>
-                                {% comment %} {% if order %} {% endcomment %}
-                                    <input type="checkbox" name="select_buy" id="id_select_buy" checked>   
-                                    <label for="">Выбрать</label>                            
-                                {% comment %} {% endif %} {% endcomment %}
-                            </span>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-dark btn-sm decrement"
                                     data-cart-id="{{ cart.id }}" 
@@ -44,9 +40,9 @@
                         </div>
                     </div>
                     <div class="col p-0">
-                        <p class="text-black">{{ cart.product.unit }}  x  {{ cart.product.sell_price }}  = </p>
+                        <p class="text-black">{{ cart.product.unit }}  x  {{ cart.product.sell_price }}</p>
                     </div>
-                    <div class="col p-0"><strong>{{ cart.products_price }} Р</strong></div>
+                    <div class="col p-0"><strong>={{ cart.products_price }} Р</strong></div>
                     <div class="col p-0">
                         <a href="{% url "carts:cart_remove" %}" class="remove-from-cart" 
                             data-cart-id="{{cart.id}}">
@@ -66,8 +62,61 @@
         <h4 class="float-left"><strong>{{ carts.total_price }} Р</strong></h4>
     </div>
 </div>
-{% if carts and not order %}
+{% comment %} {% if carts and not order %}
     <a class="btn btn-dark" href="{% url "orders:create_order" %}">
         Оформить заказ
     </a>
-{% endif %}
+{% endif %} {% endcomment %}
+<!-- Детали заказа -->
+<div class="container">
+    <h3 class="text-center text-black">Детали заказа</h3>
+    <div class="card mb-3">
+        <div class="card-body">
+            <form action="{% url "orders:create_order" %}" method="post">
+                {% csrf_token %}
+                <div class="row text-black">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_first_name" class="form-label">Имя*:</label>
+                        <input type="text" class="form-control" id="id_first_name"
+                            value="{% if form.first_name.value %}{{form.first_name.value}}{% endif %}"
+                            name="first_name" required>
+                        {% if form.first_name.errors %}
+                            <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_last_name" class="form-label">Фамилия*:</label>
+                        <input type="text" class="form-control" id="id_last_name"
+                            value="{% if form.last_name.value %}{{form.last_name.value}}{% endif %}"
+                            name="last_name" required>
+                        {% if form.last_name.errors %}
+                            <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_telnmbr" class="form-label">Номер телефона*:</label>
+                        <input type="text" class="form-control" id="id_telnmbr"
+                            value="{% if form.telnmbr.value %}{{form.telnmbr.value}}{% endif %}"
+                            name="telnmbr"
+                            placeholder="В формате: 8XXXXXXXXXX"
+                            required>
+                        {% if form.telnmbr.errors %}
+                            <div class="alert alert-danger alert-dismissible fade show">{{form.telnmbr.errors}}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3" id="deliveryAddressField">
+                        <label for="id_adres" class="form-label">Адрес
+                            доставки*:</label>
+                        <input type="text" class="form-control" id="id_adres"
+                            value="{% if form.adres.value %}{{form.adres.value}}{% endif %}"
+                            name="adres" rows="2" required></input>
+                        {% if form.adres.errors %}
+                            <div class="alert alert-danger alert-dismissible fade show">{{form.adres.errors}}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-dark">Заказать</button>
+            </form>
+        </div>
+    </div>
+</div>
