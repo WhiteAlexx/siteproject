@@ -6,8 +6,12 @@
 {% block trading %}
 <div class=" bg-white bg-opacity-50 p-4 mb-4 mx-2 rounded custom-shadow">
     <div class="container">
-        <h3 class="text-center mb-4">Выбранные товары</h3>
+        <h3 class="text-center mb-4 text-black">Выбранные товары</h3>
         <div class="container" id="cart-items-container">
+            {% if order %}
+                <input type="checkbox" name="select_all" id="id_select_all" checked>   
+                <label class="text-black" for="id_select_all"><strong>Выбрать все</strong></label>                        
+            {% endif %}
             <!-- Разметка корзины -->
                 {% user_carts request as carts %}
                 {% include "carts/includes/included_cart.html" %}
@@ -16,12 +20,12 @@
     </div>
     <!-- Детали заказа -->
     <div class="container">
-        <h3 class="text-center">Детали заказа</h3>
+        <h3 class="text-center text-black">Детали заказа</h3>
         <div class="card mb-3">
             <div class="card-body">
                 <form action="{% url "orders:create_order" %}" method="post">
                     {% csrf_token %}
-                    <div class="row">
+                    <div class="row text-black">
                         <div class="col-md-6 mb-3">
                             <label for="id_first_name" class="form-label">Имя*:</label>
                             <input type="text" class="form-control" id="id_first_name"
@@ -68,9 +72,9 @@
                         <div class="mb-3" id="deliveryAddressField">
                             <label for="id_adres" class="form-label">Адрес
                                 доставки*:</label>
-                            <textarea class="form-control" id="id_adres"
+                            <input type="text" class="form-control" id="id_adres"
                                 value="{% if form.adres.value %}{{form.adres.value}}{% endif %}"
-                                name="adres" rows="2" required></textarea>
+                                name="adres" rows="2" required></input>
                             {% if form.adres.errors %}
                                 <div class="alert alert-danger alert-dismissible fade show">{{form.adres.errors}}</div>
                             {% endif %}
@@ -91,7 +95,7 @@
                             </div>
                         </div> {% endcomment %}
                     </div>
-                    <button type="submit" class="btn btn-dark">Оформить заказ</button>
+                    <button type="submit" class="btn btn-dark">Заказать</button>
                 </form>
             </div>
         </div>

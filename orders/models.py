@@ -22,11 +22,14 @@ class Order(models.Model):
     adres = models.CharField(max_length=250, null=True, blank=True, verbose_name="Адрес доставки")
     # payment_on_get = models.BooleanField(default=False, verbose_name="Оплата при получении")
     is_paid = models.BooleanField(default=False, verbose_name="Оплачено")
-    status = models.CharField(max_length=50, default='В обработке',
-                              choices=(('В обработке', 'В обработке'),
+    status = models.CharField(max_length=50, default='Ожидает оплаты',
+                              choices=(('Ожидает оплаты', 'Ожидает оплаты'),
+                                       ('В обработке', 'В обработке'),
                                        ('В пути', 'В пути'),
-                                       ('Доставлено', 'Доставлено'),),
+                                       ('Доставлено', 'Доставлено'),
+                                       ),
                               verbose_name="Статус заказа")
+    total_cost = models.DecimalField(default=0.00, max_digits=11, decimal_places=2, verbose_name="Стоимость")
 
     class Meta:
         db_table = "order"

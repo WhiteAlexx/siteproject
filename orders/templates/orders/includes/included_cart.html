@@ -4,15 +4,15 @@
 <label class="text-black" for="id_select_all"><strong>Выбрать все</strong></label>                        
 
 
-
-
 <div class="card mb-3 text-bg-light shadow-lg">
-    {% for cart in carts %}
+    {% for item in cart_items %}
         <div class="card-header">
-            <h5 class="card-title">{{ cart.product.name }} ({{ cart.product.unit }})</h5>
-            {% comment %} {% if order %} {% endcomment %}
-                <img src="{{ cart.image_for_order }}" alt="{{ cart.product.name }}">
-            {% comment %} {% endif %} {% endcomment %}
+            <h5 class="card-title">{{ item.product.name }} ({{ item.product.unit }})</h5>
+
+
+                <img src="{{ item.image_for_order }}" alt="{{ item.product.name }}">
+
+
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
@@ -20,35 +20,37 @@
                     <div class="col p-0">
                         <div class="input-group">
                             <span>
-                                {% comment %} {% if order %} {% endcomment %}
+
+
                                     <input type="checkbox" name="select_buy" id="id_select_buy" checked>   
                                     <label for="">Выбрать</label>                            
-                                {% comment %} {% endif %} {% endcomment %}
+
+
                             </span>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-dark btn-sm decrement"
                                     data-cart-id="{{ cart.id }}" 
-                                    data-cart-change-url="{% url "cart:cart_change" %}">
+                                    data-cart-change-url="{% url "orders:cart_change" %}">
                                     {% csrf_token %}
                                     -</button>
                             </span>
-                            <input type="text" class="form-control number" value="{{ cart.quantity }}"
+                            <input type="text" class="form-control number" value="{{ item.quantity }}"
                                 readonly>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-dark btn-sm increment"
                                     data-cart-id="{{ cart.id }}" 
-                                    data-cart-change-url="{% url "cart:cart_change" %}">
+                                    data-cart-change-url="{% url "orders:cart_change" %}">
                                     {% csrf_token %}
                                     +</button>
                             </span>
                         </div>
                     </div>
                     <div class="col p-0">
-                        <p class="text-black">{{ cart.product.unit }}  x  {{ cart.product.sell_price }}  = </p>
+                        <p class="text-black">{{ item.product.unit }}  x  {{ item.product.sell_price }}  = </p>
                     </div>
-                    <div class="col p-0"><strong>{{ cart.products_price }} Р</strong></div>
+                    <div class="col p-0"><strong>{{ item.products_price }} Р</strong></div>
                     <div class="col p-0">
-                        <a href="{% url "carts:cart_remove" %}" class="remove-from-cart" 
+                        <a href="{% url "orders:cart_remove" %}" class="remove-from-cart" 
                             data-cart-id="{{cart.id}}">
                             {% csrf_token %}
                             <img class="mx-1" src="{% static "deps/icons/trash3-fill.svg" %}"
@@ -66,8 +68,3 @@
         <h4 class="float-left"><strong>{{ carts.total_price }} Р</strong></h4>
     </div>
 </div>
-{% if carts and not order %}
-    <a class="btn btn-dark" href="{% url "orders:create_order" %}">
-        Оформить заказ
-    </a>
-{% endif %}

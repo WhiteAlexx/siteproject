@@ -35,3 +35,7 @@ def delivery(request):
     }
 
     return render(request, 'main/delivery.html', context)
+
+
+def payment(request):
+    return render(request, 'main/payment.html')

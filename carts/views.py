@@ -6,7 +6,10 @@ from carts.models import Cart
 from carts.utils import get_user_carts
 from goods.models import Products
 
+
 # Create your views here.
+
+
 def cart_add(request):
 
     product_id = request.POST.get("product_id")
@@ -49,6 +52,7 @@ def cart_add(request):
 
     return JsonResponse(response_data)
 
+
 def cart_change(request):
     cart_id = request.POST.get("cart_id")
     quantity = request.POST.get("quantity")
@@ -73,20 +77,20 @@ def cart_change(request):
 
 def cart_remove(request):
 
-    cart_id = request.POST.get("cart_id")
+        cart_id = request.POST.get("cart_id")
 
-    cart = Cart.objects.get(id=cart_id)
-    quantity = cart.quantity
-    cart.delete()
+        cart = Cart.objects.get(id=cart_id)
+        quantity = cart.quantity
+        cart.delete()
 
-    user_cart = get_user_carts(request)
-    cart_items_html = render_to_string(
-        "carts/includes/included_cart.html", {"carts": user_cart}, request=request)
+        user_cart = get_user_carts(request)
+        cart_items_html = render_to_string(
+            "carts/includes/included_cart.html", {"carts": user_cart}, request=request)
 
-    response_data = {
-        "message": "Товар удалён",
-        "cart_items_html": cart_items_html,
-        "quantity_deleted": quantity,
-    }
+        response_data = {
+            "message": "Товар удалён",
+            "cart_items_html": cart_items_html,
+            "quantity_deleted": quantity,
+        }
 
-    return JsonResponse(response_data)
+        return JsonResponse(response_data)

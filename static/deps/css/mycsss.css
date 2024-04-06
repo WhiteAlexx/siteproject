@@ -26,13 +26,13 @@ body {
     background-position: center center;
     background-size: cover;
     height: 100%;
-    color: black;
+    color: azure;
 }
 
 p,
 h2,
 h3 {
-    color: black;
+    color: azure;
 }
 
 .carousel-item {
@@ -45,12 +45,12 @@ h3 {
 .card {
     box-shadow: 7px 5px 8px 1px black;
     background: rgba(0, 0, 0, 0.440);
-    color: black;
+    color: azure;
 }
 
 .card a {
     text-decoration: none;
-    color: black;
+    color: azure;
 }
 
 .carousel-inner a {
@@ -58,7 +58,7 @@ h3 {
     color: black;
 }
 .nav-link {
-    color: black;
+    color: azure;
 }
 
 .navbar-nav .nav-link.active {
@@ -70,14 +70,14 @@ h3 {
 }
 
 .sidebar {
-    color: black;
+    color: azure;
     background: rgba(0, 0, 0, 0.440)
 }
 
 .sld-txt,
 .ftr-txt,
 .btn-outline-primary {
-    color: black;
+    color: azure;
     margin: auto auto;
 }
 

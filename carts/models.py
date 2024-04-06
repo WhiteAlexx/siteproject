@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import BooleanField
 
 from goods.models import Products
 from users.models import User
@@ -18,12 +19,14 @@ class CartQueryset(models.QuerySet):
 
 class Cart(models.Model):
 
+    select_buy = models.BooleanField(default=True, verbose_name='Выделено к оплате')
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Пользователь')
     product = models.ForeignKey(to=Products, on_delete=models.CASCADE, verbose_name='Товар')
     quantity = models.PositiveSmallIntegerField(default=0, verbose_name='Количество')
     unit = models.CharField(max_length=10, blank=True, null=True, verbose_name='Единица измерения')
     session_key = models.CharField(max_length=32, blank=True, null=True)
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
+    img_for_order = models.ImageField(storage="goods_images", height_field=40, blank=True, null=True, verbose_name="Изображение")
 
     class Meta:
         db_table = 'cart'
