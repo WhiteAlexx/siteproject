@@ -24,8 +24,6 @@ class CartAdmin(admin.ModelAdmin):
 
     def product_display(self, obj):
         return str(obj.product.name)
-        
+
     def unit_display(self, obj):
         return str(obj.product.unit)
-    
-

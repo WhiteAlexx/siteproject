@@ -2,9 +2,17 @@
 
 
 
-
-<input type="checkbox" name="select_all" id="id_select_all" checked>   
-<label class="text-black" for="id_select_all"><strong>Выбрать все</strong></label>                        
+{% if carts %}
+    <input type="checkbox" name="select_all" id="id_select_all" value='on' 
+        {% if request.POST.select_all == 'on' %}checked{% endif %} checked>   
+    <label class="text-black" for="id_select_all"><strong>Выбрать все</strong></label>
+{% else %}
+    <h4 class="text-center mb-4 text-dark">Корзина еще не заполнена. Положите туда что-нибудь.</h4>
+    <div class="col-lg-12 col-md-12 text-center mt-4">
+        <a href="{% url "catalog:index" 'tovary' %}"><button type="button" class="btn btn-outline-primary btn-lg my-5">Все товары</button></a>
+        <a href="{% url "shipping:index" %}"><button type="button" class="btn btn-outline-primary btn-lg my-5">В пути</button></a>
+    </div>
+{% endif %}
 
 <div class="card mb-3 text-bg-light shadow-lg">
     {% for cart in carts %}
@@ -14,17 +22,21 @@
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <div class="row text-center">
-                    <div class="col p-0">
-                        {% comment %} <span> {% endcomment %}
-                            <input type="checkbox" name="select_buy" id="id_select_buy" checked>
-                        {% comment %} </span> {% endcomment %}
-                    </div>    
+                    {% comment %} <div class="col p-0">
+                    </div>     {% endcomment %}
                     <div class="col p-0">
                         <div class="input-group">
+                            <span>
+                                <input type="checkbox" name="select_buy" id="id_select_buy" value='on' 
+                                    {% if request.POST.select_buy == 'on' %}checked{% endif %} checked
+                                    data-cart-id="{{ cart.id }}" 
+                                    data-cart-select-url="{% url "carts:cart_select" %}">
+                                    {% csrf_token %}
+                            </span>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-dark btn-sm decrement"
                                     data-cart-id="{{ cart.id }}" 
-                                    data-cart-change-url="{% url "cart:cart_change" %}">
+                                    data-cart-change-url="{% url "carts:cart_change" %}">
                                     {% csrf_token %}
                                     -</button>
                             </span>
@@ -33,7 +45,7 @@
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-dark btn-sm increment"
                                     data-cart-id="{{ cart.id }}" 
-                                    data-cart-change-url="{% url "cart:cart_change" %}">
+                                    data-cart-change-url="{% url "carts:cart_change" %}">
                                     {% csrf_token %}
                                     +</button>
                             </span>
@@ -42,7 +54,7 @@
                     <div class="col p-0">
                         <p class="text-black">{{ cart.product.unit }}  x  {{ cart.product.sell_price }}</p>
                     </div>
-                    <div class="col p-0"><strong>={{ cart.products_price }} Р</strong></div>
+                    <div class="col p-0"><strong>= {{ cart.products_price }} Р</strong></div>
                     <div class="col p-0">
                         <a href="{% url "carts:cart_remove" %}" class="remove-from-cart" 
                             data-cart-id="{{cart.id}}">
@@ -56,67 +68,66 @@
         </ul>
     {% endfor %}
 </div>
-<div class="card mb-3 shadow-lg">
-    <div class="card-footer text-black">
-        <p class="float-left text-black">Итого <strong>{{ carts.total_quantity }}</strong> товар(а) на сумму</p>
-        <h4 class="float-left"><strong>{{ carts.total_price }} Р</strong></h4>
-    </div>
-</div>
-{% comment %} {% if carts and not order %}
-    <a class="btn btn-dark" href="{% url "orders:create_order" %}">
-        Оформить заказ
-    </a>
-{% endif %} {% endcomment %}
-<!-- Детали заказа -->
-<div class="container">
-    <h3 class="text-center text-black">Детали заказа</h3>
-    <div class="card mb-3">
-        <div class="card-body">
-            <form action="{% url "orders:create_order" %}" method="post">
-                {% csrf_token %}
-                <div class="row text-black">
-                    <div class="col-md-6 mb-3">
-                        <label for="id_first_name" class="form-label">Имя*:</label>
-                        <input type="text" class="form-control" id="id_first_name"
-                            value="{% if form.first_name.value %}{{form.first_name.value}}{% endif %}"
-                            name="first_name" required>
-                        {% if form.first_name.errors %}
-                            <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
-                        {% endif %}
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="id_last_name" class="form-label">Фамилия*:</label>
-                        <input type="text" class="form-control" id="id_last_name"
-                            value="{% if form.last_name.value %}{{form.last_name.value}}{% endif %}"
-                            name="last_name" required>
-                        {% if form.last_name.errors %}
-                            <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
-                        {% endif %}
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="id_telnmbr" class="form-label">Номер телефона*:</label>
-                        <input type="text" class="form-control" id="id_telnmbr"
-                            value="{% if form.telnmbr.value %}{{form.telnmbr.value}}{% endif %}"
-                            name="telnmbr"
-                            placeholder="В формате: 8XXXXXXXXXX"
-                            required>
-                        {% if form.telnmbr.errors %}
-                            <div class="alert alert-danger alert-dismissible fade show">{{form.telnmbr.errors}}</div>
-                        {% endif %}
-                    </div>
-                    <div class="mb-3" id="deliveryAddressField">
-                        <label for="id_adres" class="form-label">Адрес
-                            доставки*:</label>
-                        <input type="text" class="form-control" id="id_adres"
-                            value="{% if form.adres.value %}{{form.adres.value}}{% endif %}"
-                            name="adres" rows="2" required></input>
-                        {% if form.adres.errors %}
-                            <div class="alert alert-danger alert-dismissible fade show">{{form.adres.errors}}</div>
-                        {% endif %}
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-dark">Заказать</button>
-            </form>
+{% if carts %}
+    <div class="card mb-3 shadow-lg">
+        <div class="card-footer text-black">
+            <p class="float-left text-black">Итого <strong>{{ carts.total_quantity }}</strong> товар(а) на сумму</p>
+            <h4 class="float-left"><strong>{{ carts.total_price }} Р</strong></h4>
         </div>
     </div>
-</div>
+{% endif %}
+{% if carts %}
+    <!-- Детали заказа -->
+    <div class="container">
+        <h3 class="text-center text-black">Детали заказа</h3>
+        <div class="card mb-3">
+            <div class="card-body">
+                <form action="{% url "orders:create_order" %}" method="post">
+                    {% csrf_token %}
+                    <div class="row text-black">
+                        <div class="col-md-6 mb-3">
+                            <label for="id_first_name" class="form-label">Имя*:</label>
+                            <input type="text" class="form-control" id="id_first_name"
+                                value="{% if form.first_name.value %}{{form.first_name.value}}{% endif %}"
+                                name="first_name" required>
+                            {% if form.first_name.errors %}
+                                <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="id_last_name" class="form-label">Фамилия*:</label>
+                            <input type="text" class="form-control" id="id_last_name"
+                                value="{% if form.last_name.value %}{{form.last_name.value}}{% endif %}"
+                                name="last_name" required>
+                            {% if form.last_name.errors %}
+                                <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="id_telnmbr" class="form-label">Номер телефона*:</label>
+                            <input type="text" class="form-control" id="id_telnmbr"
+                                value="{% if form.telnmbr.value %}{{form.telnmbr.value}}{% endif %}"
+                                name="telnmbr"
+                                placeholder="В формате: 8XXXXXXXXXX"
+                                required>
+                            {% if form.telnmbr.errors %}
+                                <div class="alert alert-danger alert-dismissible fade show">{{form.telnmbr.errors}}</div>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3" id="deliveryAddressField">
+                            <label for="id_adres" class="form-label">Адрес
+                                доставки*:</label>
+                            <input type="text" class="form-control" id="id_adres"
+                                value="{% if form.adres.value %}{{form.adres.value}}{% endif %}"
+                                name="adres" rows="2" required></input>
+                            {% if form.adres.errors %}
+                                <div class="alert alert-danger alert-dismissible fade show">{{form.adres.errors}}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-dark">Заказать</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endif %}

@@ -1,4 +1,3 @@
-import imp
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -6,7 +5,7 @@ from goods.models import Categories, Products
 
 # Create your views here.
 def index(request):
-      
+
     categories = Categories.objects.exclude(slug__contains='tovary')  #Фильтр без все и в пути
     #product = Products.objects.exclude(category__name__icontains='в пути')
 

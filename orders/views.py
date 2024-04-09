@@ -50,7 +50,6 @@ def create_order(request):
                             cost = price * quantity
                             total_cost += cost
 
-
                             if product.quantity < quantity and product.category.name != 'Товары в пути':
                                 raise ValidationError(f'Недостаточное количество товара {name} на складе\
                                                        В наличии - {product.quantity}')
@@ -76,7 +75,6 @@ def create_order(request):
                 messages.success(request, str(e))
                 return redirect('cart:order')
 
-
     else:
         initial = {
             'first_name': request.user.first_name,
@@ -92,45 +90,3 @@ def create_order(request):
         'order': True,
     }
     return render(request, 'orders/create_order.html', context=context)
-
-# def cart_change(request):
-#     cart_id = request.POST.get("cart_id")
-#     quantity = request.POST.get("quantity")
-
-#     cart = Cart.objects.get(id=cart_id)
-
-#     cart.quantity = quantity
-#     cart.save()
-#     update_quantity = cart.quantity
-
-#     cart = get_user_carts(request)
-#     cart_items_html = render_to_string(
-#         "orders/create_order.html", {"carts": cart}, request=request)
-
-#     response_data = {
-#         "message": "Количество изменено",
-#         "cart_items_html": cart_items_html,
-#         "quantity": update_quantity,
-#     }
-
-#     return JsonResponse(response_data)
-
-# def cart_remove(request):
-
-#     cart_id = request.POST.get("cart_id")
-
-#     cart = Cart.objects.get(id=cart_id)
-#     quantity = cart.quantity
-#     cart.delete()
-
-#     user_cart = get_user_carts(request)
-#     cart_items_html = render_to_string(
-#         "orders/create_order.html", {"carts": user_cart}, request=request)
-
-#     response_data = {
-#         "message": "Товар удалён",
-#         "cart_items_html": cart_items_html,
-#         "quantity_deleted": quantity,
-#     }
-
-#     return JsonResponse(response_data)

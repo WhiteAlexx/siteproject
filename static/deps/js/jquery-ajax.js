@@ -27,13 +27,13 @@ $(document).ready(function () {
                 csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
             },
             success: function (data) {
-                // Сообщение
-                successMessage.html(data.message);
-                successMessage.fadeIn(400);
-                // Через 7сек убираем сообщение
-                setTimeout(function () {
-                    successMessage.fadeOut(400);
-                }, 7000);
+                // // Сообщение
+                // successMessage.html(data.message);
+                // successMessage.fadeIn(400);
+                // // Через 7сек убираем сообщение
+                // setTimeout(function () {
+                //     successMessage.fadeOut(400);
+                // }, 7000);
 
                 // Увеличиваем количество товаров в корзине (отрисовка в шаблоне)
                 cartCount++;
@@ -78,13 +78,13 @@ $(document).ready(function () {
                 csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
             },
             success: function (data) {
-                // Сообщение
-                successMessage.html(data.message);
-                successMessage.fadeIn(400);
-                // Через 7сек убираем сообщение
-                setTimeout(function () {
-                    successMessage.fadeOut(400);
-                }, 7000);
+                // // Сообщение
+                // successMessage.html(data.message);
+                // successMessage.fadeIn(400);
+                // // Через 7сек убираем сообщение
+                // setTimeout(function () {
+                //     successMessage.fadeOut(400);
+                // }, 7000);
 
                 // Уменьшаем количество товаров в корзине (отрисовка)
                 cartCount -= data.quantity_deleted;
@@ -154,13 +154,13 @@ $(document).ready(function () {
             },
 
             success: function (data) {
-                 // Сообщение
-                successMessage.html(data.message);
-                successMessage.fadeIn(400);
-                 // Через 7сек убираем сообщение
-                setTimeout(function () {
-                     successMessage.fadeOut(400);
-                }, 7000);
+                //  // Сообщение
+                // successMessage.html(data.message);
+                // successMessage.fadeIn(400);
+                //  // Через 7сек убираем сообщение
+                // setTimeout(function () {
+                //      successMessage.fadeOut(400);
+                // }, 7000);
 
                 // Изменяем количество товаров в корзине
                 var goodsInCartCount = $("#goods-in-cart-count");
