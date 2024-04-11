@@ -18,9 +18,7 @@ class Order(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.SET_DEFAULT, blank=True, null=True, verbose_name="Пользователь", default=None)
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания заказа")
     telnmbr = models.DecimalField(max_digits=11, decimal_places=0, verbose_name="Номер телефона")
-    # requires_delivery = models.BooleanField(default=False, verbose_name="Требуется доставка")
     adres = models.CharField(max_length=250, null=True, blank=True, verbose_name="Адрес доставки")
-    # payment_on_get = models.BooleanField(default=False, verbose_name="Оплата при получении")
     is_paid = models.BooleanField(default=False, verbose_name="Оплачено")
     status = models.CharField(max_length=50, default='Ожидает оплаты',
                               choices=(('Ожидает оплаты', 'Ожидает оплаты'),

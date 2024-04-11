@@ -71,8 +71,6 @@
                 {% endif %}
                 <div class="card-body">
                     <h6 class="card-title text-truncate"><a href="{% url "catalog:product" product.slug %}">{{product.name}}</a></h6>
-                    {% comment %} <p class="card-text">{{ product.description|truncatechars:40 }}</p> {% endcomment %}
-                    {% comment %} <p class="product_id">slug: {{ product.display_id }}</p> {% endcomment %}
                     <div class="d-flex justify-content-between">
                         {% if product.discount %}
                             <p><s>{{product.price}}</s></p>
@@ -98,8 +96,6 @@
                 {% endif %}
                 <div class="card-body">
                     <h6 class="card-title text-truncate"><a href="{% url "catalog:product" product.slug %}">{{product.name}}</a></h6>
-                    {% comment %} <p class="card-text">{{ product.description|truncatechars:40 }}</p> {% endcomment %}
-                    {% comment %} <p class="product_id">slug: {{ product.display_id }}</p> {% endcomment %}
                     <div class="d-flex justify-content-between">
                         {% if product.discount %}
                             <p><s>{{product.price}}</s></p>
@@ -109,7 +105,7 @@
                             <p><strong>{{product.price}} Р/{{product.unit}}</strong></p>
                         {% endif %}
                         <a href="{% url "carts:cart_add" %}" class="btn add-to-cart"
-                        data-product-id="{{ product.id }}">
+                            data-product-id="{{ product.id }}">
                             {% csrf_token %}
                             <img class="mx-1" src="{% static "deps/icons/cart-plus.svg" %}" alt="Catalog Icon" width="32" height="32">
                         </a>

@@ -50,7 +50,7 @@
             <h5 class="card-title">{{product.name}}</h5>
             {% comment %} <p class="card-text">{{product.description}}</p> {% endcomment %}
             <a href="{% url "carts:cart_add" %}" class="btn btn-dark add-to-cart"
-            data-product-id="{{ product.id }}">
+                data-product-id="{{ product.id }}">
                 {% csrf_token %}
                 Добавить в корзину</a>
         </div>

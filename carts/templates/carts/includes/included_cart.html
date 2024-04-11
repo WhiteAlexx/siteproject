@@ -17,7 +17,7 @@
 <div class="card mb-3 text-bg-light shadow-lg">
     {% for cart in carts %}
         <div class="card-header">
-            <h5 class="card-title">{{ cart.product.name }} ({{ cart.product.unit }}){{ cart.select_buy }}</h5>
+            <h5 class="card-title">{{ cart.product.name }} ({{ cart.product.unit }})</h5>
             {% comment %} <img src="{{ cart.product.image }}" alt="{{ cart.product.name }}"> {% endcomment %}
         </div>
         <ul class="list-group list-group-flush">
@@ -27,14 +27,18 @@
                     </div>     {% endcomment %}
                     <div class="col p-0">
                         <div class="input-group">
-                            <span>
-                                <input type="checkbox" name="select_buy" id="id_select_buy" value="{{ cart.select_buy }}"
-                                    {% if request.POST.select_buy == "True" %}checked{% endif %}
-                                    {% comment %} checked {% endcomment %}
-                                    data-cart-id="{{ cart.id }}" 
-                                    data-cart-select-url="{% url "carts:cart_select" %}">
-                                    {% csrf_token %}
-                            </span>
+                            <div class="col p-0">
+                                {% comment %} <a href="{% url "cart:cart_select" cart.id %}" {% endcomment %}
+                                    {% comment %} data-cart-id="{{cart.id}}">
+                                    {% csrf_token %} {% endcomment %}
+                                    <input type="checkbox" name="select_buy" id="id_select_buy" value="{{ cart.select_buy }}"
+                                    {% if request.GET.select_buy == True %} checked
+                                    {% elif cart.select_buy == True %} checked
+                                    {% endif %}
+                                    href="{% url "cart:cart_select" cart.id %}"
+                                    {% comment %} checked {% endcomment %}>
+                                {% comment %} </a> {% endcomment %}
+                            </div>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-dark btn-sm decrement"
                                     data-cart-id="{{ cart.id }}" 
@@ -56,8 +60,10 @@
                     <div class="col p-0">
                         <p class="text-black">{{ cart.product.unit }}  x  {{ cart.product.sell_price }}</p>
                     </div>
-                    <div class="col p-0"><strong>= {{ cart.products_price }} Р</strong></div>
                     <div class="col p-0">
+                        <p class="text-black prdctprc"><strong>= {{ cart.products_price }} Р</strong></p>
+                    {% comment %} </div>
+                    <div class="col p-0"> {% endcomment %}
                         <a href="{% url "carts:cart_remove" %}" class="remove-from-cart" 
                             data-cart-id="{{cart.id}}">
                             {% csrf_token %}
@@ -73,63 +79,72 @@
 {% if carts %}
     <div class="card mb-3 shadow-lg">
         <div class="card-footer text-black">
-            <p class="float-left text-black">Итого <strong>{{ carts.total_quantity }}</strong> товар(а) на сумму</p>
-            <h4 class="float-left"><strong>{{ carts.total_price }} Р</strong></h4>
+            <p class="float-left text-black ttlqntt">Итого <strong>{{ carts.total_quantity }}</strong> товар(а) на сумму</p>
+            <h4 class="float-left ttlprc"><strong>{{ carts.total_price }} Р</strong></h4>
         </div>
     </div>
 {% endif %}
 {% if carts %}
-    <!-- Детали заказа -->
-    <div class="container">
-        <h3 class="text-center text-black">Детали заказа</h3>
-        <div class="card mb-3">
-            <div class="card-body">
-                <form action="{% url "orders:create_order" %}" method="post">
-                    {% csrf_token %}
-                    <div class="row text-black">
-                        <div class="col-md-6 mb-3">
-                            <label for="id_first_name" class="form-label">Имя*:</label>
-                            <input type="text" class="form-control" id="id_first_name"
-                                value="{% if form.first_name.value %}{{form.first_name.value}}{% endif %}"
-                                name="first_name" required>
-                            {% if form.first_name.errors %}
-                                <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
-                            {% endif %}
+{% if user.is_authenticated %}
+        <!-- Детали заказа -->
+        <div class="container">
+            <h3 class="text-center text-black">Детали заказа</h3>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <form action="{% url "orders:create_order" %}" method="post">
+                        {% csrf_token %}
+                        <div class="row text-black">
+                            <div class="col-md-6 mb-3">
+                                <label for="id_first_name" class="form-label">Имя*:</label>
+                                <input type="text" class="form-control" id="id_first_name"
+                                    value="{% if form.first_name.value %}{{form.first_name.value}}{% endif %}"
+                                    name="first_name" required>
+                                {% if form.first_name.errors %}
+                                    <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="id_last_name" class="form-label">Фамилия*:</label>
+                                <input type="text" class="form-control" id="id_last_name"
+                                    value="{% if form.last_name.value %}{{form.last_name.value}}{% endif %}"
+                                    name="last_name" required>
+                                {% if form.last_name.errors %}
+                                    <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="id_telnmbr" class="form-label">Номер телефона*:</label>
+                                <input type="text" class="form-control" id="id_telnmbr"
+                                    value="{% if form.telnmbr.value %}{{form.telnmbr.value}}{% endif %}"
+                                    name="telnmbr"
+                                    placeholder="В формате: 8XXXXXXXXXX"
+                                    required>
+                                {% if form.telnmbr.errors %}
+                                    <div class="alert alert-danger alert-dismissible fade show">{{form.telnmbr.errors}}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3" id="deliveryAddressField">
+                                <label for="id_adres" class="form-label">Адрес
+                                    доставки*:</label>
+                                <input type="text" class="form-control" id="id_adres"
+                                    value="{% if form.adres.value %}{{form.adres.value}}{% endif %}"
+                                    name="adres" rows="2" required></input>
+                                {% if form.adres.errors %}
+                                    <div class="alert alert-danger alert-dismissible fade show">{{form.adres.errors}}</div>
+                                {% endif %}
+                            </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="id_last_name" class="form-label">Фамилия*:</label>
-                            <input type="text" class="form-control" id="id_last_name"
-                                value="{% if form.last_name.value %}{{form.last_name.value}}{% endif %}"
-                                name="last_name" required>
-                            {% if form.last_name.errors %}
-                                <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
-                            {% endif %}
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="id_telnmbr" class="form-label">Номер телефона*:</label>
-                            <input type="text" class="form-control" id="id_telnmbr"
-                                value="{% if form.telnmbr.value %}{{form.telnmbr.value}}{% endif %}"
-                                name="telnmbr"
-                                placeholder="В формате: 8XXXXXXXXXX"
-                                required>
-                            {% if form.telnmbr.errors %}
-                                <div class="alert alert-danger alert-dismissible fade show">{{form.telnmbr.errors}}</div>
-                            {% endif %}
-                        </div>
-                        <div class="mb-3" id="deliveryAddressField">
-                            <label for="id_adres" class="form-label">Адрес
-                                доставки*:</label>
-                            <input type="text" class="form-control" id="id_adres"
-                                value="{% if form.adres.value %}{{form.adres.value}}{% endif %}"
-                                name="adres" rows="2" required></input>
-                            {% if form.adres.errors %}
-                                <div class="alert alert-danger alert-dismissible fade show">{{form.adres.errors}}</div>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-dark">Заказать</button>
-                </form>
+                        <button type="submit" class="btn btn-dark">Заказать</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    {% else %}
+        <h4 class="text-center mb-4 text-dark">Вы еще не авторизованы.</h4>
+        <div class="col-lg-12 col-md-12 text-center mt-4">
+            <a class="nav-link text-black" aria-current="page" href="{% url "users:login" %}">
+                <button type="button" class="btn btn-outline-primary btn-lg my-1">Авторизоваться</button>
+            </a>
+        </div>
+    {% endif %}
 {% endif %}

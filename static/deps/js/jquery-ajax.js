@@ -210,4 +210,51 @@ $(document).ready(function () {
             $("#deliveryAddressField").hide();
         }
     });
+
+    // $("input[name='select_buy']").change(function () {
+    //     var selectedValue = $(this).val();
+    //     // Берем ссылку на контроллер django из атрибута data-cart-select-url
+    //     var url = $(this).data("cart-select-url");
+    //     // Берем id корзины из атрибута data-cart-id
+    //     var cartID = $(this).data("cart-id");
+    //     // Ищем ближайшеий input с количеством 
+    //     var $input = $(this).closest('.input-group').find('.number');
+    //     // Берем значение количества товара
+    //     var currentValue = parseInt($input.val());
+        
+    //     var $prdctprc = $(this).find('.prdctprc');
+    //     var currentprdctprc = parseInt($prdctprc.val());
+        
+    //     var $ttlqntt = $(this).find('.ttlqntt');
+    //     var currentttlqntt = parseInt($ttlqntt.val());
+        
+    //     var $ttlprc = $(this).find('.ttlprc');
+    //     var currentttlprc = parseInt($ttlprc.val());
+
+    //     if (selectedValue === "True") {
+    //         $ttlqntt.val(currentttlqntt + currentValue);
+    //         $ttlprc.val(currentttlprc + currentprdctprc);
+    //     } else {
+    //         $ttlqntt.val(currentttlqntt - currentValue);
+    //         $ttlprc.val(currentttlprc - currentprdctprc);
+    //     }
+        
+    //     // делаем post запрос через ajax не перезагружая страницу
+    //     $.ajax({
+
+    //         type: "POST",
+    //         url: url,
+    //         data: {
+    //             cart_id: cartID,
+    //             selection: selectedValue,
+    //             csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+    //             },
+    //         success: function (data) {
+
+    //             // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
+    //             var cartItemsContainer = $("#cart-items-container");
+    //             cartItemsContainer.html(data.cart_items_html);
+    //             },
+    //     });
+    // });
 });
