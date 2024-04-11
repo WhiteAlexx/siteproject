@@ -4,7 +4,10 @@
 
 {% block trading %}
 {% user_carts request as carts %}
-{% user_user request as form %}
+{% if user.is_authenticated %}
+    {% user_user request as form %}
+{% endif %}
+
 <!-- Контент на странице -->
 <div class="row">
     <div class="container mt-5">

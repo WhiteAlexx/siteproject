@@ -2,7 +2,9 @@
 {% load carts_tags %}
 
 {% user_carts request as carts %}
-{% user_user request as form %}
+{% if user.is_authenticated %}
+    {% user_user request as form %}
+{% endif %}
 
 <div>
     <button type="button" class="btn btn-dark btn-secondary d-flex mt-4" id="modalButton"

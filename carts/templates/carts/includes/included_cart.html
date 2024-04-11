@@ -17,7 +17,8 @@
 <div class="card mb-3 text-bg-light shadow-lg">
     {% for cart in carts %}
         <div class="card-header">
-            <h5 class="card-title">{{ cart.product.name }} ({{ cart.product.unit }})</h5>
+            <h5 class="card-title">{{ cart.product.name }} ({{ cart.product.unit }}){{ cart.select_buy }}</h5>
+            {% comment %} <img src="{{ cart.product.image }}" alt="{{ cart.product.name }}"> {% endcomment %}
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
@@ -27,8 +28,9 @@
                     <div class="col p-0">
                         <div class="input-group">
                             <span>
-                                <input type="checkbox" name="select_buy" id="id_select_buy" value='on' 
-                                    {% if request.POST.select_buy == 'on' %}checked{% endif %} checked
+                                <input type="checkbox" name="select_buy" id="id_select_buy" value="{{ cart.select_buy }}"
+                                    {% if request.POST.select_buy == "True" %}checked{% endif %}
+                                    {% comment %} checked {% endcomment %}
                                     data-cart-id="{{ cart.id }}" 
                                     data-cart-select-url="{% url "carts:cart_select" %}">
                                     {% csrf_token %}
