@@ -17,7 +17,8 @@
             </div>
             <div class="col-md-8 ">
                 <p class="product_id mt-3">id: {{ product.display_id }}</p>
-                <p class="product_id mt-3">Доступно {{product.quantity}}{{product.unit}}</p>
+                <h5 class="card-title">{{product.name}}</h5>
+                <p class="product_id mt-3">{% if product.quantity %}Доступно {{product.quantity}}{{product.unit}}{% endif %}</p>
                 <p class="card-text">{{product.description}}</p>
             </div>
             <!-- Увеличить изображение в модальном окне -->
@@ -26,7 +27,7 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="imageModal1Label">{{product.name}}</h5>
+                            <h5 class="modal-title text-black" id="imageModal1Label">{{product.name}}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Закрыть"></button>
                         </div>
@@ -47,12 +48,18 @@
             {% else %}
                 <p><strong>{{product.price}} Р/{{product.unit}}</strong></p>
             {% endif %}
-            <h5 class="card-title">{{product.name}}</h5>
-            {% comment %} <p class="card-text">{{product.description}}</p> {% endcomment %}
-            <a href="{% url "carts:cart_add" %}" class="btn btn-dark add-to-cart"
+            {% if not product.quantity %}
+                <span class="badge bg-warning text-dark">Нет в наличии</span>
+                <a href="{% url "carts:cart_add" %}" class="btn btn-dark add-to-cart disabled"
                 data-product-id="{{ product.id }}">
                 {% csrf_token %}
                 Добавить в корзину</a>
+            {% else %}
+                <a href="{% url "carts:cart_add" %}" class="btn btn-dark add-to-cart"
+                data-product-id="{{ product.id }}">
+                {% csrf_token %}
+                Добавить в корзину</a>
+            {% endif %}
         </div>
     </div>
 </div>

@@ -211,50 +211,66 @@ $(document).ready(function () {
         }
     });
 
-    // $("input[name='select_buy']").change(function () {
-    //     var selectedValue = $(this).val();
-    //     // Берем ссылку на контроллер django из атрибута data-cart-select-url
-    //     var url = $(this).data("cart-select-url");
-    //     // Берем id корзины из атрибута data-cart-id
-    //     var cartID = $(this).data("cart-id");
-    //     // Ищем ближайшеий input с количеством 
-    //     var $input = $(this).closest('.input-group').find('.number');
-    //     // Берем значение количества товара
-    //     var currentValue = parseInt($input.val());
-        
-    //     var $prdctprc = $(this).find('.prdctprc');
-    //     var currentprdctprc = parseInt($prdctprc.val());
-        
-    //     var $ttlqntt = $(this).find('.ttlqntt');
-    //     var currentttlqntt = parseInt($ttlqntt.val());
-        
-    //     var $ttlprc = $(this).find('.ttlprc');
-    //     var currentttlprc = parseInt($ttlprc.val());
 
-    //     if (selectedValue === "True") {
-    //         $ttlqntt.val(currentttlqntt + currentValue);
-    //         $ttlprc.val(currentttlprc + currentprdctprc);
-    //     } else {
-    //         $ttlqntt.val(currentttlqntt - currentValue);
-    //         $ttlprc.val(currentttlprc - currentprdctprc);
-    //     }
-        
-    //     // делаем post запрос через ajax не перезагружая страницу
-    //     $.ajax({
+    $(document).on("click", ".select_buy", function () {
+        // Берем ссылку на контроллер django из атрибута data-cart-select-url
+        var url = $(this).data("cart-select-url");
+        // Берем id корзины из атрибута data-cart-id
+        var cartID = $(this).data("cart-id");
 
-    //         type: "POST",
-    //         url: url,
-    //         data: {
-    //             cart_id: cartID,
-    //             selection: selectedValue,
-    //             csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
-    //             },
-    //         success: function (data) {
+        // делаем post запрос через ajax не перезагружая страницу
+        $.ajax({
 
-    //             // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
-    //             var cartItemsContainer = $("#cart-items-container");
-    //             cartItemsContainer.html(data.cart_items_html);
-    //             },
-    //     });
-    // });
+            type: "POST",
+            url: url,
+            data: {
+                cart_id: cartID,
+                csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+                },
+            success: function (data) {
+
+                // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
+                var cartItemsContainer = $("#cart-items-container");
+                cartItemsContainer.html(data.cart_items_html);
+                
+            },
+        });
+    });
+
+    // При клике по оплате открываем всплывающее(модальное) окно
+    // $('#modalButton_1').click(function () {
+    $(document).on("click", ".modalButton_1", function () {
+        // Берем ссылку на контроллер django из атрибута data-order-payment-url
+        var url = $(this).data("order-payment-url");
+        // Берем id корзины из атрибута data-order-id
+        var orderID = $(this).data("order-id");
+
+        // делаем post запрос через ajax не перезагружая страницу
+        $.ajax({
+
+            type: "POST",
+            url: url,
+            data: {
+                order_id: orderID,
+                csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+                },
+            success: function (data) {
+
+                // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
+                var paymentContainer = $("#payment-container");
+                paymentContainer.html(data.payment_html);
+                
+            },
+        });
+
+        $('#exampleModal_1').appendTo('body');
+
+        $('#exampleModal_1').modal('show');
+    });
+
+    // Собыите клик по кнопке закрыть окна корзины
+    $('#exampleModal_1 .btn-close').click(function () {
+        $('#exampleModal_1').modal('hide');
+    });
+
 });

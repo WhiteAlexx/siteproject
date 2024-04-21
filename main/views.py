@@ -1,7 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
 
 from goods.models import Categories, Products
+from orders.models import Order
 
 # Create your views here.
 def index(request):
@@ -35,6 +37,14 @@ def delivery(request):
 
     return render(request, 'main/delivery.html', context)
 
+# @login_required
+# def payment(request, order_id):
 
-def payment(request):
-    return render(request, 'main/payment.html')
+#     amount_order = Order.objects.get(id=order_id)
+#     context = {
+#         'title': 'Оплата',
+#         "order": amount_order.id,
+#         "amount": amount_order.total_cost,
+#     }
+
+#     return render(request, 'main/payment.html', context)

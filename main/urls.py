@@ -8,5 +8,5 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("about/", views.about, name="about"),
     path("delivery/", views.delivery, name="delivery"),
-    path("payment/", views.payment, name="payment"),
+    # path("payment/<int:order_id>/", views.payment, name="payment"),
 ]

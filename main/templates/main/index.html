@@ -7,7 +7,15 @@
 
 {% block trading %}
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-    <div class="carousel-indicators">
+    {% comment %} <div class="carousel-indicators">
+        
+        {% for category in categories %}
+            {% if forloop.counter == 1 %}
+            {% endif %}
+            {% if forloop.counter != 1 %}
+            <!-- ПОСТАРАТЬСЯ СДЕЛАТЬ СЛАЙДЕРЫ ЧЕРЕЗ ЦИКЛ -->
+            {% endif %}    
+        {% endfor %}
 
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
             class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -18,8 +26,8 @@
             aria-label="Slide 3"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
             aria-label="Slide 4"></button>
+    </div> {% endcomment %}
 
-    </div>
     <div class="carousel-inner rounded my-4">
         {% for category in categories %}
             {% if forloop.counter == 1 %}
@@ -27,7 +35,11 @@
                     <div class="d-block w-100">
                         <div class="row">
                             <div class="col-lg-6 col-md-6">
-                                <a href="{% url "catalog:index" category.slug %}"><img src="{% static "deps/images/1.png" %}" class="w-100" alt="{{ category.name }}"></a>
+                                {% if category.image %}
+                                    <a href="{% url "catalog:index" category.slug %}"><img src="{{ category.image.url }}" class="w-100" alt="{{ category.name }}"></a>
+                                {% else %}
+                                    <a href="{% url "catalog:index" category.slug %}"><img src="{% static "deps/images/Not found image.png" %}" class="w-100" alt="{{ category.name }}"></a>
+                                {% endif %}
                             </div>
                             <div class="col-lg-6 col-md-6 sld-txt">
                                 <a href="{% url "catalog:index" category.slug %}">
@@ -43,7 +55,11 @@
                     <div class="d-block w-100">
                         <div class="row">
                             <div class="col-lg-6 col-md-6">
-                                <a href="{% url "catalog:index" category.slug %}"><img src="{% static "deps/images/1.png" %}" class="w-100" alt="{{ category.name }}"></a>
+                                {% if category.image %}
+                                    <a href="{% url "catalog:index" category.slug %}"><img src="{{ category.image.url }}" class="w-100" alt="{{ category.name }}"></a>
+                                {% else %}
+                                    <a href="{% url "catalog:index" category.slug %}"><img src="{% static "deps/images/Not found image.png" %}" class="w-100" alt="{{ category.name }}"></a>
+                                {% endif %}
                             </div>
                             <div class="col-lg-6 col-md-6 sld-txt">
                                 <a href="{% url "catalog:index" category.slug %}">
@@ -69,8 +85,8 @@
     </button>
 </div>
 <div class="col-lg-12 col-md-12 text-center mt-4">
-    <a href="{% url "catalog:index" 'tovary' %}"><button type="button" class="btn btn-outline-primary btn-lg my-5">Все товары</button></a>
-    <a href="{% url "shipping:index" %}"><button type="button" class="btn btn-outline-primary btn-lg my-5">В пути</button></a>
+    <a href="{% url "catalog:index" 'tovary' %}"><button type="button" class="btn btn-dark btn-lg my-5">Все товары</button></a>
+    <a href="{% url "shipping:index" %}"><button type="button" class="btn btn-dark btn-lg my-5">В пути</button></a>
 </div>
 {% endblock  %}
 

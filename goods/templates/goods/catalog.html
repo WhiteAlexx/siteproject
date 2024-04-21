@@ -15,7 +15,7 @@
     </button>
 
     <form action="{% if request.GET.q %}{% url "catalog:search" %}{% else %}{% url "catalog:index" slug_url %}{% endif %}" method="get" class="dropdown-menu bg-dark" data-bs-theme="dark">
-        <div class="form-check text-white mx-3">
+        <div class="form-check text-white mx-1">
             <input class="form-check-input" type="checkbox" name="on_sale" id="flexCheckDefault" value="on" {% if request.GET.on_sale == 'on' %}checked{% endif %}>
             {% if request.GET.q %}
                 <input type="hidden" name="q" value="{{ request.GET.q }}">
@@ -24,29 +24,29 @@
                 Товары со скидкой
             </label>
         </div>
-        <p class="text-white mx-3 mt-3">Сортировать:</p>
-        <div class="form-check text-white mx-3">
+        <p class="text-white mx-1 mt-3">Сортировать:</p>
+        <div class="form-check text-white mx-1">
             <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault1" value="default" 
             {% if not request.GET.order_by or request.GET.order_by == 'default' %}checked{% endif %}>
             <label class="form-check-label" for="flexRadioDefault1">
                 По умолчанию
             </label>
         </div>
-        <div class="form-check text-white mx-3">
+        <div class="form-check text-white mx-1">
             <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault2" value="price" 
             {% if request.GET.order_by == 'price' %}checked{% endif %}>
             <label class="form-check-label" for="flexRadioDefault2">
                 От дешевых к дорогим
             </label>
         </div>
-        <div class="form-check text-white mx-3">
+        <div class="form-check text-white mx-1">
             <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault3" value="-price" 
             {% if request.GET.order_by == '-price' %}checked{% endif %}>
             <label class="form-check-label" for="flexRadioDefault3">
                 От дорогих к дешевым
             </label>
         </div>
-        <button type="submit" class="btn btn-primary mx-3 mt-3">Применить</button>
+        <button type="submit" class="btn btn-primary mx-1 mt-3">Применить</button>
     </form>
 </div>
 {% endblock  %}
@@ -57,6 +57,10 @@
     <h3 class="mt-4">Результаты поиска по запросу {{ request.GET.q }}</h3>
     {% if not goods %}
         <h2 class="mt-4">По запросу ничего не найдено</h2>
+    {% endif %}
+{% else %}
+    {% if not goods %}
+        <h2 class="mt-4">В этой категории еще нет товаров</h2>
     {% endif %}
 {% endif %}
 
@@ -79,9 +83,20 @@
                         {% else %}
                             <p><strong>{{product.price}} Р/{{product.unit}}</strong></p>
                         {% endif %}
-                        <a href="#" class="btn add-to-cart">
-                            <img class="mx-1" src="{% static "deps/icons/cart-plus.svg" %}" alt="Catalog Icon" width="32" height="32">
-                        </a>
+                        {% if not product.quantity %}
+                            <span class="badge bg-warning text-dark">Нет в наличии</span>
+                            <a href="{% url "carts:cart_add" %}" class="btn add-to-cart bg-light bg-opacity-25 disabled"
+                                data-product-id="{{ product.id }}">
+                                {% csrf_token %}
+                                <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
+                            </a>
+                        {% else %}
+                            <a href="{% url "carts:cart_add" %}" class="btn add-to-cart bg-light bg-opacity-25"
+                                data-product-id="{{ product.id }}">
+                                {% csrf_token %}
+                                <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -104,11 +119,20 @@
                         {% else %}
                             <p><strong>{{product.price}} Р/{{product.unit}}</strong></p>
                         {% endif %}
-                        <a href="{% url "carts:cart_add" %}" class="btn add-to-cart"
-                            data-product-id="{{ product.id }}">
-                            {% csrf_token %}
-                            <img class="mx-1" src="{% static "deps/icons/cart-plus.svg" %}" alt="Catalog Icon" width="32" height="32">
-                        </a>
+                        {% if not product.quantity %}
+                            <span class="badge bg-warning text-dark">Нет в наличии</span>
+                            <a href="{% url "carts:cart_add" %}" class="btn add-to-cart bg-light bg-opacity-25 disabled"
+                                data-product-id="{{ product.id }}">
+                                {% csrf_token %}
+                                <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
+                            </a>
+                        {% else %}
+                            <a href="{% url "carts:cart_add" %}" class="btn add-to-cart bg-light bg-opacity-25"
+                                data-product-id="{{ product.id }}">
+                                {% csrf_token %}
+                                <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

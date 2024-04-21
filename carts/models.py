@@ -8,7 +8,15 @@ from users.models import User
 class CartQueryset(models.QuerySet):
 
     def total_price(self):
-        return sum(cart.products_price() for cart in self)
+        carts = Cart.objects.filter(select_buy='True')
+        return sum(cart.products_price() for cart in carts)
+
+    def select_quantity(self):
+        if self:
+            carts = Cart.objects.filter(select_buy='True')
+            return sum(cart.quantity for cart in carts)
+
+        return 0
 
     def total_quantity(self):
         if self:
@@ -16,17 +24,14 @@ class CartQueryset(models.QuerySet):
 
         return 0
 
-
 class Cart(models.Model):
 
-    select_buy = models.BooleanField(default=True, verbose_name='Выделено к оплате')
+    select_buy = models.BooleanField(default=True, verbose_name='VX')
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Пользователь')
     product = models.ForeignKey(to=Products, on_delete=models.CASCADE, verbose_name='Товар')
     quantity = models.PositiveSmallIntegerField(default=0, verbose_name='Количество')
-    unit = models.CharField(max_length=10, blank=True, null=True, verbose_name='Единица измерения')
     session_key = models.CharField(max_length=32, blank=True, null=True)
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
-    img_for_order = models.ImageField(storage="goods_images", height_field=40, blank=True, null=True, verbose_name="Изображение")
 
     class Meta:
         db_table = 'cart'
@@ -40,6 +45,6 @@ class Cart(models.Model):
 
     def __str__(self):
         if self.user:
-            return f'Корзина {self.user.username} | Товар {self.product.name} | Количество {self.quantity} | {self.product.unit}'
+            return f'Корзина {self.user.username}{self.select_buy} | Товар {self.product.name} | Количество {self.quantity} | {self.product.unit}'
 
-        return f'Анонимная корзина | Товар {self.product.name} | Количество {self.quantity} | {self.product.unit}'
+        return f'Анонимная корзина{self.select_buy} | Товар {self.product.name} | Количество {self.quantity} | {self.product.unit}'

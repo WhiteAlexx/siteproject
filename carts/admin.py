@@ -7,14 +7,18 @@ from carts.models import Cart
 #admin.site.register(Cart)
 class CartTabAdmin(admin.TabularInline):
     model = Cart
-    fields = "product", "quantity", "unit", "created_timestamp"
+    fields = "product", "quantity", "created_timestamp"
     search_fields = "product", "quantity", "created_timestamp"
     readonly_fields = ("created_timestamp",)
     extra = 1
 
+    def unit_display(self, obj):
+        return str(obj.product.unit)
+
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
-    list_display = ['user_display', 'product_display', 'quantity', 'unit_display', 'created_timestamp',]
+    list_display = ['user_display','select_buy', 'product_display', 'quantity', 'unit_display', 'created_timestamp',]
+    list_editable = ['select_buy',]
     list_filter = ['user', 'product__name', 'created_timestamp',]
 
     def user_display(self, obj):

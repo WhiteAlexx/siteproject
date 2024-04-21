@@ -27,9 +27,12 @@ def create_order(request):
 
                         total_cost = 0
                         for cart_item in cart_items:
-                            price=cart_item.product.sell_price()
-                            quantity=cart_item.quantity
-                            total_cost += price * quantity
+                            if cart_item.select_buy is True:
+                                price=cart_item.product.sell_price()
+                                quantity=cart_item.quantity
+                                total_cost += price * quantity
+
+                                # cart_item.delete()
 
                         # Создать заказ
                         order = Order.objects.create(
@@ -41,33 +44,34 @@ def create_order(request):
                         # Создать заказанные товары
                         total_cost = 0
                         for cart_item in cart_items:
-                            product=cart_item.product
-                            name=cart_item.product.name
-                            price=cart_item.product.sell_price()
-                            quantity=cart_item.quantity
-                            unit = cart_item.unit
+                            if cart_item.select_buy is True:
+                                product=cart_item.product
+                                name=cart_item.product.name
+                                price=cart_item.product.sell_price()
+                                quantity=cart_item.quantity
+                                unit = cart_item.product.unit
 
-                            cost = price * quantity
-                            total_cost += cost
+                                cost = price * quantity
+                                total_cost += cost
 
-                            if product.quantity < quantity and product.category.name != 'Товары в пути':
-                                raise ValidationError(f'Недостаточное количество товара {name} на складе\
-                                                       В наличии - {product.quantity}')
+                                if product.quantity < quantity and product.category.name != 'Товары в пути':
+                                    raise ValidationError(f'Недостаточное количество товара {name} на складе\
+                                                        В наличии - {product.quantity}')
 
-                            OrderItem.objects.create(
-                                order=order,
-                                product=product,
-                                name=name,
-                                price=price,
-                                quantity=quantity,
-                                unit=unit,
-                            )
+                                OrderItem.objects.create(
+                                    order=order,
+                                    product=product,
+                                    name=name,
+                                    price=price,
+                                    quantity=quantity,
+                                    unit=unit,
+                                )
 
-                            product.quantity -= quantity
-                            product.save()
+                                product.quantity -= quantity
+                                product.save()
 
                         # Очистить корзину пользователя после создания заказа
-                        cart_items.delete()
+                                cart_item.delete()
 
                         messages.success(request, 'Заказ оформлен!')
                         return redirect('user:profile')

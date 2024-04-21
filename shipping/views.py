@@ -8,7 +8,7 @@ def shipping(request, page=1):
 
     shipp = Products.objects.filter(category__name__icontains='в пути')
 
-    paginator = Paginator(shipp, 3)
+    paginator = Paginator(shipp, 6)
     crrnt_pg = paginator.page(page)
 
     context = {
@@ -18,7 +18,7 @@ def shipping(request, page=1):
     return render(request, "shipping/shipping.html", context)
 
 def product(request, product_id=False, product_slug=False):
-   
+
     if product_id:
         product = Products.objects.get(id=product_id)
     else:

@@ -23,7 +23,7 @@ class OrderItemAdmin(admin.ModelAdmin):
 
     def product_display(self, obj):
         return str(obj.product.name)
-    
+
     def unit_display(self, obj):
         return str(obj.product.unit)
 
@@ -45,5 +45,5 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ("id",)
     readonly_fields = ("created_timestamp",)
     list_filter = ("status", "is_paid",)
-    
+
     inlines = (OrderItemTabulareAdmin,)
