@@ -14,7 +14,7 @@ def catalog(request, category_slug=None):
     query = request.GET.get("q", None)
 
     if category_slug == "tovary":
-        goods = Products.objects.all()  # exclude(category__name__icontains='в пути')
+        goods = Products.objects.exclude(category__slug__icontains='v-puti').exclude(category__slug__icontains='udalennye')
     elif query:
         goods = q_search(query)
     else:
@@ -28,6 +28,8 @@ def catalog(request, category_slug=None):
 
     paginator = Paginator(goods, 6)
     crrnt_pg = paginator.page(page)
+
+    print(crrnt_pg.object_list)
 
     context = {
         "title": "Товары в наличии",

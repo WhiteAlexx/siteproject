@@ -4,8 +4,9 @@ from django.shortcuts import render
 from goods.models import Products
 
 # Create your views here.
-def shipping(request, page=1):
+def shipping(request):
 
+    page = request.GET.get("page", 1)
     shipp = Products.objects.filter(category__name__icontains='в пути')
 
     paginator = Paginator(shipp, 6)

@@ -101,7 +101,7 @@
                 </div>
             </div>
         </div>
-    {% elif product.category.name != "Товары в пути" %}
+    {% elif product.category.name != "Товары в пути" and product.category.name != "Удаленные товары"%}
         <div class="col-lg-4 col-md-6 p-4">
             <div class="card rounded">
                 {% if product.image %}

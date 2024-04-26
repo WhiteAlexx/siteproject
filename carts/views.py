@@ -1,16 +1,15 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
+from num2words import num2words
 
 from carts.models import Cart
-from carts.utils import get_user, get_user_carts
+from carts.utils import get_user, get_user_carts, get_endng
 from goods.models import Products
 from orders.forms import CreateOrderForm
 
 
 # Create your views here.
-
-
 def cart_add(request):
 
     product_id = request.POST.get("product_id")
@@ -42,16 +41,17 @@ def cart_add(request):
             )
 
     user_cart = get_user_carts(request)
+    tovar = get_endng(request)
+
     if request.user.is_authenticated:
         user_user = get_user(request)
         cart_items_html = render_to_string(
-            "carts/includes/included_cart.html", {"carts": user_cart, "form": user_user}, request=request)
+            "carts/includes/included_cart.html", {"carts": user_cart, "tovar": tovar, "form": user_user}, request=request)
     else:
         cart_items_html = render_to_string(
-            "carts/includes/included_cart.html", {"carts": user_cart}, request=request)
+            "carts/includes/included_cart.html", {"carts": user_cart, "tovar": tovar}, request=request)
 
     response_data = {
-        # "message": "Товар добавлен в корзину",
         "cart_items_html": cart_items_html,
     }
 
@@ -67,21 +67,20 @@ def cart_change(request):
 
     cart.quantity = quantity
     cart.save()
-    update_quantity = cart.quantity
 
     user_cart = get_user_carts(request)
+    tovar = get_endng(request)
+
     if request.user.is_authenticated:
         user_user = get_user(request)
         cart_items_html = render_to_string(
-            "carts/includes/included_cart.html", {"carts": user_cart, "form": user_user}, request=request)
+            "carts/includes/included_cart.html", {"carts": user_cart, "tovar": tovar, "form": user_user}, request=request)
     else:
         cart_items_html = render_to_string(
-            "carts/includes/included_cart.html", {"carts": user_cart}, request=request)
+            "carts/includes/included_cart.html", {"carts": user_cart, "tovar": tovar}, request=request)
 
     response_data = {
-        # "message": "Количество изменено",
         "cart_items_html": cart_items_html,
-        "quantity": update_quantity,
     }
 
     return JsonResponse(response_data)
@@ -96,18 +95,18 @@ def cart_remove(request):
     cart.delete()
 
     user_cart = get_user_carts(request)
+    tovar = get_endng(request)
+
     if request.user.is_authenticated:
         user_user = get_user(request)
         cart_items_html = render_to_string(
-            "carts/includes/included_cart.html", {"carts": user_cart, "form": user_user}, request=request)
+            "carts/includes/included_cart.html", {"carts": user_cart, "tovar": tovar, "form": user_user}, request=request)
     else:
         cart_items_html = render_to_string(
-            "carts/includes/included_cart.html", {"carts": user_cart}, request=request)
+            "carts/includes/included_cart.html", {"carts": user_cart, "tovar": tovar}, request=request)
 
     response_data = {
-        # "message": "Товар удалён",
         "cart_items_html": cart_items_html,
-        "quantity_deleted": quantity,
     }
 
     return JsonResponse(response_data)
@@ -125,13 +124,15 @@ def cart_select(request):
     cart.save()
 
     user_cart = get_user_carts(request)
+    tovar = get_endng(request)
+
     if request.user.is_authenticated:
         user_user = get_user(request)
         cart_items_html = render_to_string(
-            "carts/includes/included_cart.html", {"carts": user_cart, "form": user_user}, request=request)
+            "carts/includes/included_cart.html", {"carts": user_cart, "tovar": tovar, "form": user_user}, request=request)
     else:
         cart_items_html = render_to_string(
-            "carts/includes/included_cart.html", {"carts": user_cart}, request=request)
+            "carts/includes/included_cart.html", {"carts": user_cart, "tovar": tovar}, request=request)
 
     response_data = {
         "cart_items_html": cart_items_html,

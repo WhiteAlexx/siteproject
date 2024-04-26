@@ -36,15 +36,3 @@ def delivery(request):
     }
 
     return render(request, 'main/delivery.html', context)
-
-# @login_required
-# def payment(request, order_id):
-
-#     amount_order = Order.objects.get(id=order_id)
-#     context = {
-#         'title': 'Оплата',
-#         "order": amount_order.id,
-#         "amount": amount_order.total_cost,
-#     }
-
-#     return render(request, 'main/payment.html', context)

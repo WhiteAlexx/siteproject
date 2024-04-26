@@ -12,11 +12,15 @@
         <div class="row">
             <!-- Миниатюры -->
             <div class="col-md-4">
-                <img src="{{ product.image.url }}"
-                    class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1" alt="{{ product.name }}">
+                {% else %}
+                    <img src="{% static "deps/images/Not found image.png" %}" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1" alt="{{ product.name }}">
+                {% endif %}
             </div>
             <div class="col-md-8 ">
                 <p class="product_id mt-3">id: {{ product.display_id }}</p>
+                <h5 class="card-title">{{product.name}}</h5>
                 <p class="product_id mt-3">Доступно</p>
                 <p class="card-text">{{product.description}}</p>
             </div>
@@ -31,8 +35,11 @@
                                 aria-label="Закрыть"></button>
                         </div>
                         <div class="modal-body">
-                            <img src="{{ product.image.url }}"
-                                class="img-fluid" alt="{{product.name}}">
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" class="img-fluid" alt="{{product.name}}" alt="{{ product.name }}">
+                            {% else %}
+                                <img src="{% static "deps/images/Not found image.png" %}" class="img-fluid" alt="{{product.name}}" alt="{{ product.name }}">
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -47,7 +54,6 @@
             {% else %}
                 <p><strong>{{product.price}} Р/{{product.unit}}</strong></p>
             {% endif %}
-            <h5 class="card-title">{{product.name}}</h5>
             <a href="{% url "carts:cart_add" %}" class="btn btn-dark add-to-cart"
             data-product-id="{{ product.id }}">
                 {% csrf_token %}

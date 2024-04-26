@@ -7,6 +7,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 
 from carts.models import Cart
+from carts.utils import get_user_carts, get_endng
 from orders.models import Order, OrderItem
 from users.forms import ProfileForm, UserLoginForm, UserRegistrationForm
 
@@ -100,15 +101,22 @@ def profile(request):
             )
             .order_by("-id")
         )
+
+    tovar = get_endng(request)
+
     context = {
         "title": "Кабинет",
         "form": form,
         "orders": orders,
+        "tovar": tovar,
         }
     return render(request, "users/profile.html", context)
 
 def users_cart(request):
-    return render(request, 'users/users_cart.html', {"title": "Корзина товаров"})
+
+    tovar = get_endng(request)
+
+    return render(request, 'users/users_cart.html', {"tovar": tovar, "title": "Корзина товаров"})
 
 @login_required
 def logout(request):

@@ -50,23 +50,17 @@
             <li class="list-group-item">
                 <div class="row text-center">
                     <div class="col p-0">
-                        <div class="input-group">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-dark btn-sm decrement"
-                                    data-cart-id="{{ cart.id }}" 
-                                    data-cart-change-url="{% url "carts:cart_change" %}">
-                                    {% csrf_token %}
-                                    -</button>
-                            </span>
+                        <div class="input-group input-group-sm" style="width: 100px;">
+                            <button type="button" class="btn btn-dark btn-sm decrement"
+                                data-cart-id="{{ cart.id }}" 
+                                data-cart-change-url="{% url "carts:cart_change" %}">
+                                {% csrf_token %}-</button>
                             <input type="text" class="form-control number" value="{{ cart.quantity }}"
                                 readonly>
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-dark btn-sm increment"
-                                    data-cart-id="{{ cart.id }}" 
-                                    data-cart-change-url="{% url "carts:cart_change" %}">
-                                    {% csrf_token %}
-                                    +</button>
-                            </span>
+                            <button type="button" class="btn btn-dark btn-sm increment"
+                                data-cart-id="{{ cart.id }}" 
+                                data-cart-change-url="{% url "carts:cart_change" %}">
+                                {% csrf_token %}+</button>
                         </div>
                     </div>
                     <div class="col p-0">
@@ -90,7 +84,8 @@
     <div class="card mb-3 shadow-lg">
         <div class="card-footer text-black text-start">
             <span id="slct-ttl-qntt">
-                <p class="float-left text-black">Итого <strong>{{ carts.select_quantity }}</strong> товар(а) на сумму</p>
+                <p class="float-left text-black">Итого <strong>{{ carts.select_quantity }} </strong>
+                {{tovar}} </p>
             </span>
             <span id="slct-ttl-prc">
                 <h4 class="float-left"><strong>{{ carts.total_price }} Р</strong></h4>

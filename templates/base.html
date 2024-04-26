@@ -48,10 +48,9 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-white" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    Мой профиль
+                                    Мой профиль {{ user_name }}
                                 </a>
                                 <ul class="dropdown-menu bg-dark">
-                                    {% comment %} <li><a class="nav-link text-white" href="{% url "user:users_cart" %}">Корзина</a></li> {% endcomment %}
                                     <li><a class="nav-link text-white" href="{% url "users:profile" %}">Кабинет</a></li>
                                     {% if user.is_admin or user.is_staff %}
                                         <li><a class="nav-link text-white" href="{% url "admin:index" %}">Админ панель</a></li>
