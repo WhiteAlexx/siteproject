@@ -10,8 +10,8 @@
             "price": "150.00",
             "unit": "шт",
             "discount": "0.00",
-            "quantity": 706,
-            "category": 4
+            "quantity": 0,
+            "category": 9
         }
     },
     {
@@ -25,8 +25,8 @@
             "price": "93.00",
             "unit": "шт",
             "discount": "0.00",
-            "quantity": 453,
-            "category": 4
+            "quantity": 451,
+            "category": 7
         }
     },
     {
@@ -40,7 +40,7 @@
             "price": "670.00",
             "unit": "шт",
             "discount": "25.00",
-            "quantity": 1001,
+            "quantity": 998,
             "category": 5
         }
     },
@@ -55,7 +55,7 @@
             "price": "365.00",
             "unit": "шт",
             "discount": "33.33",
-            "quantity": 666,
+            "quantity": 663,
             "category": 5
         }
     },
@@ -70,7 +70,7 @@
             "price": "430.00",
             "unit": "м",
             "discount": "0.00",
-            "quantity": 80,
+            "quantity": 0,
             "category": 6
         }
     },
@@ -99,8 +99,8 @@
             "image": "goods_images/bedside_table.jpg",
             "price": "55.00",
             "unit": "м",
-            "discount": "0.00",
-            "quantity": 337,
+            "discount": "5.00",
+            "quantity": 336,
             "category": 4
         }
     },
@@ -130,7 +130,7 @@
             "price": "30.00",
             "unit": "кг",
             "discount": "0.00",
-            "quantity": 3,
+            "quantity": 0,
             "category": 8
         }
     },
@@ -145,7 +145,7 @@
             "price": "10.00",
             "unit": "кг",
             "discount": "5.00",
-            "quantity": 4,
+            "quantity": 6,
             "category": 8
         }
     },
@@ -175,8 +175,908 @@
             "price": "25.00",
             "unit": "кг",
             "discount": "0.00",
+            "quantity": -8,
+            "category": 9
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 13,
+        "fields": {
+            "name": "Узкие брюки длиной до щиколотки",
+            "slug": "uzkie-bryuki-dlinoj-do-shikolotki",
+            "description": "Брюки длиной до щиколотки с 5 карманами из эластичного твила. Талия стандартной высоты, ширинка на молнии и пуговице, узкие прямые брючины. 74% хлопок, 25% полиэстер, 1% спандекс. Машинная стирка...",
+            "image": "goods_images/Ankle-length_Slim-fit_Pants__93270-A.jpg",
+            "price": "24.99",
+            "unit": "шт",
+            "discount": "0.00",
+            "quantity": 334,
+            "category": 6
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 14,
+        "fields": {
+            "name": "Комбинезон с нагрудником",
+            "slug": "kombinezon-s-nagrudnikom",
+            "description": "Короткий комбинезон из твила. Плечевые лямки скреплены сверху металлическими петельками. Нагрудный карман, передние карманы и задние карманы. Без подкладки. 58% хлопок, 42% лиоцелл. Машинная стирка холодной водой.",
+            "image": "goods_images/Bib_Overall_Dress__94323-A.jpg",
+            "price": "29.99",
+            "unit": "шт",
+            "discount": "0.00",
+            "quantity": 222,
+            "category": 4
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 15,
+        "fields": {
+            "name": "Комбинезон с нагрудником 1",
+            "slug": "kombinezon-s-nagrudnikom_1",
+            "description": "Короткий комбинезон из твила. Плечевые лямки скреплены сверху металлическими петельками. Нагрудный карман, передние карманы и задние карманы. Без подкладки. 58% хлопок, 42% лиоцелл. Машинная стирка холодной водой.",
+            "image": "",
+            "price": "29.99",
+            "unit": "шт",
+            "discount": "0.00",
+            "quantity": 134,
+            "category": 4
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 16,
+        "fields": {
+            "name": "Блейзер",
+            "slug": "blejzer",
+            "description": "Двубортный пиджак из тканого материала с зазубренными лацканами, пуговицами спереди и прорезными передними карманами. На подкладке. 63% полиэстер, 33% вискоза, 4% спандекс. Только сухая чистка.",
+            "image": "goods_images/Blazer__93086-B.jpg",
+            "price": "49.99",
+            "unit": "м",
+            "discount": "0.00",
             "quantity": 0,
             "category": 9
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 17,
+        "fields": {
+            "name": "Блузка с вышивкой",
+            "slug": "bluzka-s-vyshivkoj",
+            "description": "Широкая блузка из хлопчатобумажной ткани с вышивкой. Округленный вырез горловины, частично потайные пуговицы спереди и длинные широкие рукава-фонарики с вышивкой и манжетами. 100% хлопок. Машинная стирка холодной водой.",
+            "image": "goods_images/Blouse_with_Embroidery__96236-C.jpg",
+            "price": "59.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 89,
+            "category": 6
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 18,
+        "fields": {
+            "name": "Блузка с воротником с рюшами",
+            "slug": "bluzka-s-vorotnikom-s-ryushami",
+            "description": "Блуза из тканого материала с воротником-стойкой, отделанным рюшами. Пуговицы спереди и длинные рукава-фонарики с манжетами на пуговицах. 56% полиэстер, 44% хлопок. Машинная стирка холодной водой.",
+            "image": "goods_images/Blouse_with_Ruffled_Collar__98894-A.jpg",
+            "price": "49.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 99,
+            "category": 6
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 19,
+        "fields": {
+            "name": "Шифоновое платье",
+            "slug": "shifonovoe-plate",
+            "description": "Короткое платье из жатого шифона с V-образным вырезом спереди и сзади. Горизонтальные завязки сзади на шее, складки сверху и потайная молния сбоку. Длинные полупрозрачные рукава, присборенная талия и расклешенная юбка. На подкладке. 100% полиэстер. Машинная стирка холодной водой.",
+            "image": "goods_images/Chiffon_Dress_with_Flounce__97504-A.jpg",
+            "price": "54.99",
+            "unit": "кг",
+            "discount": "0.00",
+            "quantity": 175,
+            "category": 7
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 20,
+        "fields": {
+            "name": "Шифоновое платье с воланом",
+            "slug": "shifonovoe-plate-s-volanom",
+            "description": "Платье длиной до икры из жатого шифона с набивным рисунком. V-образный вырез, пришитый запах спереди и короткие рукава. Отрезная оборка на талии, потайная молния с одной стороны и асимметричный подол. Половина на подкладке. 100% полиэстер. Машинная стирка холодной водой.",
+            "image": "goods_images/Chiffon_Dress__93745-A.jpg",
+            "price": "49.99",
+            "unit": "кг",
+            "discount": "0.00",
+            "quantity": 532,
+            "category": 7
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 21,
+        "fields": {
+            "name": "Пальто",
+            "slug": "palto",
+            "description": "Длинное пальто из ткани с добавлением вискозы. Воротник, потайные пуговицы спереди и пояс на талии. Заниженная линия плеча, широкие рукава и широкие манжеты на пуговицах. Открытые нагрудные карманы, карманы в боковых швах и высокие разрезы по бокам. Без подкладки. 66 % полиэстер, 32 % вискоза, 2 % спандекс. Машинная стирка...",
+            "image": "goods_images/Coat__98209-A.jpg",
+            "price": "69.99",
+            "unit": "м",
+            "discount": "2.50",
+            "quantity": 0,
+            "category": 5
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 22,
+        "fields": {
+            "name": "Блузка с жатой оборкой",
+            "slug": "bluzka-s-zhatoj-oborkoj",
+            "description": "Блузка из воздушной жатой ткани с набивным рисунком. Небольшой воротник-стойка, потайные пуговицы спереди и воланы спереди. Длинные рукава с пуговицами на манжетах. Закругленный край. 100% полиэстер. Машинная стирка холодной водой.",
+            "image": "goods_images/Crinkled_Flounced_Blouse__00959-A.jpg",
+            "price": "24.99",
+            "unit": "м",
+            "discount": "10.00",
+            "quantity": 777,
+            "category": 5
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 23,
+        "fields": {
+            "name": "Платье",
+            "slug": "plate",
+            "description": "Платье длиной до икры из плотной ткани с воротником. Планка на пуговицах, нагрудные карманы с клапанами и сильно заниженная линия плеча. Широкие зауженные рукава с пуговицами на манжетах, съемный пояс и разрезы по бокам. 63 % полиэстер, 32 % вискоза, 5 % спандекс. Машинная стирка...",
+            "image": "goods_images/Dress__98086-A.jpg",
+            "price": "69.99",
+            "unit": "шт",
+            "discount": "0.00",
+            "quantity": 95,
+            "category": 6
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 24,
+        "fields": {
+            "name": "Приталенное платье",
+            "slug": "pritalennoe-plate",
+            "description": "Приталенное платье из плотного трикотажа с V-образным вырезом, длинными рукавами и вырезом сзади с пуговицей сзади на шее. На подкладке сверху. 60 % вискоза, 35 % нейлон, 5 % спандекс. Машинная стирка в теплой воде.",
+            "image": "goods_images/Fitted_Dress__94766-A.jpg",
+            "price": "34.99",
+            "unit": "шт",
+            "discount": "0.00",
+            "quantity": 357,
+            "category": 4
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 25,
+        "fields": {
+            "name": "Топ в стиле Хенли",
+            "slug": "top-v-stile-henli",
+            "description": "Приталенный топ из мягкого хлопкового трикотажа с овальным вырезом, пуговицами спереди и длинными рукавами. 68% хлопок, 27% полиэстер, 5% спандекс.",
+            "image": "goods_images/Henley-style_Top__34975-K.jpg",
+            "price": "12.99",
+            "unit": "кг",
+            "discount": "50.00",
+            "quantity": 666,
+            "category": 5
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 26,
+        "fields": {
+            "name": "Куртка с капюшоном",
+            "slug": "kurtka-s-kapyushonom",
+            "description": "Толстовка с капюшоном на подкладке и шнурке. Молния спереди, боковые карманы, трикотажная резинка на манжетах и по нижнему краю. 58% хлопок, 42% полиэстер. Машинная стирка в теплой воде.",
+            "image": "goods_images/Hooded_Jacket__52378-D.jpg",
+            "price": "29.99",
+            "unit": "шт",
+            "discount": "0.00",
+            "quantity": 258,
+            "category": 7
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 27,
+        "fields": {
+            "name": "Топ с капюшоном",
+            "slug": "top-s-kapyushonom",
+            "description": "Толстовка широкого кроя с капюшоном на трикотажной подкладке и кулиской. Заниженная линия плеча, карман-кенгуру, трикотажная резинка на манжетах и по нижнему краю. 70% хлопок, 25% полиэстер, 5% вискоза. Машинная стирка в теплой воде.",
+            "image": "goods_images/Hooded_Top__60135-A.jpg",
+            "price": "29.99",
+            "unit": "шт",
+            "discount": "3.00",
+            "quantity": 16,
+            "category": 8
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 28,
+        "fields": {
+            "name": "Платье из джерси",
+            "slug": "plate-iz-dzhersi",
+            "description": "Приталенное платье из трикотажа с длинными прямыми рукавами. Без подкладки. 72% полиэстер, 23% вискоза, 5% спандекс. Машинная стирка...",
+            "image": "goods_images/Jersey_Dress__96113-B.jpg",
+            "price": "19.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 13,
+            "category": 8
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 29,
+        "fields": {
+            "name": "Платье из джерси 1",
+            "slug": "plate-iz-dzhersi-1",
+            "description": "Приталенное платье из трикотажа с длинными прямыми рукавами. Без подкладки. 72% полиэстер, 23% вискоза, 5% спандекс. Машинная стирка...",
+            "image": "goods_images/Jersey_Dress__96113-C.jpg",
+            "price": "19.99",
+            "unit": "0,1кг",
+            "discount": "0.00",
+            "quantity": 0,
+            "category": 9
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 30,
+        "fields": {
+            "name": "Джоггеры",
+            "slug": "dzhoggery",
+            "description": "Джоггеры из мягкой толстовки с эластичным поясом на кулиске, боковыми карманами и эластичными краями. Мягкий, с начесом внутри. 7",
+            "image": "goods_images/Joggers__59851-A.jpg",
+            "price": "17.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 0,
+            "category": 9
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 31,
+        "fields": {
+            "name": "Джоггеры 1",
+            "slug": "dzhoggery-1",
+            "description": "Джоггеры из ткани с легким шуршанием. Широкий пояс на эластичном шнурке, боковые карманы и задний карман на молнии. Широкая трикотажная резинка по низу. 54% полиэстер, 43% хлопок, 3% спандекс. Машинная стирка...",
+            "image": "goods_images/Joggers__92905-A.jpg",
+            "price": "34.99",
+            "unit": "0,1кг",
+            "discount": "0.00",
+            "quantity": 558,
+            "category": 7
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 32,
+        "fields": {
+            "name": "Вязаный свитер из смесового мохера",
+            "slug": "vyazanyj-sviter-iz-smesovogo-mohera",
+            "description": "ВЫСОКОЕ КАЧЕСТВО. Широкий вязаный свитер из смесового мохера. Небольшой ребристый воротник-стойка и длинные рукава с ребристыми манжетами. 32 % нейлон, 32 % шерсть, 32 % мохер, 4 % спандекс. Мытье рук...",
+            "image": "goods_images/Knit_Mohair-blend_Sweater__94321-B.jpg",
+            "price": "69.99",
+            "unit": "шт",
+            "discount": "10.00",
+            "quantity": 421,
+            "category": 5
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 33,
+        "fields": {
+            "name": "Трикотажный топ с длинными рукавами",
+            "slug": "trikotazhnyj-top-s-dlinnymi-rukavami",
+            "description": "Приталенный топ с длинными рукавами из эластичного трикотажа из натурального хлопка с круглым вырезом. 92 % хлопок, 3 % спандекс, 3 % вискоза, 2 % полиэстер.",
+            "image": "goods_images/Long-sleeved_Jersey_Top__73840-F.jpg",
+            "price": "12.99",
+            "unit": "м",
+            "discount": "25.00",
+            "quantity": 1147,
+            "category": 5
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 34,
+        "fields": {
+            "name": "Трикотажный топ с длинными рукавами 1",
+            "slug": "trikotazhnyj-top-s-dlinnymi-rukavami-1",
+            "description": "Приталенный топ с длинными рукавами из эластичного трикотажа из натурального хлопка с круглым вырезом. 92 % хлопок, 3 % спандекс, 3 % вискоза, 2 % полиэстер.",
+            "image": "goods_images/Long-sleeved_Jersey_Top__73840-P.jpg",
+            "price": "12.99",
+            "unit": "м",
+            "discount": "15.00",
+            "quantity": 2547,
+            "category": 5
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 35,
+        "fields": {
+            "name": "Трикотажный топ с длинными рукавами 2",
+            "slug": "trikotazhnyj-top-s-dlinnymi-rukavami-2",
+            "description": "Приталенный топ с длинными рукавами из эластичного трикотажа из натурального хлопка с круглым вырезом. 92 % хлопок, 3 % спандекс, 3 % вискоза, 2 % полиэстер.",
+            "image": "",
+            "price": "12.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 3562,
+            "category": 7
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 36,
+        "fields": {
+            "name": "Свитер свободной вязки",
+            "slug": "sviter-svobodnoj-vyazki",
+            "description": "Мягкий свитер свободной вязки с V-образным вырезом, длинными рукавами реглан и закругленными краями на манжетах и подоле. Сзади длиннее. 100% акрил. Машинная стирка в теплой воде.",
+            "image": "goods_images/Loose-knit_Sweater__71342-J.jpg",
+            "price": "17.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 2658,
+            "category": 7
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 37,
+        "fields": {
+            "name": "Блузка из лиоцелла",
+            "slug": "bluzka-iz-liocella",
+            "description": "Блузка прямого кроя из ткани с содержанием лиоцелла Tencel®. Открытый вырез сзади на пуговице и широкие рукава на кулиске. 66 % вискоза, 19 % полиэстер, 15 % лиоцелл. Машинная стирка...",
+            "image": "goods_images/Lyocell-blend_Blouse__91865-A.jpg",
+            "price": "34.99",
+            "unit": "шт",
+            "discount": "0.00",
+            "quantity": 357,
+            "category": 6
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 38,
+        "fields": {
+            "name": "Сетчатая футболка",
+            "slug": "setchataya-futbolka",
+            "description": "Длинная футболка из сетки с V-образным вырезом. Кокетка, заниженная линия плеча и рукава с контрастной отделкой из репсовой ткани. 100% полиэстер. Машинная стирка в теплой воде.",
+            "image": "goods_images/Mesh_T-shirt__94984-A.jpg",
+            "price": "17.99",
+            "unit": "0,1кг",
+            "discount": "0.00",
+            "quantity": 38,
+            "category": 8
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 39,
+        "fields": {
+            "name": "Платье с открытыми плечами",
+            "slug": "plate-s-otkrytymi-plechami",
+            "description": "Короткое приталенное платье с открытыми плечами из эластичной ткани в рубчик. Короткие рукава реглан, отрезная по талии, слегка расклешенная юбка. Без подкладки. 54 % вискоза, 44 % нейлон, 2 % спандекс. Машинная стирка в теплой воде.",
+            "image": "goods_images/Off-the-shoulder_Dress__90882-B.jpg",
+            "price": "59.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 85,
+            "category": 8
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 40,
+        "fields": {
+            "name": "Джинсовая куртка оверсайз",
+            "slug": "dzhinsovaya-kurtka-oversajz",
+            "description": "Джинсовая куртка оверсайз с гладкими металлическими пуговицами спереди и на манжетах. Воротник, нагрудные карманы с клапаном и пуговицей, карманы в боковых швах. Регулируемая застежка сзади с пуговицами. 100% хлопок. Машинная стирка холодной водой.",
+            "image": "goods_images/Oversized_Denim_Jacket__94706-A.jpg",
+            "price": "19.99",
+            "unit": "м",
+            "discount": "3.00",
+            "quantity": 45,
+            "category": 8
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 41,
+        "fields": {
+            "name": "Брюки",
+            "slug": "bryuki",
+            "description": "Брюки из эластичной ткани с легким блеском. Пришитые складки, контрастные полосы по бокам и ложные прорезные карманы сзади. Разрезы по низу на потайной молнии. 85 % вискоза, 13 % полиэстер, 2 % спандекс. Машинная стирка...",
+            "image": "goods_images/Pants__00286-B.jpg",
+            "price": "49.99",
+            "unit": "шт",
+            "discount": "5.00",
+            "quantity": 456,
+            "category": 5
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 42,
+        "fields": {
+            "name": "Брюки с рисунком",
+            "slug": "bryuki-s-risunkom",
+            "description": "Брюки длиной до щиколотки из эластичного хлопкового атласа с рисунком. Талия стандартной высоты со потайной застежкой на крючки и молнией. Боковые карманы и зауженные брючины с разрезами по краю. 61% хлопок, 36% полиэстер, 3% спандекс. Машинная стирка...",
+            "image": "goods_images/Patterned_Slacks__96436-A.jpg",
+            "price": "29.99",
+            "unit": "0,1кг",
+            "discount": "20.00",
+            "quantity": 841,
+            "category": 5
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 43,
+        "fields": {
+            "name": "Юбка в складку",
+            "slug": "yubka-v-skladku",
+            "description": "Юбка длиной до икры из плиссированной креповой ткани с эластичным поясом. На подкладке. 100% полиэстер. Машинная стирка холодной водой.",
+            "image": "goods_images/Pleated_Skirt__00268-B.jpg",
+            "price": "54.99",
+            "unit": "кг",
+            "discount": "0.00",
+            "quantity": 0,
+            "category": 9
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 44,
+        "fields": {
+            "name": "Короткое шифоновое платье",
+            "slug": "korotkoe-shifonovoe-plate",
+            "description": "Короткое платье с V-образным вырезом из шифона плюмети. Сборки, небольшая оборка на плечах, заниженная линия плеча и длинные широкие рукава с манжетами на пуговицах. Узкая талия на эластичной резинке и юбка-солнце с ярусами рюшей. На подкладке. 100% полиэстер. Машинная стирка в теплой воде.",
+            "image": "goods_images/Short_Chiffon_Dress__93926-B.jpg",
+            "price": "49.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 0,
+            "category": 9
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 45,
+        "fields": {
+            "name": "Короткое шифоновое платье 1",
+            "slug": "korotkoe-shifonovoe-plate-1",
+            "description": "Короткое платье с V-образным вырезом из шифона плюмети. Сборки, небольшая оборка на плечах, заниженная линия плеча и длинные широкие рукава с манжетами на пуговицах. Узкая талия на эластичной резинке и юбка-солнце с ярусами рюшей. На подкладке. 100% полиэстер. Машинная стирка в теплой воде.",
+            "image": "goods_images/Short_Chiffon_Dress__93926-C.jpg",
+            "price": "49.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 0,
+            "category": 9
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 46,
+        "fields": {
+            "name": "Короткое платье",
+            "slug": "korotkoe-plate",
+            "description": "Короткое платье из тканого материала. Круглый вырез горловины и вырез сзади на пуговице. Кокетка сзади со потайными складками, длинные рукава и узкие манжеты с завязками. Боковые карманы. 100% полиэстер. Машинная стирка холодной водой.",
+            "image": "goods_images/Short_Dress__90008-E.jpg",
+            "price": "24.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 758,
+            "category": 7
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 47,
+        "fields": {
+            "name": "Короткое кружевное платье",
+            "slug": "korotkoe-kruzhevnoe-plate",
+            "description": "Короткое платье прямого кроя из кружева. Открытый вырез сзади и потайная пуговица сзади на шее. Круглый вырез, мягкие плечи и рукава длиной 3/4. На подкладке. 51 % хлопок, 25 % нейлон, 24 % вискоза. Машинная стирка холодной водой.",
+            "image": "goods_images/Short_Lace_Dress__96643-A.jpg",
+            "price": "59.99",
+            "unit": "м",
+            "discount": "70.00",
+            "quantity": 614,
+            "category": 5
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 48,
+        "fields": {
+            "name": "Короткая юбка",
+            "slug": "korotkaya-yubka",
+            "description": "Короткая юбка из модальной ткани с контрастной отделкой из репсовой ткани. Потайная боковая молния и пришитый ремень с D-образными кольцами спереди. Без подкладки. 72% модал, 28% полиэстер. Машинная стирка холодной водой.",
+            "image": "goods_images/Short_Skirt__92740-A.jpg",
+            "price": "24.99",
+            "unit": "кг",
+            "discount": "2.50",
+            "quantity": 75,
+            "category": 8
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 49,
+        "fields": {
+            "name": "Короткая толстовка",
+            "slug": "korotkaya-tolstovka",
+            "description": "Короткий свитшот с длинными рукавами и рельефной резинкой по вырезу, манжетам и нижнему краю. 57% хлопок, 43% полиэстер. Машинная стирка холодной водой.",
+            "image": "goods_images/Short_Sweatshirt__96230-A.jpg",
+            "price": "24.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 412,
+            "category": 6
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 50,
+        "fields": {
+            "name": "Короткая толстовка 1",
+            "slug": "korotkaya-tolstovka-1",
+            "description": "Короткий свитшот с длинными рукавами и рельефной резинкой по вырезу, манжетам и нижнему краю. 57% хлопок, 43% полиэстер. Машинная стирка холодной водой.",
+            "image": "goods_images/Short_Sweatshirt__96230-B.jpg",
+            "price": "24.99",
+            "unit": "м",
+            "discount": "3.33",
+            "quantity": 258,
+            "category": 4
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 51,
+        "fields": {
+            "name": "Короткая толстовка 2",
+            "slug": "korotkaya-tolstovka-2",
+            "description": "Короткий свитшот с длинными рукавами и рельефной резинкой по вырезу, манжетам и нижнему краю. 57% хлопок, 43% полиэстер. Машинная стирка холодной водой.",
+            "image": "goods_images/Short_Sweatshirt__96230-C.jpg",
+            "price": "24.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 354,
+            "category": 6
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 52,
+        "fields": {
+            "name": "Короткая толстовка 3",
+            "slug": "korotkaya-tolstovka-3",
+            "description": "Короткий свитшот с длинными рукавами и рельефной резинкой по вырезу, манжетам и нижнему краю. 83% хлопок, 15% полиэстер, 2% вискоза.",
+            "image": "goods_images/Short_Sweatshirt__96230-D.jpg",
+            "price": "9.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 48,
+            "category": 8
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 53,
+        "fields": {
+            "name": "Джинсы скинни с высокой талией",
+            "slug": "dzhinsy-skinni-s-vysokoj-taliej",
+            "description": "Джинсы с пятью карманами из стираного эластичного денима с потертыми деталями. Высокая талия, ширинка на молнии и пуговице, узкие брючины. 99% хлопок, 1% спандекс.",
+            "image": "goods_images/Skinny_High_Waist_Jeans__65763-A.jpg",
+            "price": "39.99",
+            "unit": "0,1кг",
+            "discount": "0.00",
+            "quantity": 88,
+            "category": 8
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 54,
+        "fields": {
+            "name": "Джинсы скинни с высокой талией 1",
+            "slug": "dzhinsy-skinni-s-vysokoj-taliej-1",
+            "description": "Джинсы с пятью карманами из стираного эластичного денима с потертыми деталями. Высокая талия, ширинка на молнии и пуговице, узкие брючины. 70% хлопок, 28% полиэстер, 2% спандекс. Машинная стирка...",
+            "image": "",
+            "price": "39.99",
+            "unit": "0,1кг",
+            "discount": "0.00",
+            "quantity": 108,
+            "category": 8
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 55,
+        "fields": {
+            "name": "Джинсы скинни стандартного размера",
+            "slug": "dzhinsy-skinni-standartnogo-razmera",
+            "description": "Джинсы с пятью карманами из стираного денима суперстрейч с сильно потертыми деталями. Талия стандартной высоты, ширинка на молнии и стройные брючины. 82% хлопок, 17% полиэстер, 1% спандекс.",
+            "image": "goods_images/Skinny_Regular_Jeans__94453-B.jpg",
+            "price": "29.99",
+            "unit": "м",
+            "discount": "5.00",
+            "quantity": 873,
+            "category": 6
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 56,
+        "fields": {
+            "name": "Юбка со шнуровкой",
+            "slug": "yubka-so-shnurovkoj",
+            "description": "Короткая юбка из мягкого твила с люверсами и шнуровкой спереди. Сзади потайная молния с пуговицей. Без подкладки. 56% хлопок, 44% лиоцелл. Машинная стирка холодной водой.",
+            "image": "goods_images/Skirt_with_Lacing__93811-A.jpg",
+            "price": "34.99",
+            "unit": "м",
+            "discount": "3.33",
+            "quantity": 741,
+            "category": 6
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 57,
+        "fields": {
+            "name": "Юбка со шнуровкой 1",
+            "slug": "yubka-so-shnurovkoj-1",
+            "description": "Короткая юбка из мягкого твила с люверсами и шнуровкой спереди. Сзади потайная молния с пуговицей. Без подкладки. 56% хлопок, 44% лиоцелл. Машинная стирка холодной водой.",
+            "image": "goods_images/Skirt_with_Lacing__93811-B.jpg",
+            "price": "34.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 628,
+            "category": 7
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 58,
+        "fields": {
+            "name": "Суперскинни Высокие джинсы",
+            "slug": "superskinni-vysokie-dzhinsy",
+            "description": "Джинсы из стираного денима суперстрейч с застежкой-молнией и пуговицей. Ложные карманы спереди, обычные карманы сзади и очень узкие брючины. Высокая талия. 78% хлопок, 20% полиэстер, 2% спандекс. Машинная стирка...",
+            "image": "goods_images/Super_Skinny_High_Jeans__70745-D.jpg",
+            "price": "19.99",
+            "unit": "шт",
+            "discount": "33.33",
+            "quantity": 512,
+            "category": 5
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 59,
+        "fields": {
+            "name": "Топ",
+            "slug": "top",
+            "description": "Топ из мягкого эластичного вискозного трикотажа. Широкий вырез горловины, длинные рукава «летучая мышь», видимый шов спереди и сзади. 94% вискоза, 6% спандекс. Машинная стирка в теплой воде.",
+            "image": "goods_images/Top__00948-B.jpg",
+            "price": "29.99",
+            "unit": "шт",
+            "discount": "7.00",
+            "quantity": 19,
+            "category": 8
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 60,
+        "fields": {
+            "name": "Топ с галстуком",
+            "slug": "top-s-galstukom",
+            "description": "Топ с короткими рукавами из мягкого трикотажа. Металлические люверсы спереди, контрастная завязка и контрастная резинка на воротнике и манжетах. 100% хлопок. Машинная стирка холодной водой.",
+            "image": "goods_images/Top_with_Tie__94967-A.jpg",
+            "price": "17.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 0,
+            "category": 9
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 61,
+        "fields": {
+            "name": "Футболка",
+            "slug": "futbolka",
+            "description": "Футболка приталенного кроя из мягкого трикотажа из натурального хлопка. 100% хлопок.",
+            "image": "goods_images/T-shirt__96771-A.jpg",
+            "price": "6.99",
+            "unit": "шт",
+            "discount": "0.00",
+            "quantity": 0,
+            "category": 9
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 62,
+        "fields": {
+            "name": "Футболка 1",
+            "slug": "futbolka-1",
+            "description": "Футболка приталенного кроя из мягкого трикотажа из натурального хлопка. 100% хлопок. Машинная стирка в теплой воде.",
+            "image": "goods_images/T-shirt__96771-B.jpg",
+            "price": "6.99",
+            "unit": "шт",
+            "discount": "0.00",
+            "quantity": 0,
+            "category": 9
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 63,
+        "fields": {
+            "name": "Футболка с вышивкой",
+            "slug": "futbolka-s-vyshivkoj",
+            "description": "Футболка из хлопкового трикотажа с вышитой надписью. 100% хлопок.",
+            "image": "goods_images/T-shirt_with_Embroidery__01007-C.jpg",
+            "price": "29.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 6524,
+            "category": 7
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 64,
+        "fields": {
+            "name": "Блузка с V-образным вырезом",
+            "slug": "bluzka-s-v-obraznym-vyrezom",
+            "description": "Блуза с V-образным вырезом из вискозной ткани, пуговицами сверху и рукавами длиной 3/4. Закругленный низ с короткими разрезами по бокам. Сзади немного длиннее. 100% район. Машинная стирка холодной водой.",
+            "image": "goods_images/V-neck_Blouse__97571-B.jpg",
+            "price": "17.99",
+            "unit": "кг",
+            "discount": "2.50",
+            "quantity": 521,
+            "category": 6
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 65,
+        "fields": {
+            "name": "Комбинезон с V-образным вырезом",
+            "slug": "kombinezon-s-v-obraznym-vyrezom",
+            "description": "Комбинезон из тканого материала с V-образным вырезом и короткими рукавами-бабочками. Потайная молния сзади, отрезная талия и слегка зауженные, слегка расклешенные брючины со складками. 92% полиэстер, 8% спандекс. Машинная стирка в теплой воде.",
+            "image": "goods_images/V-neck_Jumpsuit__91696-C.jpg",
+            "price": "69.99",
+            "unit": "шт",
+            "discount": "0.00",
+            "quantity": 0,
+            "category": 9
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 66,
+        "fields": {
+            "name": "Топ с V-образным вырезом",
+            "slug": "top-s-v-obraznym-vyrezom",
+            "description": "Топ из тканого материала с V-образным вырезом спереди и сзади. Узкие бретели и декоративные бретели сзади. 100% полиэстер. Машинная стирка холодной водой.",
+            "image": "goods_images/V-neck_Top__93756-B.jpg",
+            "price": "24.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 0,
+            "category": 9
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 67,
+        "fields": {
+            "name": "Топ с V-образным вырезом 1",
+            "slug": "top-s-v-obraznym-vyrezom-1",
+            "description": "Топ из тканого материала с V-образным вырезом спереди и сзади. Узкие бретели и декоративные бретели сзади. 100% полиэстер. Машинная стирка холодной водой.",
+            "image": "goods_images/V-neck_Top__93756-C.jpg",
+            "price": "24.99",
+            "unit": "шт",
+            "discount": "10.00",
+            "quantity": 73,
+            "category": 8
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 68,
+        "fields": {
+            "name": "Топ с V-образным вырезом 2",
+            "slug": "top-s-v-obraznym-vyrezom-2",
+            "description": "Топ из тканого материала с V-образным вырезом спереди и сзади. Узкие бретели и декоративные бретели сзади. 100% полиэстер. Машинная стирка холодной водой.",
+            "image": "goods_images/V-neck_Top__93756-D.jpg",
+            "price": "24.99",
+            "unit": "кг",
+            "discount": "0.00",
+            "quantity": 185,
+            "category": 7
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 69,
+        "fields": {
+            "name": "Топ с V-образным вырезом 3",
+            "slug": "top-s-v-obraznym-vyrezom-3",
+            "description": "Топ с V-образным вырезом из воздушного трикотажа, пуговицами сверху и рукавами длиной 3/4. Закругленный низ с разрезами по бокам. Сзади немного длиннее. 100% полиэстер. Машинная стирка холодной водой.",
+            "image": "goods_images/V-neck_Top__95168-D.jpg",
+            "price": "9.99",
+            "unit": "0,1кг",
+            "discount": "0.00",
+            "quantity": 342,
+            "category": 6
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 70,
+        "fields": {
+            "name": "Широкий хлопковый топ",
+            "slug": "shirokij-hlopkovyj-top",
+            "description": "Топ прямого кроя из плотного хлопкового трикотажа с декоративными швами и строчкой. Округленные плечи и короткие рукава. 96% хлопок, 4% спандекс. Машинная стирка в теплой воде.",
+            "image": "goods_images/Wide-cut_Cotton_Top__99663-A.jpg",
+            "price": "34.99",
+            "unit": "0,1кг",
+            "discount": "40.00",
+            "quantity": 246,
+            "category": 5
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 71,
+        "fields": {
+            "name": "Широкие брюки",
+            "slug": "shirokie-bryuki",
+            "description": "Брюки из креповой ткани с контрастными полосками по бокам. Ширинка-молния со потайной застежкой на крючки. Боковые карманы, задние карманы и прямые брючины с пришитыми манжетами. 100% полиэстер. Машинная стирка в теплой воде.",
+            "image": "goods_images/Wide-leg_Pants__92942-B.jpg",
+            "price": "34.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 852,
+            "category": 7
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 72,
+        "fields": {
+            "name": "Широкие брюки 1",
+            "slug": "shirokie-bryuki-1",
+            "description": "Широкие брюки из мягкого стираного денима с высокой талией, потайной застежкой на крючки и ширинкой на молнии. Складки сверху, боковые карманы, прорезные задние карманы и широкие прямые брючины со складками спереди и пришитыми манжетами по краю. 100% хлопок. Машинная стирка холодной водой.",
+            "image": "goods_images/Wide-leg_Pants__93158-A.jpg",
+            "price": "49.99",
+            "unit": "м",
+            "discount": "0.00",
+            "quantity": 917,
+            "category": 7
         }
     }
 ]

@@ -3,8 +3,9 @@
         "model": "goods.categories",
         "pk": 4,
         "fields": {
-            "name": "Товары в наличии",
-            "slug": "tovary"
+            "name": "В наличии",
+            "slug": "tovary",
+            "image": ""
         }
     },
     {
@@ -12,7 +13,8 @@
         "pk": 5,
         "fields": {
             "name": "Распродажа",
-            "slug": "rasprodazha"
+            "slug": "rasprodazha",
+            "image": "cats_images/1_An7jmQd.png"
         }
     },
     {
@@ -20,7 +22,8 @@
         "pk": 6,
         "fields": {
             "name": "Популярное",
-            "slug": "populyarnoe"
+            "slug": "populyarnoe",
+            "image": "cats_images/2_FF8461U.png"
         }
     },
     {
@@ -28,7 +31,8 @@
         "pk": 7,
         "fields": {
             "name": "Новинки",
-            "slug": "novinki"
+            "slug": "novinki",
+            "image": "cats_images/3_467dnA4.png"
         }
     },
     {
@@ -36,7 +40,8 @@
         "pk": 8,
         "fields": {
             "name": "Остатки",
-            "slug": "ostatki"
+            "slug": "ostatki",
+            "image": "cats_images/4_75qQT8S.png"
         }
     },
     {
@@ -44,7 +49,26 @@
         "pk": 9,
         "fields": {
             "name": "Товары в пути",
-            "slug": "tovary-v-puti"
+            "slug": "tovary-v-puti",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 10,
+        "fields": {
+            "name": "Удаленные товары",
+            "slug": "udalennye-tovary",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 11,
+        "fields": {
+            "name": "Залежалось );",
+            "slug": "zalezhalos",
+            "image": ""
         }
     }
 ]
