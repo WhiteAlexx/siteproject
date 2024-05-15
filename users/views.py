@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.tokens import default_token_generator
 from django.contrib import auth, messages
+from django.core.mail import send_mail
 from django.db.models import Prefetch
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
@@ -10,7 +12,7 @@ from carts.models import Cart
 from carts.utils import get_user_carts, get_endng
 from orders.models import Order, OrderItem
 from users.forms import ProfileForm, UserLoginForm, UserRegistrationForm
-
+from users.models import User
 
 # Create your views here.
 def login(request):
@@ -138,3 +140,49 @@ def payment(request):
         "payment_html": payment_html,
     }
     return JsonResponse(response_data)
+
+
+# def pass_reset_form(request):
+#     form = UserPassResetForm
+#     return render(request, "users/password_reset_form.html", {"form": form, "title": "Сброс пароля"})
+
+
+# def pass_reset_done(request):
+#     if request.method == 'POST':
+#         form = UserPassResetForm(data=request.POST)
+#         if form.is_valid():
+#             email = request.POST['email']
+#             users = User.objects.all()
+#             for user in users:
+#                 if email == user.email:
+#                     site_name = 'Оптовые закупки из Китая'
+#                     protocol = 'https'
+#                     domain = request.get_host()
+#                     url = 'users/password_reset_confirm'
+#                     # uid = ''
+#                     token = default_token_generator
+#                     subject = f'Сброс пароля на сайте { site_name }'
+#                     message = f"Вы получили это письмо, поскольку запросили сброс пароля для своей учетной записи на сайте { site_name }.\n\
+#     Пожалуйста, перейдите на следующую страницу и выберите новый пароль:\n\
+#     { protocol }://{ domain }{ url }/{ token }/\n\
+#     Ваше имя пользователя, если вы забыли:{ user.get_username }\n\
+#     Спасибо за использование нашего сайта!\n\
+#     Команда { site_name }"
+#                     from_email = 'webmaster@localhost'
+#                     recipient_list = [email,]
+#                     send_mail(subject, message, from_email, recipient_list,)
+
+#     return render(request, "users/password_reset_done.html", {"title": "Сброс пароля"})
+
+
+# def pass_reset_confirm(request):
+#     form = UserPassSetForm
+#     return render(request, "users/password_reset_confirm.html", {"form": form, "title": "Сброс пароля"})
+
+
+# def pass_reset_complete(request):
+#     if request.method == 'POST':
+#         form = UserPassSetForm(data=request.POST)
+#         if form.is_valid():
+#             print(request.POST)
+#     return render(request, "users/password_reset_complete.html", {"title": "Сброс пароля"})

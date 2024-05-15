@@ -6,6 +6,7 @@ __pycache__/
 #ide stuff
 .vscode
 .idea
+zzzTRASH.txt
 
 #django stuff
 db.sqlite3
