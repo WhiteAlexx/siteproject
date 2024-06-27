@@ -45,18 +45,18 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center my-4">
             <div class="custom-shadow d-flex">
-                <li class="page-item {% if not shipp.has_previous %}disabled{% endif %}">
-                <a class="page-link" href="{% if shipp.has_previous %}?{% change_params page=shipp.previous_page_number %}{% else %}#{% endif %}">Назад</a>
+                <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+                <a class="page-link" href="{% if page_obj.has_previous %}?{% change_params page=page_obj.previous_page_number %}{% else %}#{% endif %}">Назад</a>
                 </li>
-                {% for page in shipp.paginator.page_range %}
-                    {% if page >= shipp.number|add:-2 and page <= shipp.number|add:2 %}
-                        <li class="page-item {% if shipp.number == page %} active {% endif %}">
+                {% for page in page_obj.paginator.page_range %}
+                    {% if page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %}
+                        <li class="page-item {% if page_obj.number == page %} active {% endif %}">
                             <a class="page-link" href="?{% change_params page=page %}">{{ page }}</a>
                         </li>
                     {% endif %}
                 {% endfor %}
-                <li class="page-item {% if not shipp.has_next %}disabled{% endif %}">
-                    <a class="page-link" href="{% if shipp.has_next %}?{% change_params page=shipp.next_page_number %}{% else %}#{% endif %}">Вперед</a>
+                <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+                    <a class="page-link" href="{% if page_obj.has_next %}?{% change_params page=page_obj.next_page_number %}{% else %}#{% endif %}">Вперед</a>
                 </li>
             </div>
         </ul>

@@ -1,6 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
+from django.views import View
 from num2words import num2words
 
 from carts.models import Cart
@@ -9,7 +10,27 @@ from goods.models import Products
 from orders.forms import CreateOrderForm
 
 
-# Create your views here.
+class CartAddView(View):
+
+    def post(self, request):
+
+        product_id = request.POST.get("product_id")
+        product = Products.objects.get(id=product_id)
+
+        cart = self.get_cart(request, product=product)
+
+        if cart:
+            cart.quantity += 1
+            cart. save()
+        else:
+            Cart.objects.create(user=request.user if request.user.is_authenticated else None,
+                                session_key=request.session.session_key if not request.user.is_authenticated else None,
+                                product=product, quantity=1)
+
+        response_data = {
+            "cart_items_html": self.render_cart(request),
+        }
+
 def cart_add(request):
 
     product_id = request.POST.get("product_id")

@@ -58,21 +58,21 @@
                     <a href="#">Забыли пароль?</a> | <a href="{% url "user:registration" %}">Создать аккаунт</a>
                 </div>
                 <hr>
-                {% comment %} <div class="text-center">
-                    <p class="text-black">Или авторизуйтесь через:</p>
+                <div class="text-center">
+                    {% comment %} <p class="text-black">Или авторизуйтесь через:</p>
                     <a href="#" class="btn btn-dark">
                         <img class="mx-1" src="{% static "deps/icons/google.svg" %}" alt="Catalog Icon" width="16" height="16">
                         Google
-                    </a>
-                    <a href="#" class="btn btn-dark">
-                        <img class="mx-1" src="{% static "deps/icons/facebook.svg" %}" alt="Catalog Icon" width="16" height="16">
-                        Facebook
-                    </a>
-                    <a href="#" class="btn btn-dark">
+                    </a> {% endcomment %}
+                    <div id="vk_auth"></div>
+                        <script type="text/javascript">
+                            VK.Widgets.Auth("vk_auth", {authUrl: "/ru/widgets/auth"});
+                        </script>
+                    {% comment %} <a href="#" class="btn btn-dark">
                         <img class="mx-1" src="{% static "deps/icons/github.svg" %}" alt="Catalog Icon" width="16" height="16">
                         GitHub
-                    </a>
-                </div> {% endcomment %}
+                    </a> {% endcomment %}
+                </div>
             </div>
         </div>
     </div>

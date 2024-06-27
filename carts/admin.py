@@ -31,3 +31,7 @@ class CartAdmin(admin.ModelAdmin):
 
     def unit_display(self, obj):
         return str(obj.product.unit)
+
+    # user_display and product_display alter name of columns in admin panel
+    user_display.short_description = "Пользователь"
+    product_display.short_description = "Товар"
