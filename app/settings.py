@@ -97,6 +97,16 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'pandi',
+#         'USER': 'pandi',
+#         'PASSWORD': '1940PandI!($^',
+#         'HOST': '192.168.0.0',
+#         'PORT': '24',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -134,7 +144,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS: list[Path] = [
+STATICFILES_DIRS = [
     BASE_DIR / 'static'
     ]
 

@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -72,7 +74,7 @@
       //version 1.3.2 build 23.01.2023 15:30
       function setup() {
         document.getElementById("linkUrl").value =
-          "https://qr.nspk.ru/AS100001ORTF4GAF80KPJ53K186D9A3G?type=01&bank=100000000007&crc=0C8A";
+          "https://qr.nspk.ru/{{ my_link_url }}";
 
         const slideUpWidget = new SlideUpWidget(
           window.localStorage,
@@ -105,7 +107,8 @@
 
       document.addEventListener("DOMContentLoaded", setup);
 
-    </script><script src="slideUpWidget.js"></script>  
+    </script>
+    <script src="{% static "deps/js/slideUpWidget.js" %}"></script>
 
 </body>
 
