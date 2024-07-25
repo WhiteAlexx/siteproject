@@ -34,6 +34,12 @@
                         <img class="mx-1 --bs-btn-bg: darkorange" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
                     </a>
                 </div>
+                <div class="d-flex justify-content-between">
+                    <p><strong>Цена мелким оптом:</strong></p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p><strong>{{product.price_mid}} Р от {{product.count_for_mid}} {{product.unit}}</strong></p>
+                </div>
             </div>
         </div>
     </div>

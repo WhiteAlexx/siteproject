@@ -81,7 +81,7 @@ class UserRegistrationView(CreateView):
             Cart.objects.filter(session_key=session_key).update(user=user)
 
         messages.success(self.request, f"{user.username}, Вы успешно зарегистрировались и вошли в аккаунт")
-        return HttpResponseRedirect(self.get_success_url)
+        return HttpResponseRedirect(self.success_url)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
