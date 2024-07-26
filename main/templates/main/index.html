@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cache %}
 
 {% block modal_cart %}
 {% include "includes/cart_button.html" %}
@@ -29,6 +30,7 @@
     </div> {% endcomment %}
 
     <div class="carousel-inner rounded my-4">
+        {% cache 60 catalog_categories %}
         {% for category in categories %}
             {% if forloop.counter == 1 %}
                 <div class="carousel-item active">
@@ -71,6 +73,7 @@
                 </div>
             {% endif %}    
         {% endfor %}
+        {% endcache %}
 
     </div>
     <button class="carousel-control-prev" type="button"
