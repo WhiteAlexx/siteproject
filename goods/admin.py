@@ -24,7 +24,7 @@ class ProductsAdmin(admin.ModelAdmin):
         'category',
         ('price', 'discount'),
         ('price_mid', 'count_for_mid'),
-        ('price_low'),
+        ('price_low', 'count_for_low'),
         ('quantity', 'unit'),
         'description',
         'image',
