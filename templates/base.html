@@ -1,4 +1,5 @@
 {% load static %}
+{% load cache %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,16 +40,25 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" aria-current="page" href="{% url "main:index" %}">Домашняя страница</a>
                         </li>
-                        <ul class="dropdown-menu bg-dark">
-                            <li><a class="nav-link text-white" href="{% url "catalog:index" 'tovary' %}">Все товары</a></li>
-                            {% if user.is_superuser %}
-                                <li><a class="nav-link text-white" href="{% url "admin:index" %}">Админ панель</a></li>
-                            {% endif %}
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="nav-link text-white" href="{% url "user:logout" %}">Выйти</a></li>
-                        </ul>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Каталог {{ user_name }}
+                            </a>
+                            <ul class="dropdown-menu bg-dark">
+                                {% cache 60 catalog %}
+                                {% for category in categories %}
+                                <li>
+                                    <a class="nav-link text-white" href="{% url "catalog:index" category.slug %}">{{ category.name }}</a>
+                                </li>
+                                {% endfor %}
+                                {% endcache %}
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="nav-link text-white" href="{% url "catalog:index" 'tovary' %}">Все товары</a></li>
+                            </ul>
+                        </li>
                         {% if user.groups_id == 1 %}
                             <li class="nav-item">
                                 <a class="nav-link text-white" aria-current="page" href="{% url "shipping:index" %}">Заказать в пути</a>
