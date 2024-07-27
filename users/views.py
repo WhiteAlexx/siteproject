@@ -16,6 +16,7 @@ from django.views.generic import CreateView, TemplateView, UpdateView
 from carts.models import Cart
 from carts.utils import get_user_carts, get_endng
 from common.mixins import CacheMixin
+from goods.models import Categories
 import orders
 from orders.models import Order, OrderItem
 from users.forms import ProfileForm, UserLoginForm, UserRegistrationForm
@@ -60,6 +61,7 @@ class UserLoginView(LoginView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Авторизация'
+        context['categories'] = Categories.objects.exclude(slug__contains='tovary')
         return context
 
 
@@ -86,6 +88,7 @@ class UserRegistrationView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Регистрация'
+        context['categories'] = Categories.objects.exclude(slug__contains='tovary')
         return context
 
 
@@ -109,6 +112,7 @@ class UserProfileView(LoginRequiredMixin, CacheMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Кабинет'
+        context['categories'] = Categories.objects.exclude(slug__contains='tovary')
 
         # orders = cache.get(f'orders_for_user_{self.request.user.id}')
         # if not orders:
@@ -132,6 +136,7 @@ class UserCartView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Корзина товаров'
         context['tovar'] = get_endng(self.request)
+        context['categories'] = Categories.objects.exclude(slug__contains='tovary')
         return context
 
 

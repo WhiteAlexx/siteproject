@@ -89,7 +89,9 @@
 </div>
 <div class="col-lg-12 col-md-12 text-center mt-4">
     <a href="{% url "catalog:index" 'tovary' %}"><button type="button" class="btn btn-dark btn-lg my-5">Все товары</button></a>
-    <a href="{% url "shipping:index" %}"><button type="button" class="btn btn-dark btn-lg my-5">В пути</button></a>
+    {% if user.groups_id == 1 %}
+        <a href="{% url "shipping:index" %}"><button type="button" class="btn btn-dark btn-lg my-5">В пути</button></a>
+    {% endif %}
 </div>
 {% endblock  %}
 

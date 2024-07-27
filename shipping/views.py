@@ -4,7 +4,7 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
-from goods.models import Products
+from goods.models import Categories, Products
 
 
 class ShippingView(ListView):
@@ -20,6 +20,7 @@ class ShippingView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Заказать в пути'
+        context['categories'] = Categories.objects.exclude(slug__contains='tovary')
         # context['slug_url'] = 'get_queryset.category_slug'
         return context
 

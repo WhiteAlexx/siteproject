@@ -5,7 +5,7 @@ from django.db.models.base import Model as Model
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
-from goods.models import Products
+from goods.models import Categories, Products
 from goods.utils import q_search
 
 
@@ -22,7 +22,7 @@ class CatalogView(ListView):
         category_slug = self.kwargs.get('category_slug')
         on_sale = self.request.GET.get("on_sale")
         order_by = self.request.GET.get("order_by")
-        query = self.request.GET.get("q")        
+        query = self.request.GET.get("q")
 
         if category_slug == "tovary":
             goods = super().get_queryset().exclude(category__slug__icontains='v-puti').exclude(category__slug__icontains='udalennye')
@@ -43,6 +43,7 @@ class CatalogView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Товары в наличии'
         context['slug_url'] = self.kwargs.get('category_slug')
+        context['categories'] = Categories.objects.exclude(slug__contains='tovary')
         return context
 
 
@@ -61,6 +62,7 @@ class ProductView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = self.object.name
+        context['categories'] = Categories.objects.exclude(slug__contains='tovary')
         return context
 
 # def catalog(request, category_slug=None):
