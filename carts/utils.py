@@ -28,7 +28,7 @@ def get_endng(request):
 
     if endng == 'н':
         return 'товар на сумму'
-    elif endng == 'ь':
+    elif endng in ['ь', 'к', 'т', 'о']:
         return 'товаров на сумму'
     else:
         return 'товара на сумму'

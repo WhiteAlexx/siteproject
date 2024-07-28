@@ -42,7 +42,10 @@ class Cart(models.Model):
     objects = CartQueryset().as_manager()
 
     def products_price(self):
-        return round(self.product.sell_price() * self.quantity, 2)
+        if self.quantity < self.product.count_for_mid:
+            return round(self.product.sell_price() * self.quantity, 2)
+        if self.quantity >= self.product.count_for_mid:
+            return round(self.product.price_mid * self.quantity, 2)
 
     def __str__(self):
         if self.user:
