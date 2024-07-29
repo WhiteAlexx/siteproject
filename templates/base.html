@@ -59,11 +59,11 @@
                                 <li><a class="nav-link text-white" href="{% url "catalog:index" 'tovary' %}">Все товары</a></li>
                             </ul>
                         </li>
-                        {% if user.groups_id == 1 %}
-                            <li class="nav-item">
-                                <a class="nav-link text-white" aria-current="page" href="{% url "shipping:index" %}">Заказать в пути</a>
-                            </li>
-                        {% endif %}
+                        {% comment %} {% if user.groups_id == 1 %} {% endcomment %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white" aria-current="page" href="{% url "shipping:index" %}">Заказать в пути</a>
+                        </li>
+                        {% comment %} {% endif %} {% endcomment %}
                         <li class="nav-item">
                             <a class="nav-link text-white" aria-current="page" href="{% url "user:users_cart" %}">Корзина</a>
                         </li>
