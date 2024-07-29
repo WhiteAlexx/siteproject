@@ -66,10 +66,14 @@
                         </div>
                     </div>
                     <div class="col p-0">
-                        {% if cart.quantity < cart.product.count_for_mid %}
-                            <p class="text-black">{{ cart.product.unit }}  x  {{ cart.product.sell_price }} Р/{{ cart.product.unit }}</p>
-                        {% else %}
+                        {% comment %} {% if carts.total_price > 5000 %}
+                            <p class="text-black">{{ cart.product.unit }}  x  {{ cart.product.price_low }} Р/{{ cart.product.unit }}</p> {% endcomment %}
+                        {% if cart.quantity >= cart.product.count_for_low and user.groups_id == 1 %}
+                            <p class="text-black">{{ cart.product.unit }}  x  {{ cart.product.price_low }} Р/{{ cart.product.unit }}</p>
+                        {% elif cart.quantity >= cart.product.count_for_mid%}
                             <p class="text-black">{{ cart.product.unit }}  x  {{ cart.product.price_mid }} Р/{{ cart.product.unit }}</p>
+                        {% elif cart.quantity < cart.product.count_for_mid %}
+                            <p class="text-black">{{ cart.product.unit }}  x  {{ cart.product.sell_price }} Р/{{ cart.product.unit }}</p>
                         {% endif %}
                     </div>
                     <div class="col p-0">

@@ -46,21 +46,15 @@
             </div>
         </div>
         <!-- Описание товара -->
-        <di class="card-body">
-            {% if product.discount %}
-                <p><s>{{product.price}}</s></p>
-                <p><strong>{{product.sell_price}} Р/{{product.unit}}</strong></p>
-                <span class="badge bg-warning text-dark">Скидка {{product.discount}} %</span>
-            {% else %}
-                <p><strong>{{product.price}} Р/{{product.unit}}</strong></p>
-                {% if user.groups_id == 1 %}
-                    <p><strong>Оптовая цена {{product.price_low}} Р от {{product.count_for_low}} {{product.unit}}</strong></p>
-                {% endif %}
+        <div class="card-body">
+            <p><s>{{product.price}}</s></p>
+            {% if user.groups_id == 1 %}
+                <p><strong>Оптовая цена {{product.price_low}} Р от {{product.count_for_low}} {{product.unit}}</strong></p>
             {% endif %}
-            <a href="{% url "carts:cart_add" %}" class="btn btn-dark add-to-cart"
-            data-product-id="{{ product.id }}">
+            <a href="{% url "carts:cart_add_low" %}" class="btn btn-dark add-to-cart"
+            data-product-id="{{ product.id }}" data-count-low="{{product.count_for_low}}">
                 {% csrf_token %}
-                Добавить в корзину</a>
+                Добавить в корзину {{product.count_for_low}} {{product.unit}}</a>
         </div>
     </div>
 </div>

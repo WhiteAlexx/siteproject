@@ -21,12 +21,60 @@ class CartAddView(CartMixin, View):
         cart = self.get_cart(request, product=product)
 
         if cart:
-            cart.quantity += 1
+            cart.quantity += product.count_for
             cart. save()
         else:
             Cart.objects.create(user=request.user if request.user.is_authenticated else None,
                                 session_key=request.session.session_key if not request.user.is_authenticated else None,
-                                product=product, quantity=1)
+                                product=product, quantity=product.count_for)
+
+        response_data = {
+            'cart_items_html': self.render_cart(request),
+        }
+
+        return JsonResponse(response_data)
+
+
+class CartAddMidView(CartMixin, View):
+
+    def post(self, request):
+
+        product_id = request.POST.get("product_id")
+        product = Products.objects.get(id=product_id)
+
+        cart = self.get_cart(request, product=product)
+
+        if cart:
+            cart.quantity += product.count_for_mid
+            cart. save()
+        else:
+            Cart.objects.create(user=request.user if request.user.is_authenticated else None,
+                                session_key=request.session.session_key if not request.user.is_authenticated else None,
+                                product=product, quantity=product.count_for_mid)
+
+        response_data = {
+            'cart_items_html': self.render_cart(request),
+        }
+
+        return JsonResponse(response_data)
+
+
+class CartAddLowView(CartMixin, View):
+
+    def post(self, request):
+
+        product_id = request.POST.get("product_id")
+        product = Products.objects.get(id=product_id)
+
+        cart = self.get_cart(request, product=product)
+
+        if cart:
+            cart.quantity += product.count_for_low
+            cart. save()
+        else:
+            Cart.objects.create(user=request.user if request.user.is_authenticated else None,
+                                session_key=request.session.session_key if not request.user.is_authenticated else None,
+                                product=product, quantity=product.count_for_low)
 
         response_data = {
             'cart_items_html': self.render_cart(request),

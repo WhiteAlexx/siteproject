@@ -14,6 +14,8 @@ $(document).ready(function () {
 
         // Получаем id товара из атрибута data-product-id
         var product_id = $(this).data("product-id");
+        var count_mid = parseInt($(this).data("count-mid"));
+        var count_low = parseInt($(this).data("count-low"));
 
         // Из атрибута href берем ссылку на контроллер django
         var add_to_cart_url = $(this).attr("href");
@@ -36,7 +38,12 @@ $(document).ready(function () {
                 // }, 7000);
 
                 // Увеличиваем количество товаров в корзине (отрисовка в шаблоне)
-                cartCount++;
+                if (count_mid > 0) {
+                    cartCount += count_mid;
+                } else if (count_low > 0) {
+                    cartCount += count_low;
+                } else {
+                    cartCount++;}
                 goodsInCartCount.text(cartCount);
 
                 // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
@@ -87,7 +94,7 @@ $(document).ready(function () {
                 // }, 7000);
 
                 // Уменьшаем количество товаров в корзине (отрисовка)
-                cartCount -= data.quantity_deleted;
+                cartCount -= data.quantity;
                 goodsInCartCount.text(cartCount);
 
                 // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)

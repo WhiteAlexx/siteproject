@@ -1,3 +1,4 @@
+from urllib import request
 from django.db import models
 from django.forms import BooleanField
 
@@ -42,13 +43,22 @@ class Cart(models.Model):
     objects = CartQueryset().as_manager()
 
     def products_price(self):
-        if self.quantity < self.product.count_for_mid:
-            return round(self.product.sell_price() * self.quantity, 2)
+        if self.quantity >= self.product.count_for_low and get_user_group(self) == 'Опт':
+            return round(self.product.price_low * self.quantity, 2)
         if self.quantity >= self.product.count_for_mid:
             return round(self.product.price_mid * self.quantity, 2)
+        if self.quantity < self.product.count_for_mid:
+            return round(self.product.sell_price() * self.quantity, 2)
 
     def __str__(self):
         if self.user:
             return f'Корзина {self.user.username}{self.select_buy} | Товар {self.product.name} | Количество {self.quantity} | {self.product.unit}'
 
         return f'Анонимная корзина{self.select_buy} | Товар {self.product.name} | Количество {self.quantity} | {self.product.unit}'
+
+
+def get_user_group(self):
+    if self.user:
+        return self.user.groups.name
+
+    return None
