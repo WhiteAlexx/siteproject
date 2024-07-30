@@ -8,6 +8,7 @@ cache/
 .vscode
 .idea
 zzzTRASH.txt
+trash.py
 
 #django stuff
 # db.sqlite3

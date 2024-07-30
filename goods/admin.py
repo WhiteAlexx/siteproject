@@ -22,11 +22,11 @@ class ProductsAdmin(admin.ModelAdmin):
     # list_display = ['name', 'price', 'price_mid', 'count_for_mid', 'price_low', 'count_for_low']
     # list_editable = ['price', 'price_mid', 'count_for_mid', 'price_low', 'count_for_low']
 
-    list_display = ['name', 'quantity', 'unit']
-    list_editable = ['quantity',]
+    list_display = ['name', 'quantity', 'unit', 'is_neo']
+    list_editable = ['quantity', 'is_neo']
 
     search_fields = ['name', 'description']
-    list_filter = ['unit', 'category']
+    list_filter = ['unit', 'category', 'is_neo']
 
     fields = [
         ('name', 'slug'),
