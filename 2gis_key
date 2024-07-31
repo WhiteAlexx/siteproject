@@ -1,0 +1,32 @@
+key=e2500c7e-fdee-4c7f-863b-141c127ba132
+
+https://catalog.api.2gis.com/3.0/items?q=Москва&key=e2500c7e-fdee-4c7f-863b-141c127ba132
+"id": "4504222397630173"
+
+https://catalog.api.2gis.com/3.0/items?rubric_id=509&city_id=4504222397630173&key=e2500c7e-fdee-4c7f-863b-141c127ba132
+
+
+{
+  "meta": {
+    "api_version": "2.0.17900",
+    "code": 200,
+    "issue_date": "20240731"
+  },
+  "result": {
+    "items": [
+      {
+        "alias": "shvejjnaya_furnitura",
+        "branch_count": 1094,
+        "caption": "Швейная фурнитура",
+        "id": "509",
+        "keyword": "Швейная фурнитура",
+        "name": "Швейная фурнитура",
+        "org_count": 934,
+        "parent_id": "42872",
+        "title": "Швейная фурнитура",
+        "type": "rubric"
+      }
+    ],
+    "total": 1
+  }
+}
