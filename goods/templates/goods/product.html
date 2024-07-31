@@ -47,54 +47,82 @@
         </div>
         <!-- Описание товара -->
         <div class="card-body">
-            {% if product.discount %}
-                <p><s>{{product.price}}</s></p>
-                <p><strong>{{product.sell_price}} Р/{{product.unit}}</strong></p>
-                <span class="badge bg-warning text-dark">Скидка {{product.discount}} %</span>
-            {% else %}
-                <p><strong>{{product.price}} Р/{{product.unit}}</strong></p>
+            {% if user.groups_id == 1 %}
+                {% if product.discount_low %}
+                    <p><s>Цена {{product.price_low}} Р/{{product.unit}}</s></p>
+                    <p><strong>Цена {{product.sell_price_low}} Р/{{product.unit}}</strong></p>
+                    <span class="badge bg-warning text-dark">Скидка {{product.discount_low}}%</span>
+                {% else %}
+                    <p><strong>Цена {{product.price_low}} Р/{{product.unit}}</strong></p>
+                {% endif %}
                 {% if not product.quantity %}
-                    <span class="badge bg-warning text-dark">Нет в наличии</span>
-                    <a href="{% url "carts:cart_add" %}" class="btn btn-dark add-to-cart disabled"
-                    data-product-id="{{ product.id }}">
-                    {% csrf_token %}
-                    Добавить в корзину</a>
+                    <span class="badge bg-danger text-dark">Нет в наличии</span>
+                    <a href="{% url "carts:cart_add_low" %}" class="btn btn-dark add-to-cart disabled"
+                        data-product-id="{{ product.id }}">
+                        {% csrf_token %}
+                        Добавить в корзину
+                    </a>
                 {% else %}
-                    <a href="{% url "carts:cart_add" %}" class="btn btn-dark add-to-cart"
-                    data-product-id="{{ product.id }}">
-                    {% csrf_token %}
-                    Добавить в корзину</a>
+                    <a href="{% url "carts:cart_add_low" %}" class="btn btn-dark add-to-cart"
+                        data-product-id="{{ product.id }}">
+                        {% csrf_token %}
+                        Добавить в корзину
+                    </a>
                 {% endif %}
-                {% if user.groups_id == 1 %}
-                    <p><strong>Оптовая цена {{product.price_low}} Р от {{product.count_for_low}} {{product.unit}}</strong></p>
-                    {% if not product.quantity %}
-                        <span class="badge bg-warning text-dark">Нет в наличии</span>
-                        <a href="{% url "carts:cart_add_low" %}" class="btn btn-dark add-to-cart disabled"
-                        data-product-id="{{ product.id }}" data-count-low="{{product.count_for_low}}">
-                        {% csrf_token %}
-                        Добавить в корзину {{product.count_for_low}} {{product.unit}}</a>
-                    {% else %}
-                        <a href="{% url "carts:cart_add_low" %}" class="btn btn-dark add-to-cart"
-                        data-product-id="{{ product.id }}" data-count-low="{{product.count_for_low}}">
-                        {% csrf_token %}
-                        Добавить в корзину {{product.count_for_low}} {{product.unit}}</a>
-                    {% endif %}
+            {% else %}
+                <div class="d-flex justify-content-around">
+                    <div>
+                        <p>В розницу</p>
+                        {% if product.discount %}
+                            <p><s>Цена {{product.price}} Р/{{product.unit}}</s></p>
+                            <p><strong>Цена {{product.sell_price}} Р/{{product.unit}}</strong></p>
+                            <span class="badge bg-warning text-dark">Скидка {{product.discount}}%</span>
+                        {% else %}
+                            <p><strong>Цена {{product.price}} Р/{{product.unit}}</strong></p>
+                        {% endif %}
+                        {% if not product.quantity %}
+                            <span class="badge bg-danger text-dark">Нет в наличии</span>
+                            <a href="{% url "carts:cart_add" %}" class="btn btn-dark add-to-cart disabled"
+                                data-product-id="{{ product.id }}">
+                                {% csrf_token %}
+                                Добавить в корзину
+                            </a>
+                        {% else %}
+                            <a href="{% url "carts:cart_add" %}" class="btn btn-dark add-to-cart"
+                                data-product-id="{{ product.id }}">
+                                {% csrf_token %}
+                                Добавить в корзину
+                            </a>
+                        {% endif %}
+                    </div>
+                    <p> </p>
                     
-                {% else %}
-                    <p><strong>Цена мелким оптом: {{product.price_mid}} Р от {{product.count_for_mid}} {{product.unit}}</strong></p>
-                    {% if not product.quantity %}
-                        <span class="badge bg-warning text-dark">Нет в наличии</span>
-                        <a href="{% url "carts:cart_add_mid" %}" class="btn btn-dark add-to-cart disabled"
-                        data-product-id="{{ product.id }}" data-count-mid="{{ product.count_for_mid }}">
-                        {% csrf_token %}
-                        Добавить в корзину {{product.count_for_mid}} {{product.unit}}</a>
-                    {% else %}
-                        <a href="{% url "carts:cart_add_mid" %}" class="btn btn-dark add-to-cart"
-                        data-product-id="{{ product.id }}" data-count-mid="{{ product.count_for_mid }}">
-                        {% csrf_token %}
-                        Добавить в корзину {{product.count_for_mid}} {{product.unit}}</a>
-                    {% endif %}
-                {% endif %}
+                    <div>
+                        <p>Мелкий опт</p>
+                        {% if product.discount_mid %}
+                            <p><s>Цена {{product.price_mid}} Р/{{ product.count_for_mid }} {{product.unit}}</s></p>
+                            <p><strong>Цена {{product.sell_price_mid}} Р/{{ product.count_for_mid }} {{product.unit}}</strong></p>
+                            <span class="badge bg-warning m text-dark">Скидка {{product.discount_mid}}%</span>
+                        {% else %}
+                            <p><strong>Цена {{product.price_mid}} Р/{{product.unit}}</strong></p>
+                        {% endif %}
+                        {% if not product.quantity %}
+                            {% comment %} <span class="badge bg-warning m text-dark">Нет в наличии</span> {% endcomment %}
+                            <a href="{% url "carts:cart_add_mid" %}" class="btn btn-dark add-to-cart disabled"
+                                data-product-id="{{ product.id }}">
+                                {% csrf_token %}
+                                Добавить в корзину {{product.count_for_mid}} {{product.unit}}
+                            </a>
+                        {% else %}
+                            <a href="{% url "carts:cart_add_mid" %}" class="btn btn-dark add-to-cart"
+                                data-product-id="{{ product.id }}" data-count-mid="{{product.count_for_mid}}">
+                                {% csrf_token %}
+                                Добавить в корзину {{product.count_for_mid}} {{product.unit}}
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+
             {% endif %}
         </div>
     </div>

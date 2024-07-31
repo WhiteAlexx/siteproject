@@ -16,8 +16,11 @@ class CategoriesAdmin(admin.ModelAdmin):
 class ProductsAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
-    list_display = ['name', 'unit', 'count_for_mid', 'count_for_low']
-    list_editable = ['unit', 'count_for_mid', 'count_for_low']
+    list_display = ['name', 'discount_mid', 'discount_low']
+    list_editable = ['discount_mid', 'discount_low']
+
+    # list_display = ['name', 'unit', 'count_for_mid', 'count_for_low']
+    # list_editable = ['unit', 'count_for_mid', 'count_for_low']
 
     # list_display = ['name', 'price', 'price_mid', 'count_for_mid', 'price_low', 'count_for_low']
     # list_editable = ['price', 'price_mid', 'count_for_mid', 'price_low', 'count_for_low']
@@ -33,8 +36,8 @@ class ProductsAdmin(admin.ModelAdmin):
         ('category', 'is_neo'),
         ('price', 'discount'),
         ('price_mid', 'count_for_mid', 'discount_mid'),
-        ('price_low', 'discount_low'),
-        # ('price_low', 'count_for_low', 'discount_low'),
+        # ('price_low', 'discount_low'),
+        ('price_low', 'count_for_low', 'discount_low'),
         ('quantity', 'unit'),
         'description',
         'image',
