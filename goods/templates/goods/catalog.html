@@ -6,7 +6,7 @@
 {% include "includes/cart_button.html" %}
 {% endblock  %}
 
-{% comment %} {% block filter %}
+{% block filter %}
 <!-- Форма фильтров -->
 <div class="dropdown mt-4">
     <button class="btn btn-secondary dropdown-toggle btn-dark" type="button" data-bs-toggle="dropdown"
@@ -49,7 +49,7 @@
         <button type="submit" class="btn btn-primary mx-1 mt-3">Применить</button>
     </form>
 </div>
-{% endblock  %} {% endcomment %}
+{% endblock  %}
 
 {% block trading %}
 
@@ -66,13 +66,13 @@
 
 {% for product in goods %}
     {% if request.GET.q %}
-        <div class="col-lg-4 col-md-6 p-4">
+        <div class="col-lg-3 col-md-6 p-4">
             <div class="card rounded">
                 {% include "goods\includes\included_product_card.html" %}
             </div>
         </div>
     {% elif product.category.name != "Товары в пути" and product.category.name != "Удаленные товары"%}
-        <div class="col-lg-4 col-md-6 p-4">
+        <div class="col-lg-3 col-md-6 p-4">
             <div class="card rounded">
                 {% include "goods\includes\included_product_card.html" %}
             </div>

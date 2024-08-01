@@ -46,23 +46,23 @@
                                 Каталог {{ user_name }}
                             </a>
                             <ul class="dropdown-menu bg-dark">
+                                {% cache 60 catalog %}
                                 <li><a class="nav-link text-white" href="{% url "catalog:index" 'is_neo' %}">Новинки</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
 
-                                {% cache 60 catalog %}
                                 {% for category in categories %}
                                 <li>
                                     <a class="nav-link text-white" href="{% url "catalog:index" category.slug %}">{{ category.name }}</a>
                                 </li>
                                 {% endfor %}
-                                {% endcache %}
-
+                                
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li><a class="nav-link text-white" href="{% url "catalog:index" 'tovary' %}">Все товары</a></li>
+                                {% endcache %}
                             </ul>
                         </li>
                         {% comment %} {% if user.groups_id == 1 %} {% endcomment %}
@@ -113,18 +113,19 @@
         </div>
         <div class="container-fluid my-5">
             <div class="row">
-                <div class="col-lg-1">
-                    {% block filter %}{% endblock  %}
+                <div class="col-lg-2">
+                    {% comment %} {% block filter %}{% endblock  %} {% endcomment %}
                     <!-- Значек корзины, вызывает модальное окно -->
                         {% block modal_cart %}{% endblock  %}
                     <!-- Закончилась разметка модального окна -->
+                    {% block miniatures %}{% endblock  %}
                 </div>
                 <div class="col-lg-9 col-md-12">
                     <div class="row text-center">
                         {% block trading %}{% endblock  %}
                     </div>
                 </div>
-                {% block content %}{% endblock  %}
+                {% comment %} {% block content %}{% endblock  %} {% endcomment %}
             </div>
 
         </div>
