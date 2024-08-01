@@ -14,10 +14,14 @@ class CategoriesAdmin(admin.ModelAdmin):
 
 @admin.register(Products)
 class ProductsAdmin(admin.ModelAdmin):
+
+    save_on_top = True
+    save_as = True
+
     prepopulated_fields = {'slug': ('name',)}
 
-    list_display = ['name', 'discount_mid', 'discount_low']
-    list_editable = ['discount_mid', 'discount_low']
+    # list_display = ['name', 'discount_mid', 'discount_low']
+    # list_editable = ['discount_mid', 'discount_low']
 
     # list_display = ['name', 'unit', 'count_for_mid', 'count_for_low']
     # list_editable = ['unit', 'count_for_mid', 'count_for_low']
@@ -25,8 +29,8 @@ class ProductsAdmin(admin.ModelAdmin):
     # list_display = ['name', 'price', 'price_mid', 'count_for_mid', 'price_low', 'count_for_low']
     # list_editable = ['price', 'price_mid', 'count_for_mid', 'price_low', 'count_for_low']
 
-    # list_display = ['name', 'quantity', 'unit', 'is_neo']
-    # list_editable = ['quantity', 'is_neo']
+    list_display = ['name', 'quantity', 'unit', 'is_neo']
+    list_editable = ['quantity', 'is_neo']
 
     search_fields = ['name', 'description']
     list_filter = ['unit', 'category', 'is_neo']
@@ -40,5 +44,7 @@ class ProductsAdmin(admin.ModelAdmin):
         ('price_low', 'count_for_low', 'discount_low'),
         ('quantity', 'unit'),
         'description',
-        'image',
+        ('image', 'image_1', 'image_2'),
+        ('is_residual'),
+        ('residual_1', 'residual_2', 'residual_3', 'residual_4', 'residual_5', 'residual_6'),
     ]

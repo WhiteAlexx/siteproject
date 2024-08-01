@@ -21,7 +21,10 @@ class Products(models.Model):
     name = models.CharField(max_length=150, unique=True, verbose_name="Название")
     slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name="URL")
     description = models.TextField(blank=True, null=True, verbose_name="Описание")
-    image = models.ImageField(upload_to="goods_images", blank=True, null=True, verbose_name="Изображение")
+
+    image = models.ImageField(upload_to="goods_images", blank=True, null=True, verbose_name="Изображение 1")
+    image_1 = models.ImageField(upload_to="goods_images", blank=True, null=True, verbose_name="Изображение 2")
+    image_2 = models.ImageField(upload_to="goods_images", blank=True, null=True, verbose_name="Изображение 3")
 
     price = models.DecimalField(default=0.00, max_digits=7, decimal_places=2, verbose_name="Цена")
     price_mid = models.DecimalField(default=0.00, max_digits=7, decimal_places=2, verbose_name="Цена мелкий опт")
@@ -41,6 +44,14 @@ class Products(models.Model):
 
     created_time_stamp = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
     is_neo = models.BooleanField(default=True, verbose_name='В новинки')
+
+    is_residual = models.BooleanField(default=False, verbose_name='В остатках')
+    residual_1 = models.IntegerField(default=0, blank=True, null=True, verbose_name="Остаток")
+    residual_2 = models.IntegerField(default=0, blank=True, null=True, verbose_name="Остаток")
+    residual_3 = models.IntegerField(default=0, blank=True, null=True, verbose_name="Остаток")
+    residual_4 = models.IntegerField(default=0, blank=True, null=True, verbose_name="Остаток")
+    residual_5 = models.IntegerField(default=0, blank=True, null=True, verbose_name="Остаток")
+    residual_6 = models.IntegerField(default=0, blank=True, null=True, verbose_name="Остаток")
 
     class Meta:
         db_table = "product"
@@ -71,3 +82,7 @@ class Products(models.Model):
         if self.discount:
             return round(self.price_low - self.price_low * self.discount_low / 100, 2)
         return self.price_low
+
+
+    def get_path(self):
+        return f"goods_images/{self.id}"
