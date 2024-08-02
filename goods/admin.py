@@ -45,6 +45,5 @@ class ProductsAdmin(admin.ModelAdmin):
         ('quantity', 'unit'),
         'description',
         ('image', 'image_1', 'image_2'),
-        ('is_residual'),
-        ('residual_1', 'residual_2', 'residual_3', 'residual_4', 'residual_5', 'residual_6'),
+        ('residual', 'is_residual'),
     ]

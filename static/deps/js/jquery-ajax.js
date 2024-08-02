@@ -10,12 +10,13 @@ $(document).ready(function () {
 
         // Берем элемент счетчика в значке корзины и берем оттуда значение
         var goodsInCartCount = $("#goods-in-cart-count");
-        var cartCount = parseInt(goodsInCartCount.text() || 0);
+        var cartCount = parseFloat(goodsInCartCount.text() || 0);
 
         // Получаем id товара из атрибута data-product-id
         var product_id = $(this).data("product-id");
-        var count_mid = parseInt($(this).data("count-mid"));
-        var count_low = parseInt($(this).data("count-low"));
+        var count_mid = parseFloat($(this).data("count-mid"));
+        var count_low = parseFloat($(this).data("count-low"));
+        var count_res = parseFloat($(this).data("count-res"));
 
         // Из атрибута href берем ссылку на контроллер django
         var add_to_cart_url = $(this).attr("href");
@@ -26,6 +27,7 @@ $(document).ready(function () {
             url: add_to_cart_url,
             data: {
                 product_id: product_id,
+                count_res: count_res,
                 csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
             },
             success: function (data) {
@@ -42,6 +44,8 @@ $(document).ready(function () {
                     cartCount += count_mid;
                 } else if (count_low > 0) {
                     cartCount += count_low;
+                } else if (count_res > 0) {
+                    cartCount += count_res;
                 } else {
                     cartCount++;}
                 goodsInCartCount.text(cartCount);

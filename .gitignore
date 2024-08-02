@@ -8,7 +8,7 @@ cache/
 .vscode
 .idea
 zzzTRASH.txt
-trash.py
+# trash.py
 # 2gis_key
 
 #django stuff

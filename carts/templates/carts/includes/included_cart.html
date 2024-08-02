@@ -53,16 +53,28 @@
                 <div class="row text-center">
                     <div class="col p-0">
                         <div class="input-group input-group-sm" style="width: 100px;">
-                            <button type="button" class="btn btn-dark btn-sm decrement"
-                                data-cart-id="{{ cart.id }}" 
-                                data-cart-change-url="{% url "carts:cart_change" %}">
-                                {% csrf_token %}-</button>
-                            <input type="text" class="form-control number" value="{{ cart.quantity }}"
-                                readonly>
-                            <button type="button" class="btn btn-dark btn-sm increment"
-                                data-cart-id="{{ cart.id }}" 
-                                data-cart-change-url="{% url "carts:cart_change" %}">
-                                {% csrf_token %}+</button>
+                            {% if cart.product.is_residual %}
+                                <button type="button" class="btn btn-dark btn-sm decrement disabled"
+                                    data-cart-id="{{ cart.id }}" 
+                                    data-cart-change-url="{% url "carts:cart_change" %}">
+                                    {% csrf_token %}-</button>
+                                <input type="text" class="form-control number" value="{{ cart.quantity }}"
+                                    readonly>
+                                <button type="button" class="btn btn-dark btn-sm increment disabled"
+                                    data-cart-id="{{ cart.id }}" 
+                                    data-cart-change-url="{% url "carts:cart_change" %}">
+                                    {% csrf_token %}+</button>
+                            {% else %}
+                                <button type="button" class="btn btn-dark btn-sm decrement"
+                                    data-cart-id="{{ cart.id }}" 
+                                    data-cart-change-url="{% url "carts:cart_change" %}">
+                                    {% csrf_token %}-</button>
+                                <input type="text" class="form-control number" value="{{ cart.quantity }}">
+                                <button type="button" class="btn btn-dark btn-sm increment"
+                                    data-cart-id="{{ cart.id }}" 
+                                    data-cart-change-url="{% url "carts:cart_change" %}">
+                                    {% csrf_token %}+</button>
+                                {% endif %}
                         </div>
                     </div>
                     <div class="col p-0">

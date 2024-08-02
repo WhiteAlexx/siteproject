@@ -16,7 +16,7 @@ class CatalogView(ListView):
     # queryset = Products.objects.all().order_by('-id')
     template_name = 'goods/catalog.html'
     context_object_name = 'goods'
-    paginate_by = 6
+    paginate_by = 8
     # allow_empty = False     #Автоматически генерирует 'error404', если в категории нет товаров
 
     def get_queryset(self):
@@ -31,9 +31,6 @@ class CatalogView(ListView):
             # сюда поставить проверку на месяц 2592000сек
             query_create_date = super().get_queryset().all()
             for product in query_create_date:
-
-                # print(product.created_time_stamp.strftime("%Y-%m-%d %H:%M:%S"))
-                # print(time.time() - time.mktime(time.strptime(product.created_time_stamp.strftime("%Y-%m-%d %H:%M:%S"), "%Y-%m-%d %H:%M:%S")))
 
                 if time.time() - time.mktime(time.strptime(product.created_time_stamp.strftime("%Y-%m-%d %H:%M:%S"), "%Y-%m-%d %H:%M:%S")) > 2592000:
                     product.is_neo = False
