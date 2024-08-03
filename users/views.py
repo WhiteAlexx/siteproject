@@ -44,19 +44,12 @@ class UserLoginView(LoginView):
             messages.success(self.request, f"{user.username}, Вы вошли в аккаунт")
 
             if session_key:
-                carts_sess = Cart.objects.filter(session_key=session_key)
-                carts_user = Cart.objects.filter(user=self.request.user)
-
-                for cart_user in carts_user:
-                    for cart_sess in carts_sess:
-                        if cart_user.product.name == cart_sess.product.name:
-                            cart_user.quantity += cart_sess.quantity
-                            cart_user.select_buy = True
-                            cart_user.save()
-                            cart_sess.delete()
+                old_carts = Cart.objects.filter(user=user)
+                if old_carts.exists():
+                    old_carts.delete()
                 Cart.objects.filter(session_key=session_key).update(user=user)
 
-                return HttpResponseRedirect(self.get_success_url())
+            return HttpResponseRedirect(self.get_success_url())
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

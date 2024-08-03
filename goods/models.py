@@ -78,10 +78,15 @@ class Products(models.Model):
             return round(self.price_low - self.price_low * self.discount_low / 100, 2)
         return self.price_low
 
+    def residual_list_float(self):
+        if ',' in  self.residual:
+            self.residual =  self.residual.replace(',', '.')
+        return [float(y) for y in self.residual.split()]
+
     def residual_list(self):
         if ',' in  self.residual:
             self.residual =  self.residual.replace(',', '.')
-            return [float(i) for i in self.residual.split()]
+        return [str(float(y)) for y in self.residual.split()]
 
     def residual_cost_low(self):
-        return [float(self.sell_price_low()) * i for i in self.residual_list()]
+        return {[float(y) for y in self.residual_list()] : [float(self.sell_price_low()) * float(i) for i in self.residual_list()]}

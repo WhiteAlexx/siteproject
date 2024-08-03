@@ -41,11 +41,10 @@ class CreateOrderView(LoginRequiredMixin, FormView):
                     total_cost = 0
                     for cart_item in cart_items:
                         if cart_item.select_buy is True:
-                            price=cart_item.product.sell_price()
-                            quantity=cart_item.quantity
+                            quantity = cart_item.quantity
+                            price = get_price(user, cart_item, quantity)
                             total_cost += price * quantity
 
-                            # cart_item.delete()
 
                     # Создать заказ
                     order = Order.objects.create(
@@ -56,18 +55,21 @@ class CreateOrderView(LoginRequiredMixin, FormView):
                     )
                     # Создать заказанные товары
                     total_cost = 0
+                    cntr = 0
+
                     for cart_item in cart_items:
                         if cart_item.select_buy is True:
-                            product=cart_item.product
-                            name=cart_item.product.name
-                            price=cart_item.product.sell_price()
-                            quantity=cart_item.quantity
-                            unit = cart_item.product.unit
+                            product = cart_item.product
+                            name = cart_item.product.name
+                            quantity = cart_item.quantity
+                            price = get_price(user, cart_item, quantity)
+                            unit = product.unit
+
 
                             cost = price * quantity
                             total_cost += cost
 
-                            if product.quantity < quantity and product.category.name != 'Товары в пути':
+                            if product.quantity < quantity and product.category.name != 'Товары в пути' and product.is_residual is False:
                                 raise ValidationError(f'Недостаточное количество товара {name} на складе\
                                                     В наличии - {product.quantity}')
 
@@ -79,9 +81,22 @@ class CreateOrderView(LoginRequiredMixin, FormView):
                                 quantity=quantity,
                                 unit=unit,
                             )
-
-                            product.quantity -= quantity
-                            product.save()
+                            if not product.is_residual:
+                                product.quantity -= quantity
+                                product.save()
+                            if product.is_residual:
+                                if cntr == 0:
+                                    res_list = product.residual_list_float()
+                                else:
+                                    res_list = [float(res) for res in residuals.split()]
+                                res_list.remove(float(quantity))
+                                res_list = [str(quant) for quant in res_list]
+                                residuals = ' '.join(res_list)
+                                product.residual = residuals
+                                if residuals == '':
+                                    product.is_residual = False
+                                product.save()
+                                cntr += 1
 
                             # Очистить корзину пользователя после создания заказа
                             cart_item.delete()
@@ -101,6 +116,22 @@ class CreateOrderView(LoginRequiredMixin, FormView):
         context['title'] = 'Оформление заказа'
         # context['order'] = True
         return context
+
+def get_price(user, cart_item, quantity):
+    if cart_item.product.is_residual:
+        if user.groups.name == 'Опт':
+            price = cart_item.product.sell_price_low()
+        elif quantity < cart_item.product.count_for_mid:
+            price = cart_item.product.sell_price()
+    else:
+        if user.groups.name == 'Опт':
+            price = cart_item.product.sell_price_low()
+        elif quantity >= cart_item.product.count_for_mid:
+            price = cart_item.product.sell_price_mid()
+        elif quantity < cart_item.product.count_for_mid:
+            price = cart_item.product.sell_price()
+
+    return price
 
 
 # @login_required

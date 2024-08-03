@@ -118,17 +118,41 @@
                 <span class="badge bg-success text-dark">В остатках</span>
                 <h5>Добавьте нужный остаток в корзину</h5>
                 {% if user.groups_id == 1 %}
-                        {% for residual in product.residual_list %}
-                            <div class="col">
+                    {% for residual in product.residual_list %}
+                        <div class="col">
+                            {% if residual in list_quantity %}
+                                <a href="{% url "carts:cart_add_low" %}" class="btn btn-dark add-to-cart disabled"
+                                    data-product-id="{{ product.id }}" data-count-res="{{ residual }}">
+                                    {% csrf_token %}
+                                    Добавить в корзину {{ residual|floatformat:2 }} {{product.unit}}
+                                </a>
+                            {% else %}
                                 <a href="{% url "carts:cart_add_low" %}" class="btn btn-dark add-to-cart"
                                     data-product-id="{{ product.id }}" data-count-res="{{ residual }}">
                                     {% csrf_token %}
-                                    Добавить в корзину {{ residual }} {{product.unit}}
+                                    Добавить в корзину {{ residual|floatformat:2 }} {{product.unit}}
                                 </a>
-                            </div>
-                        {% endfor %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
                 {% else %}
-
+                    {% for residual in product.residual_list %}
+                        <div class="col">
+                            {% if residual in list_quantity %}
+                                <a href="{% url "carts:cart_add" %}" class="btn btn-dark add-to-cart disabled"
+                                    data-product-id="{{ product.id }}" data-count-res="{{ residual }}">
+                                    {% csrf_token %}
+                                    Добавить в корзину {{ residual|floatformat:2 }} {{product.unit}}
+                                </a>
+                            {% else %}
+                                <a href="{% url "carts:cart_add" %}" class="btn btn-dark add-to-cart"
+                                    data-product-id="{{ product.id }}" data-count-res="{{ residual }}">
+                                    {% csrf_token %}
+                                    Добавить в корзину {{ residual|floatformat:2 }} {{product.unit}}
+                                </a>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
                 {% endif %}
 
             {% else %}

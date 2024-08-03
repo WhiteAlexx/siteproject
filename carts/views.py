@@ -16,17 +16,28 @@ class CartAddView(CartMixin, View):
     def post(self, request):
 
         product_id = request.POST.get("product_id")
+        count_res = float(request.POST.get("count_res"))
         product = Products.objects.get(id=product_id)
 
         cart = self.get_cart(request, product=product)
 
         if cart:
-            cart.quantity += product.count_for
+            if product.is_residual:
+                Cart.objects.create(user=request.user if request.user.is_authenticated else None,
+                                    session_key=request.session.session_key if not request.user.is_authenticated else None,
+                                    product=product, quantity=count_res)
+            else:
+                cart.quantity += product.count_for
             cart. save()
         else:
-            Cart.objects.create(user=request.user if request.user.is_authenticated else None,
-                                session_key=request.session.session_key if not request.user.is_authenticated else None,
-                                product=product, quantity=product.count_for)
+            if product.is_residual:
+                Cart.objects.create(user=request.user if request.user.is_authenticated else None,
+                                    session_key=request.session.session_key if not request.user.is_authenticated else None,
+                                    product=product, quantity=count_res)
+            else:
+                Cart.objects.create(user=request.user if request.user.is_authenticated else None,
+                                    session_key=request.session.session_key if not request.user.is_authenticated else None,
+                                    product=product, quantity=product.count_for)
 
         response_data = {
             'cart_items_html': self.render_cart(request),
@@ -40,17 +51,28 @@ class CartAddMidView(CartMixin, View):
     def post(self, request):
 
         product_id = request.POST.get("product_id")
+        count_res = float(request.POST.get("count_res"))
         product = Products.objects.get(id=product_id)
 
         cart = self.get_cart(request, product=product)
 
         if cart:
-            cart.quantity += product.count_for_mid
+            if product.is_residual:
+                Cart.objects.create(user=request.user if request.user.is_authenticated else None,
+                                    session_key=request.session.session_key if not request.user.is_authenticated else None,
+                                    product=product, quantity=count_res)
+            else:
+                cart.quantity += product.count_for_mid
             cart. save()
         else:
-            Cart.objects.create(user=request.user if request.user.is_authenticated else None,
-                                session_key=request.session.session_key if not request.user.is_authenticated else None,
-                                product=product, quantity=product.count_for_mid)
+            if product.is_residual:
+                Cart.objects.create(user=request.user if request.user.is_authenticated else None,
+                                    session_key=request.session.session_key if not request.user.is_authenticated else None,
+                                    product=product, quantity=count_res)
+            else:
+                Cart.objects.create(user=request.user if request.user.is_authenticated else None,
+                                    session_key=request.session.session_key if not request.user.is_authenticated else None,
+                                    product=product, quantity=product.count_for_mid)
 
         response_data = {
             'cart_items_html': self.render_cart(request),
@@ -70,22 +92,22 @@ class CartAddLowView(CartMixin, View):
         cart = self.get_cart(request, product=product)
 
         if cart:
-            if count_res:
+            if product.is_residual:
                 Cart.objects.create(user=request.user if request.user.is_authenticated else None,
                                     session_key=request.session.session_key if not request.user.is_authenticated else None,
                                     product=product, quantity=count_res)
             else:
-                cart.quantity += product.count_for_low
+                cart.quantity += float(product.count_for_low)
             cart. save()
         else:
-            if count_res:
+            if product.is_residual:
                 Cart.objects.create(user=request.user if request.user.is_authenticated else None,
                                     session_key=request.session.session_key if not request.user.is_authenticated else None,
                                     product=product, quantity=count_res)
             else:
                 Cart.objects.create(user=request.user if request.user.is_authenticated else None,
                                     session_key=request.session.session_key if not request.user.is_authenticated else None,
-                                    product=product, quantity=product.count_for_low)
+                                    product=product, quantity=float(product.count_for_low))
 
         response_data = {
             'cart_items_html': self.render_cart(request),
@@ -103,7 +125,7 @@ class CartChangeView(CartMixin, View):
         cart.quantity = request.POST.get('quantity')
         cart.save()
 
-        quantity = cart.quantity
+        quantity = float(cart.quantity)
 
         response_data = {
             'quantity': quantity,
@@ -119,7 +141,7 @@ class CartRemoveView(CartMixin, View):
         cart_id = request.POST.get('cart_id')
         cart = self.get_cart(request, cart_id=cart_id)
 
-        quantity = cart.quantity
+        quantity = float(cart.quantity)
         cart. delete()
 
         response_data = {

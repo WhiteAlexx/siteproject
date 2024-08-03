@@ -18,6 +18,10 @@ def q_search(query):
         .order_by("-rank")
     )
 
+
+
+
+
     # keywords = [word for word in query.split() if len(word) > 2]
 
     # q_objects = Q()

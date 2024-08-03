@@ -5,6 +5,7 @@ $(document).ready(function () {
 
     // Ловим собыитие клика по кнопке добавить в корзину
     $(document).on("click", ".add-to-cart", function (e) {
+
         // Блокируем его базовое действие
         e.preventDefault();
 
@@ -17,9 +18,12 @@ $(document).ready(function () {
         var count_mid = parseFloat($(this).data("count-mid"));
         var count_low = parseFloat($(this).data("count-low"));
         var count_res = parseFloat($(this).data("count-res"));
-
         // Из атрибута href берем ссылку на контроллер django
         var add_to_cart_url = $(this).attr("href");
+
+        if (count_res > 0) {
+            $(this).addClass("disabled");
+        }
 
         // делаем post запрос через ajax не перезагружая страницу
         $.ajax({
@@ -54,12 +58,16 @@ $(document).ready(function () {
                 var cartItemsContainer = $("#cart-items-container");
                 cartItemsContainer.html(data.cart_items_html);
 
+                $('#exampleModal').appendTo('body');
+                $('#exampleModal').modal('show');
+
             },
 
             error: function (data) {
                 console.log("Ошибка при добавлении товара в корзину");
             },
         });
+
     });
 
 
@@ -72,7 +80,7 @@ $(document).ready(function () {
 
         // Берем элемент счетчика в значке корзины и берем оттуда значение
         var goodsInCartCount = $("#goods-in-cart-count");
-        var cartCount = parseInt(goodsInCartCount.text() || 0);
+        var cartCount = parseFloat(goodsInCartCount.text() || 0);
 
         // Получаем id корзины из атрибута data-cart-id
         var cart_id = $(this).data("cart-id");
@@ -126,7 +134,7 @@ $(document).ready(function () {
         // Ищем ближайшеий input с количеством 
         var $input = $(this).closest('.input-group').find('.number');
         // Берем значение количества товара
-        var currentValue = parseInt($input.val());
+        var currentValue = parseFloat($input.val());
         // Если количества больше одного, то только тогда делаем -1
         if (currentValue > 1) {
             $input.val(currentValue - 1);
@@ -145,7 +153,7 @@ $(document).ready(function () {
         // Ищем ближайшеий input с количеством 
         var $input = $(this).closest('.input-group').find('.number');
         // Берем значение количества товара
-        var currentValue = parseInt($input.val());
+        var currentValue = parseFloat($input.val());
 
         $input.val(currentValue + 1);
 
@@ -175,7 +183,7 @@ $(document).ready(function () {
 
                 // Изменяем количество товаров в корзине
                 var goodsInCartCount = $("#goods-in-cart-count");
-                var cartCount = parseInt(goodsInCartCount.text() || 0);
+                var cartCount = parseFloat(goodsInCartCount.text() || 0);
                 cartCount += change;
                 goodsInCartCount.text(cartCount);
 
