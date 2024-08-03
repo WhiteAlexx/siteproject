@@ -12,6 +12,7 @@ $(document).ready(function () {
         // Берем элемент счетчика в значке корзины и берем оттуда значение
         var goodsInCartCount = $("#goods-in-cart-count");
         var cartCount = parseFloat(goodsInCartCount.text() || 0);
+        var cartCount = parseFloat(goodsInCartCount.text() || 0);
 
         // Получаем id товара из атрибута data-product-id
         var product_id = $(this).data("product-id");
@@ -32,6 +33,7 @@ $(document).ready(function () {
             data: {
                 product_id: product_id,
                 count_res: count_res,
+                count_res: count_res,
                 csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
             },
             success: function (data) {
@@ -48,6 +50,8 @@ $(document).ready(function () {
                     cartCount += count_mid;
                 } else if (count_low > 0) {
                     cartCount += count_low;
+                } else if (count_res > 0) {
+                    cartCount += count_res;
                 } else if (count_res > 0) {
                     cartCount += count_res;
                 } else {

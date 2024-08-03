@@ -92,22 +92,37 @@ class CartAddLowView(CartMixin, View):
         cart = self.get_cart(request, product=product)
 
         if cart:
+<<<<<<< HEAD
             if product.is_residual:
+=======
+            if count_res:
+>>>>>>> 07fc77e8e334e98072c8cd22f9533782a04b1afc
                 Cart.objects.create(user=request.user if request.user.is_authenticated else None,
                                     session_key=request.session.session_key if not request.user.is_authenticated else None,
                                     product=product, quantity=count_res)
             else:
+<<<<<<< HEAD
                 cart.quantity += float(product.count_for_low)
             cart. save()
         else:
             if product.is_residual:
+=======
+                cart.quantity += product.count_for_low
+            cart. save()
+        else:
+            if count_res:
+>>>>>>> 07fc77e8e334e98072c8cd22f9533782a04b1afc
                 Cart.objects.create(user=request.user if request.user.is_authenticated else None,
                                     session_key=request.session.session_key if not request.user.is_authenticated else None,
                                     product=product, quantity=count_res)
             else:
                 Cart.objects.create(user=request.user if request.user.is_authenticated else None,
                                     session_key=request.session.session_key if not request.user.is_authenticated else None,
+<<<<<<< HEAD
                                     product=product, quantity=float(product.count_for_low))
+=======
+                                    product=product, quantity=product.count_for_low)
+>>>>>>> 07fc77e8e334e98072c8cd22f9533782a04b1afc
 
         response_data = {
             'cart_items_html': self.render_cart(request),

@@ -1,6 +1,4 @@
-from itertools import product
-import sched, time, datetime
-
+import time
 from typing import Any
 from django.core.paginator import Paginator
 from django.db.models import QuerySet
