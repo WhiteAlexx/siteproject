@@ -69,7 +69,9 @@
                                     data-cart-id="{{ cart.id }}" 
                                     data-cart-change-url="{% url "carts:cart_change" %}">
                                     {% csrf_token %}-</button>
-                                <input type="text" class="form-control number" value="{{ cart.quantity }}">
+                                <input type="text" class="form-control number" value="{{ cart.quantity }}"
+                                    id="numField" data-cart-id="{{ cart.id }}" 
+                                    data-cart-change-url="{% url "carts:cart_change" %}">
                                 <button type="button" class="btn btn-dark btn-sm increment"
                                     data-cart-id="{{ cart.id }}" 
                                     data-cart-change-url="{% url "carts:cart_change" %}">

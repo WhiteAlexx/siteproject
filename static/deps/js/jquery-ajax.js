@@ -126,8 +126,6 @@ $(document).ready(function () {
     });
 
 
-
-
     // Теперь + - количества товара 
     // Обработчик события для уменьшения значения
     $(document).on("click", ".decrement", function () {
@@ -164,6 +162,19 @@ $(document).ready(function () {
         // Запускаем функцию определенную ниже
         // с аргументами (id карты, новое количество, количество уменьшилось или прибавилось, url)
         updateCart(cartID, currentValue + 1, 1, url);
+    });
+
+    // var change = parseFloat(document.getElementById("numField"));
+    // var cartID = $(this).data("cart-id");
+    // var url = $(this).data("cart-change-url");
+    // updateCart(cartID, 0, change, url);
+
+    $(document).on("change", ".number", function () {
+        var change = $(this).val();
+        var cartID = $(this).data("cart-id");
+        var url = $(this).data("cart-change-url");
+        // alert("change: " + change + cartID + url);
+        updateCart(cartID, change, change, url);
     });
 
     function updateCart(cartID, quantity, change, url) {
