@@ -8,6 +8,8 @@ cache/
 .vscode
 .idea
 zzzTRASH.txt
+# trash.py
+# 2gis_key
 
 #django stuff
 # db.sqlite3

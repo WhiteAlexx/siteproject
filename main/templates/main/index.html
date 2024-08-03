@@ -31,27 +31,46 @@
 
     <div class="carousel-inner rounded my-4">
         {% cache 60 catalog_categories %}
+        <div class="carousel-item active">
+            <div class="d-block w-100">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        {% comment %} {% if category.image %}
+                            <a href="{% url "catalog:index" category.slug %}"><img src="{{ category.image.url }}" class="w-100" alt="{{ category.name }}"></a>
+                        {% else %} {% endcomment %}
+                        <a href="{% url "catalog:index" 'is_neo' %}"><img src="{% static "deps/images/Not found image.png" %}" class="w-100" alt="{{ category.name }}"></a>
+                        {% comment %} {% endif %} {% endcomment %}
+                    </div>
+                    <div class="col-lg-6 col-md-6 sld-txt">
+                        <a href="{% url "catalog:index" 'is_neo' %}">
+                            <h2>Новинки</h2>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {% for category in categories %}
-            {% if forloop.counter == 1 %}
-                <div class="carousel-item active">
-                    <div class="d-block w-100">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6">
-                                {% if category.image %}
-                                    <a href="{% url "catalog:index" category.slug %}"><img src="{{ category.image.url }}" class="w-100" alt="{{ category.name }}"></a>
-                                {% else %}
-                                    <a href="{% url "catalog:index" category.slug %}"><img src="{% static "deps/images/Not found image.png" %}" class="w-100" alt="{{ category.name }}"></a>
-                                {% endif %}
-                            </div>
-                            <div class="col-lg-6 col-md-6 sld-txt">
-                                <a href="{% url "catalog:index" category.slug %}">
-                                    <h2>{{ category.name }}</h2>
-                                </a>
-                            </div>
+            {% comment %} {% if forloop.counter == 1 %} {% endcomment %}
+            <div class="carousel-item">
+                <div class="d-block w-100">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            {% if category.image %}
+                                <a href="{% url "catalog:index" category.slug %}"><img src="{{ category.image.url }}" class="w-100" alt="{{ category.name }}"></a>
+                            {% else %}
+                                <a href="{% url "catalog:index" category.slug %}"><img src="{% static "deps/images/Not found image.png" %}" class="w-100" alt="{{ category.name }}"></a>
+                            {% endif %}
+                        </div>
+                        <div class="col-lg-6 col-md-6 sld-txt">
+                            <a href="{% url "catalog:index" category.slug %}">
+                                <h2>{{ category.name }}</h2>
+                            </a>
                         </div>
                     </div>
                 </div>
-            {% endif %}
+            </div>
+            {% comment %} {% endif %}
             {% if forloop.counter != 1 %}
                 <div class="carousel-item">
                     <div class="d-block w-100">
@@ -71,7 +90,7 @@
                         </div>
                     </div>
                 </div>
-            {% endif %}    
+            {% endif %}     {% endcomment %}
         {% endfor %}
         {% endcache %}
 
@@ -89,9 +108,9 @@
 </div>
 <div class="col-lg-12 col-md-12 text-center mt-4">
     <a href="{% url "catalog:index" 'tovary' %}"><button type="button" class="btn btn-dark btn-lg my-5">Все товары</button></a>
-    {% if user.groups_id == 1 %}
-        <a href="{% url "shipping:index" %}"><button type="button" class="btn btn-dark btn-lg my-5">В пути</button></a>
-    {% endif %}
+    {% comment %} {% if user.groups_id == 1 %} {% endcomment %}
+    <a href="{% url "shipping:index" %}"><button type="button" class="btn btn-dark btn-lg my-5">В пути</button></a>
+    {% comment %} {% endif %} {% endcomment %}
 </div>
 {% endblock  %}
 

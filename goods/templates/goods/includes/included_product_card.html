@@ -1,0 +1,201 @@
+{% load static %}
+
+
+{% comment %} <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            {% if product.image %}
+                <a href="{% url "catalog:product" product.slug %}"><img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}"></a>
+            {% else %}
+                <a href="{% url "catalog:product" product.slug %}"><img src="{% static "deps/images/Not found image.png" %}" class="card-img-top" alt="{{ product.name }}"></a>
+            {% endif %}
+        </div>
+        <div class="carousel-item">
+            {% if product.image_1 %}
+                <a href="{% url "catalog:product" product.slug %}"><img src="{{ product.image_1.url }}" class="card-img-top" alt="{{ product.name }}"></a>
+            {% endif %}
+        </div>
+        <div class="carousel-item">
+            {% if product.image_2 %}
+                <a href="{% url "catalog:product" product.slug %}"><img src="{{ product.image_2.url }}" class="card-img-top" alt="{{ product.name }}"></a>
+            {% endif %}
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div> {% endcomment %}
+
+{% if product.image %}
+    <a href="{% url "catalog:product" product.slug %}"><img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}"></a>
+{% else %}
+    <a href="{% url "catalog:product" product.slug %}"><img src="{% static "deps/images/Not found image.png" %}" class="card-img-top" alt="{{ product.name }}"></a>
+{% endif %}
+
+
+<div class="card-body">
+    <h6 class="card-title text-truncate"><a href="{% url "catalog:product" product.slug %}">{{product.name}}</a></h6>
+
+    {% if product.is_residual %}
+        <span class="badge bg-success text-dark">В остатках</span>
+        <a href="{% url "catalog:product" product.slug %}" class="btn btn-dark">
+            Посмотреть остатки
+        </a>
+    {% else %}
+
+        {% if user.groups_id == 1 %}
+            {% if product.discount_low %}
+                <p><s>Цена {{product.price_low}} Р/{{product.unit}}</s></p>
+                <p><strong>Цена {{product.sell_price_low}} Р/{{product.unit}}</strong></p>
+                <span class="badge bg-warning text-dark">Скидка {{product.discount_low}}%</span>
+            {% else %}
+                <p><strong>Цена {{product.price_low}} Р/{{product.unit}}</strong></p>
+            {% endif %}
+            {% if not product.quantity %}
+                <span class="badge bg-danger text-dark">Нет в наличии</span>
+                <a href="{% url "carts:cart_add_low" %}" class="btn add-to-cart bg-light bg-opacity-25 disabled"
+                    data-product-id="{{ product.id }}">
+                    {% csrf_token %}
+                    <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
+                </a>
+            {% else %}
+            <a href="{% url "carts:cart_add_low" %}" class="btn add-to-cart bg-light bg-opacity-25"
+                data-product-id="{{ product.id }}">
+                {% csrf_token %}
+                <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
+            </a>
+            {% endif %}
+        {% else %}
+
+            <p>В розницу</p>
+            {% if product.discount %}
+                <p><s>Цена {{product.price}} Р/{{product.unit}}</s></p>
+                <p><strong>Цена {{product.sell_price}} Р/{{product.unit}}</strong></p>
+                <span class="badge bg-warning text-dark">Скидка {{product.discount}}%</span>
+            {% else %}
+                <p><strong>Цена {{product.price}} Р/{{product.unit}}</strong></p>
+            {% endif %}
+            {% if not product.quantity %}
+                <span class="badge bg-danger text-dark">Нет в наличии</span>
+                <a href="{% url "carts:cart_add" %}" class="btn add-to-cart bg-light bg-opacity-25 disabled"
+                    data-product-id="{{ product.id }}">
+                    {% csrf_token %}
+                    <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
+                </a>
+            {% else %}
+                <a href="{% url "carts:cart_add" %}" class="btn add-to-cart bg-light bg-opacity-25"
+                    data-product-id="{{ product.id }}">
+                    {% csrf_token %}
+                    <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
+                </a>
+            {% endif %}
+            <p> </p>
+            
+            <p>Мелкий опт</p>
+            {% if product.discount_mid %}
+                <p><s>Цена {{product.price_mid}} Р/{{ product.count_for_mid }} {{product.unit}}</s></p>
+                <p><strong>Цена {{product.sell_price_mid}} Р/{{ product.count_for_mid }} {{product.unit}}</strong></p>
+                <span class="badge bg-warning m text-dark">Скидка {{product.discount_mid}}%</span>
+            {% else %}
+                <p><strong>Цена {{product.price_mid}} Р/{{product.unit}}</strong></p>
+            {% endif %}
+            {% if not product.quantity %}
+                {% comment %} <span class="badge bg-warning n text-dark">Нет в наличии</span> {% endcomment %}
+                <a href="{% url "carts:cart_add_mid" %}" class="btn add-to-cart bg-light bg-opacity-25 disabled"
+                    data-product-id="{{ product.id }}">
+                    {% csrf_token %}
+                    <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
+                </a>
+            {% else %}
+                <a href="{% url "carts:cart_add_mid" %}" class="btn add-to-cart bg-light bg-opacity-25"
+                    data-product-id="{{ product.id }}" data-count-mid="{{product.count_for_mid}}">
+                    {% csrf_token %}
+                    <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
+                </a>
+            {% endif %}
+
+        {% endif %}
+    {% endif %}
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+        {% if product.discount_low %}
+            {% if user.groups_id == 1 %}
+
+            {% endif %}
+        {% elif product.discount and user.groups_id != 1 %}
+            <div>
+                
+            </div>
+        {% elif product.discount_mid and user.groups_id != 1 %}
+            <div>
+                <p><s>{{product.price_mid}}</s></p>
+                <p><strong>{{product.sell_price_mid}} Р/{{product.unit}}</strong></p>
+                <span class="badge bg-warning text-dark">Скидка {{product.discount_mid}}%</span>
+            </div>
+
+        {% else %}
+            {% if user.groups_id == 1 %}
+                
+            {% else %}
+                
+                <p><strong>{{product.price_mid}} Р/{{product.unit}}</strong></p>
+            {% endif %}
+        {% endif %}
+        {% if not product.quantity %}
+        <span class="badge bg-warning text-dark">Нет в наличии</span>
+            {% if user.groups_id == 1 %}
+
+            {% else %}
+                <a href="{% url "carts:cart_add" %}" class="btn add-to-cart bg-light bg-opacity-25 disabled"
+                    data-product-id="{{ product.id }}">
+                    {% csrf_token %}
+                    <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
+                </a>
+                <a href="{% url "carts:cart_add_mid" %}" class="btn add-to-cart bg-light bg-opacity-25 disabled"
+                    data-product-id="{{ product.id }}">
+                    {% csrf_token %}
+                    <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
+                </a>
+            {% endif %}
+        {% else %}
+            {% if user.groups_id == 1 %}
+                
+            {% else %}
+                <a href="{% url "carts:cart_add" %}" class="btn add-to-cart bg-light bg-opacity-25"
+                    data-product-id="{{ product.id }}">
+                    {% csrf_token %}
+                    <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
+                </a>
+                <a href="{% url "carts:cart_add_mid" %}" class="btn add-to-cart bg-light bg-opacity-25"
+                    data-product-id="{{ product.id }}">
+                    {% csrf_token %}
+                    <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
+                </a>
+            {% endif %}
+        {% endif %}
+    </div>
+</div> {% endcomment %}

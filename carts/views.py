@@ -64,17 +64,28 @@ class CartAddLowView(CartMixin, View):
     def post(self, request):
 
         product_id = request.POST.get("product_id")
+        count_res = float(request.POST.get("count_res"))
         product = Products.objects.get(id=product_id)
 
         cart = self.get_cart(request, product=product)
 
         if cart:
-            cart.quantity += product.count_for_low
+            if count_res:
+                Cart.objects.create(user=request.user if request.user.is_authenticated else None,
+                                    session_key=request.session.session_key if not request.user.is_authenticated else None,
+                                    product=product, quantity=count_res)
+            else:
+                cart.quantity += product.count_for_low
             cart. save()
         else:
-            Cart.objects.create(user=request.user if request.user.is_authenticated else None,
-                                session_key=request.session.session_key if not request.user.is_authenticated else None,
-                                product=product, quantity=product.count_for_low)
+            if count_res:
+                Cart.objects.create(user=request.user if request.user.is_authenticated else None,
+                                    session_key=request.session.session_key if not request.user.is_authenticated else None,
+                                    product=product, quantity=count_res)
+            else:
+                Cart.objects.create(user=request.user if request.user.is_authenticated else None,
+                                    session_key=request.session.session_key if not request.user.is_authenticated else None,
+                                    product=product, quantity=product.count_for_low)
 
         response_data = {
             'cart_items_html': self.render_cart(request),
@@ -117,6 +128,10 @@ class CartRemoveView(CartMixin, View):
         }
 
         return JsonResponse(response_data)
+
+
+class CartAddResidualView(CartMixin, View):
+    pass
 
 
 def cart_select(request):

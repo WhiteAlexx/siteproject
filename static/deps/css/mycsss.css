@@ -19,6 +19,7 @@
 }
 
 body {
+    font-size: 14px;
     font-family: Roboto Slab, serif;
     background-image: url("../images/font.webp");
     background-repeat: no-repeat;
@@ -89,8 +90,41 @@ h3 {
 .badge.bg-warning.text-dark {
     position: absolute;
     top: 10px;
-    left: 10px;
+    left: -10px;
     z-index: 1;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 1rem;
+    box-shadow: 7px 5px 8px 1px black;
+}
+
+.badge.bg-warning.m.text-dark {
+    position: absolute;
+    top: 40px;
+    left: -10px;
+    z-index: 1;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 1rem;
+    box-shadow: 7px 5px 8px 1px black;
+}
+
+.badge.bg-danger.text-dark {
+    position: absolute;
+    top: 25px;
+    left: -10px;
+    z-index: 2;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 1rem;
+    box-shadow: 7px 5px 8px 1px black;
+}
+
+.badge.bg-success.text-dark {
+    position: absolute;
+    top: 25px;
+    left: -10px;
+    z-index: 2;
     padding: 5px 10px;
     border-radius: 3px;
     font-size: 1rem;
