@@ -56,7 +56,8 @@ $(document).ready(function () {
                     cartCount += count_res;
                 } else {
                     cartCount++;}
-                goodsInCartCount.text(cartCount);
+                // goodsInCartCount.text(cartCount);
+                goodsInCartCount.addClass("bg-danger");
 
                 // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
                 var cartItemsContainer = $("#cart-items-container");
@@ -64,7 +65,6 @@ $(document).ready(function () {
 
                 $('#exampleModal').appendTo('body');
                 $('#exampleModal').modal('show');
-
             },
 
             error: function (data) {
@@ -73,8 +73,6 @@ $(document).ready(function () {
         });
 
     });
-
-
 
 
     // Ловим собыитие клика по кнопке удалить товар из корзины
@@ -111,7 +109,10 @@ $(document).ready(function () {
 
                 // Уменьшаем количество товаров в корзине (отрисовка)
                 cartCount -= data.quantity;
-                goodsInCartCount.text(cartCount);
+                // goodsInCartCount.text(cartCount);
+                if (data.clss === 0) {
+                    goodsInCartCount.removeClass("bg-danger");
+                }
 
                 // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
                 var cartItemsContainer = $("#cart-items-container");
@@ -164,16 +165,11 @@ $(document).ready(function () {
         updateCart(cartID, currentValue + 1, 1, url);
     });
 
-    // var change = parseFloat(document.getElementById("numField"));
-    // var cartID = $(this).data("cart-id");
-    // var url = $(this).data("cart-change-url");
-    // updateCart(cartID, 0, change, url);
-
     $(document).on("change", ".number", function () {
-        var change = $(this).val();
+        var change = parseFloat($(this).val());
         var cartID = $(this).data("cart-id");
         var url = $(this).data("cart-change-url");
-        // alert("change: " + change + cartID + url);
+        alert("Выбрано " + change + " ед.");
         updateCart(cartID, change, change, url);
     });
 
@@ -200,7 +196,7 @@ $(document).ready(function () {
                 var goodsInCartCount = $("#goods-in-cart-count");
                 var cartCount = parseFloat(goodsInCartCount.text() || 0);
                 cartCount += change;
-                goodsInCartCount.text(cartCount);
+                // goodsInCartCount.text(cartCount);
 
                 // Меняем содержимое корзины
                 var cartItemsContainer = $("#cart-items-container");

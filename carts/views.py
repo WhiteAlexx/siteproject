@@ -144,8 +144,15 @@ class CartRemoveView(CartMixin, View):
         quantity = float(cart.quantity)
         cart. delete()
 
+        user_cart = get_user_carts(request)
+        context = {'carts': user_cart}
+        clss = 1
+        if not context.get('carts'):
+            clss = 0
+
         response_data = {
             'quantity': quantity,
+            'clss': clss,
             'cart_items_html': self.render_cart(request),
         }
 
