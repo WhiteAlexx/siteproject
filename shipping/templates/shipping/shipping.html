@@ -35,7 +35,6 @@
                     </a>
                 {% else %}
 
-                    <p>В розницу</p>
                     {% if product.discount %}
                         <p><s>Цена {{product.price}} Р/{{product.unit}}</s></p>
                         <p><strong>Цена {{product.sell_price}} Р/{{product.unit}}</strong></p>
@@ -49,20 +48,9 @@
                         <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
                     </a>
                     <p> </p>
-                    
-                    <p>Мелкий опт</p>
                     {% if product.discount_mid %}
-                        <p><s>Цена {{product.price_mid}} Р/{{ product.count_for_mid }} {{product.unit}}</s></p>
-                        <p><strong>Цена {{product.sell_price_mid}} Р/{{ product.count_for_mid }} {{product.unit}}</strong></p>
-                        <span class="badge bg-warning m text-dark">Скидка {{product.discount_mid}}%</span>
-                    {% else %}
-                        <p><strong>Цена {{product.price_mid}} Р/{{product.unit}}</strong></p>
+                        <span class="badge bg-warning m text-dark">-{{product.discount_mid}}% с оптовой цены</span>
                     {% endif %}
-                    <a href="{% url "carts:cart_add_mid" %}" class="btn add-to-cart bg-light bg-opacity-25"
-                        data-product-id="{{ product.id }}" data-count-mid="{{product.count_for_mid}}">
-                        {% csrf_token %}
-                        <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
-                    </a>
 
                 {% endif %}
             </div>

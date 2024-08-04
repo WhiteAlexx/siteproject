@@ -181,7 +181,16 @@
                 {% else %}
                     <div class="d-flex justify-content-around">
                         <div>
-                            <p>В розницу</p>
+                            {% if product.discount_mid %}
+                                <p><strong>Возьмите {{ product.count_for_mid }} {{product.unit}} 
+                                    и получите цену <s>{{product.price_mid}} Р/{{product.unit}}</s>
+                                    {{product.sell_price_mid}} Р/{{product.unit}}
+                                </strong></p>
+                            {% else %}
+                                <p><strong>Возьмите {{ product.count_for_mid }} {{product.unit}} 
+                                    и получите цену {{product.price_mid}} Р/{{product.unit}}
+                                </strong></p>
+                            {% endif %}
                             {% if product.discount %}
                                 <p><s>Цена {{product.price}} Р/{{product.unit}}</s></p>
                                 <p><strong>Цена {{product.sell_price}} Р/{{product.unit}}</strong></p>
@@ -204,9 +213,11 @@
                                 </a>
                             {% endif %}
                         </div>
-                        <p> </p>
-                        
-                        <div>
+                        {% comment %} <p> </p> {% endcomment %}
+                        {% if product.discount_mid %}
+                            <span class="badge bg-warning m text-dark">-{{product.discount_mid}}% с оптовой цены</span>
+                        {% endif %}
+                        {% comment %} <div>
                             <p>Мелкий опт</p>
                             {% if product.discount_mid %}
                                 <p><s>Цена {{product.price_mid}} Р/{{ product.count_for_mid }} {{product.unit}}</s></p>
@@ -216,7 +227,6 @@
                                 <p><strong>Цена {{product.price_mid}} Р/{{product.unit}}</strong></p>
                             {% endif %}
                             {% if not product.quantity %}
-                                {% comment %} <span class="badge bg-warning m text-dark">Нет в наличии</span> {% endcomment %}
                                 <a href="{% url "carts:cart_add_mid" %}" class="btn btn-dark add-to-cart disabled"
                                     data-product-id="{{ product.id }}">
                                     {% csrf_token %}
@@ -229,7 +239,7 @@
                                     Добавить в корзину {{product.count_for_mid}} {{product.unit}}
                                 </a>
                             {% endif %}
-                        </div>
+                        </div> {% endcomment %}
                     </div>
 
                 {% endif %}

@@ -63,7 +63,16 @@
             {% else %}
                 <div class="d-flex justify-content-around">
                     <div>
-                        <p>В розницу</p>
+                        {% if product.discount_mid %}
+                            <p><strong>Возьмите {{ product.count_for_mid }} {{product.unit}} 
+                                и получите цену <s>{{product.price_mid}} Р/{{product.unit}}</s>
+                                {{product.sell_price_mid}} Р/{{product.unit}}
+                            </strong></p>
+                        {% else %}
+                            <p><strong>Возьмите {{ product.count_for_mid }} {{product.unit}} 
+                                и получите цену {{product.price_mid}} Р/{{product.unit}}
+                            </strong></p>
+                        {% endif %}
                         {% if product.discount %}
                             <p><s>Цена {{product.price}} Р/{{product.unit}}</s></p>
                             <p><strong>Цена {{product.sell_price}} Р/{{product.unit}}</strong></p>
@@ -77,23 +86,9 @@
                             Добавить в корзину
                         </a>
                     </div>
-                    <p> </p>
-                    
-                    <div>
-                        <p>Мелкий опт</p>
-                        {% if product.discount_mid %}
-                            <p><s>Цена {{product.price_mid}} Р/{{ product.count_for_mid }} {{product.unit}}</s></p>
-                            <p><strong>Цена {{product.sell_price_mid}} Р/{{ product.count_for_mid }} {{product.unit}}</strong></p>
-                            <span class="badge bg-warning m text-dark">Скидка {{product.discount_mid}}%</span>
-                        {% else %}
-                            <p><strong>Цена {{product.price_mid}} Р/{{product.unit}}</strong></p>
-                        {% endif %}
-                        <a href="{% url "carts:cart_add_mid" %}" class="btn btn-dark add-to-cart"
-                            data-product-id="{{ product.id }}" data-count-mid="{{product.count_for_mid}}">
-                            {% csrf_token %}
-                            Добавить в корзину {{product.count_for_mid}} {{product.unit}}
-                        </a>
-                    </div>
+                    {% if product.discount_mid %}
+                        <span class="badge bg-warning m text-dark">-{{product.discount_mid}}% с оптовой цены</span>
+                    {% endif %}
                 </div>
 
             {% endif %}

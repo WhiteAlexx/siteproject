@@ -27,7 +27,7 @@
         <div class="card-header text-start">
             <h5 class="card-title">{{ cart.product.name }} ({{ cart.product.unit }})</h5>
             <div class="row">
-                <div class="col text-start">
+                <div class="col-4 text-start">
                     <input type="checkbox" name="select_buy" class="select_buy" value="{{ cart.select_buy }}"
                         {% if cart.select_buy == True %} 
                             checked
@@ -45,6 +45,18 @@
                                 <img src="{% static "deps/images/Not found image.png" %}" class="rounded img-thumbnail bg-dark bg-opacity-50" style="width: 70px" alt="{{ cart.product.name }}">
                             {% endif %}
                         </label>
+                </div>
+                <div class="col-8 text-start bottom-0">
+                    {% if cart.product.discount_mid %}
+                        <p class="text-start text-dark bottom-0"><strong>Возьмите {{ cart.product.count_for_mid }} {{cart.product.unit}} 
+                            и получите цену <s>{{cart.product.price_mid}} Р/{{cart.product.unit}}</s>
+                            {{cart.product.sell_price_mid}} Р/{{cart.product.unit}}
+                        </strong></p>
+                    {% else %}
+                        <p class="text-start text-dark bottom-0"><strong>Возьмите {{ cart.product.count_for_mid }} {{cart.product.unit}} 
+                            и получите цену {{cart.product.price_mid}} Р/{{cart.product.unit}}
+                        </strong></p>
+                    {% endif %}
                 </div>
             </div>
         </div>
