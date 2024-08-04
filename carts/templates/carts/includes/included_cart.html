@@ -47,16 +47,9 @@
                         </label>
                 </div>
                 <div class="col-8 text-start bottom-0">
-                    {% if cart.product.discount_mid %}
-                        <p class="text-start text-dark bottom-0"><strong>Возьмите {{ cart.product.count_for_mid }} {{cart.product.unit}} 
-                            и получите цену <s>{{cart.product.price_mid}} Р/{{cart.product.unit}}</s>
-                            {{cart.product.sell_price_mid}} Р/{{cart.product.unit}}
-                        </strong></p>
-                    {% else %}
-                        <p class="text-start text-dark bottom-0"><strong>Возьмите {{ cart.product.count_for_mid }} {{cart.product.unit}} 
-                            и получите цену {{cart.product.price_mid}} Р/{{cart.product.unit}}
-                        </strong></p>
-                    {% endif %}
+                    <p class="text-start text-dark bottom-0"><strong>От {{ cart.product.count_for_mid }} {{cart.product.unit}} 
+                        цена {{cart.product.price_mid}} Р/{{cart.product.unit}}
+                    </strong></p>
                 </div>
             </div>
         </div>
