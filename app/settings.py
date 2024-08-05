@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'shipping',
     'users',
     'carts',
-    'orders'
+    'orders',
+    'myadmin',
 ]
 
 MIDDLEWARE = [

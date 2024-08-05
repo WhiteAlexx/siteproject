@@ -100,7 +100,7 @@ class UserProfileView(LoginRequiredMixin, CacheMixin, UpdateView):
 
     def form_invalid(self, form):
         messages.error(self.request, 'Произошла ошибка')
-        return super().form_invalid(form)    
+        return super().form_invalid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
