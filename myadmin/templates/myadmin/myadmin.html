@@ -57,10 +57,10 @@
 <!-- Оформленные заказы -->
 {% comment %} {% cache 60 usero_rders user.id %} {% endcomment %}
 <div class="col-md-12">
-    <div class=" bg-white bg-opacity-50 p-4 mb-4 mx-2 rounded custom-shadow">
-        <h3 class="text-center text-black mb-4">Заказы</h3>
+    <div class=" bg-white bg-opacity-50 rounded custom-shadow">
+        <h3 class="text-center text-black">Заказы</h3>
         <!-- Разметка заказов -->
-        <div class="container" id="order-items-container">
+        <div class="container-fluid" id="order-items-container">
             {% include "myadmin/includes/included_myadmin.html" %}
         </div>
         <!-- Закончилась разметка заказов -->

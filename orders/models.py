@@ -48,7 +48,6 @@ class OrderItem(models.Model):
     unit = models.CharField(max_length=10, blank=True, null=True, verbose_name='Единица измерения')
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name="Дата продажи")
 
-
     class Meta:
         db_table = "order_item"
         verbose_name = "Проданный товар"
