@@ -87,6 +87,7 @@
                                     <li><a class="nav-link text-white" href="{% url "users:profile" %}">Кабинет</a></li>
                                     {% if user.is_superuser %}
                                         <li><a class="nav-link text-white" href="{% url "admin:index" %}">Админ панель</a></li>
+                                        <li><a class="nav-link text-white" href="{% url "myadmin:myadmin" %}">Собрать заказы</a></li>
                                     {% endif %}
                                     <li>
                                         <hr class="dropdown-divider">

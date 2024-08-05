@@ -46,11 +46,13 @@
                             {% endif %}
                         </label>
                 </div>
-                <div class="col-8 text-start bottom-0">
-                    <p class="text-start text-dark bottom-0"><strong>От {{ cart.product.count_for_mid }} {{cart.product.unit}} 
-                        цена {{cart.product.price_mid}} Р/{{cart.product.unit}}
-                    </strong></p>
-                </div>
+                {% if user.groups_id != 1 %}
+                    <div class="col-8 text-start bottom-0">
+                        <p class="text-start text-dark bottom-0"><strong>От {{ cart.product.count_for_mid }} {{cart.product.unit}} 
+                            цена {{cart.product.price_mid}} Р/{{cart.product.unit}}
+                        </strong></p>
+                    </div>
+                {% endif %}
             </div>
         </div>
         <ul class="list-group list-group-flush">

@@ -298,6 +298,35 @@ $(document).ready(function () {
         $('#exampleModal_1').modal('show');
     });
 
+    $(document).on("click", ".modalButton_0", function () {
+        // Берем ссылку на контроллер django из атрибута data-order-payment-url
+        var url = $(this).data("order-payment-url");
+        // Берем id корзины из атрибута data-order-id
+        var orderID = $(this).data("order-id");
+        var bttnName = $(this).text();
+
+        // делаем post запрос через ajax не перезагружая страницу
+        $.ajax({
+
+            type: "POST",
+            url: url,
+            data: {
+                order_id: orderID,
+                bttnName: bttnName,
+                csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+                },
+            success: function (data) {
+
+                var orderItemsContainer = $("#order-items-container");
+                orderItemsContainer.html(data.order_items_html);
+            },
+        });
+
+        $('#exampleModal_1').appendTo('body');
+
+        $('#exampleModal_1').modal('show');
+    });
+
     // Собыите клик по кнопке закрыть окна корзины
     $('#exampleModal_1 .btn-close').click(function () {
         $('#exampleModal_1').modal('hide');

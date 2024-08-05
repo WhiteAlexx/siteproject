@@ -40,7 +40,8 @@ class OrderTabulareAdmin(admin.TabularInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ("id", "user", "status", "is_paid", "created_timestamp",)
+    list_display = ("id", "user", "status","created_timestamp",)
+    list_editable = ['status']
 
     search_fields = ("id",)
     readonly_fields = ("created_timestamp",)
