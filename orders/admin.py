@@ -40,7 +40,7 @@ class OrderTabulareAdmin(admin.TabularInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ("id", "user", "status","created_timestamp",)
+    list_display = ("id", "username", "status","created_timestamp",)
     list_editable = ['status']
 
     search_fields = ("id",)
@@ -48,3 +48,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ("status", "is_paid",)
 
     inlines = (OrderItemTabulareAdmin,)
+
+    def username(self, obj):
+        
+        return str(obj.user.last_name + ' ' + obj.user.first_name)

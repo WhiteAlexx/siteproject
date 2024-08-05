@@ -25,7 +25,7 @@ class MyAdminView(LoginRequiredMixin, TemplateView, CacheMixin):
                     "orderitem_set",
                     queryset=OrderItem.objects.select_related("product")
                 )
-            ).order_by("-id")
+            ).order_by("id")
 
         context['orders'] = orders
         # context['orders'] = self.set_get_cache(orders, f'user_{self.request.user.id}_orders', 60 * 2)
@@ -52,7 +52,7 @@ def orderdone(request):
                     "orderitem_set",
                     queryset=OrderItem.objects.select_related("product")
                 )
-            ).order_by("-id")
+            ).order_by("id")
 
     order_items_html = render_to_string(
             "myadmin/includes/included_myadmin.html", {"orders": orders}, request=request)
