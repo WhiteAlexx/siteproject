@@ -8,6 +8,7 @@ from django.template.loader import render_to_string
 from common.mixins import CacheMixin
 from goods.models import Categories
 from orders.models import Order, OrderItem
+from users.models import User
 
 # Create your views here.
 
@@ -18,8 +19,10 @@ class MyAdminView(LoginRequiredMixin, TemplateView, CacheMixin):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Заказы'
         context['categories'] = Categories.objects.exclude(slug__contains='tovary')
+        context['users'] = User.objects.all()
 
     #   ВЫБИРАЕТ ВСЕ ЗАКАЗЫ. ВОЗМОЖНО, НУЖНО СДЕЛАТЬ ФИЛЬТР ПО СТАТУСУ
+        # status = 'В обработке'
         orders = Order.objects.all().prefetch_related(
                 Prefetch(
                     "orderitem_set",
@@ -41,18 +44,13 @@ def orderdone(request):
 
     if 'Собрать' in bttnname:
         order.status = 'Собран'
-        print('Операция выполнена')
+        status = 'В обработке'
     elif 'Отправить' in bttnname:
         order.status = 'В пути'
-        print('Операция выполнена')
+        status = 'Собран'
     order.save()
 
-    orders = Order.objects.all().prefetch_related(
-                Prefetch(
-                    "orderitem_set",
-                    queryset=OrderItem.objects.select_related("product")
-                )
-            ).order_by("id")
+    orders = get_orders(status)
 
     order_items_html = render_to_string(
             "myadmin/includes/included_myadmin.html", {"orders": orders}, request=request)
@@ -61,3 +59,12 @@ def orderdone(request):
         "order_items_html": order_items_html,
     }
     return JsonResponse(response_data)
+
+def get_orders(status):
+    return Order.objects.filter(status=status).prefetch_related(
+                Prefetch(
+                    "orderitem_set",
+                    queryset=OrderItem.objects.select_related("product")
+                )
+            ).order_by("id")
+    # return orders

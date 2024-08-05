@@ -22,6 +22,7 @@ class CatalogView(ListView):
 
     def get_queryset(self):
         category_slug = self.kwargs.get('category_slug')
+
         on_sale = self.request.GET.get("on_sale")
         order_by = self.request.GET.get("order_by")
         query = self.request.GET.get("q")

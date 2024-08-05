@@ -1,5 +1,56 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cache %}
+
+{% comment %} {% block filters %}
+
+<ul class="navbar-nav bg-dark">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-white" href="#" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Покупатели
+        </a>
+        <ul class="dropdown-menu bg-dark">
+            {% cache 60 catalog %}
+            {% for user in users %}
+                <li>
+                    <a class="nav-link text-white" href="{% url "myadmin:myadmin" 'user.id' %}">{{user.first_name}} {{user.last_name}}</a>
+                </li>
+            {% endfor %}
+            
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="nav-link text-white" href="{% url "myadmin:myadmin" %}">Все</a></li>
+            {% endcache %}
+        </ul>
+    </li>
+</ul>
+
+<ul class="navbar-nav bg-dark">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-white" href="#" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Статус
+        </a>
+        <ul class="dropdown-menu bg-dark">
+            {% cache 60 catalog %}
+            {% for order in orders %}
+            <li>
+                <a class="nav-link text-white" href="#{% url "myadmin:myadmin" order.user.id %}">{{order.status}}</a>
+            </li>
+            {% endfor %}
+            
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="nav-link text-white" href="#{% url "myadmin:myadmin" 'all' %}">Все</a></li>
+            {% endcache %}
+        </ul>
+    </li>
+</ul>
+
+{% endblock  %} {% endcomment %}
 
 
 {% block trading %}

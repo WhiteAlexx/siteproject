@@ -9,7 +9,7 @@
                 aria-controls="collapse{{ order.id }}">
                 Заказ № {{ order.id }} - {{ order.created_timestamp }} |
                 Статус: <strong class="mx-2">{{order.status}} |
-                Полупатель: {{order.user.last_name}} {{order.user.first_name}}</strong>
+                Покупатель: {{order.user.last_name}} {{order.user.first_name}}</strong>
             </button>
         </h2>
         <div id="collapse{{ order.id }}" class="accordion-collapse collapse {% if order == orders.0 %}show{% endif %}" 
