@@ -2,9 +2,13 @@
 {% load static %}
 {% load cache %}
 
-{% comment %} {% block filters %}
 
-<ul class="navbar-nav bg-dark">
+
+
+
+{% block filters %}
+
+{% comment %} <ul class="navbar-nav bg-dark">
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle text-white" href="#" role="button"
             data-bs-toggle="dropdown" aria-expanded="false">
@@ -25,9 +29,9 @@
             {% endcache %}
         </ul>
     </li>
-</ul>
+</ul> {% endcomment %}
 
-<ul class="navbar-nav bg-dark">
+{% comment %} <ul class="navbar-nav bg-dark">
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle text-white" href="#" role="button"
             data-bs-toggle="dropdown" aria-expanded="false">
@@ -48,12 +52,42 @@
             {% endcache %}
         </ul>
     </li>
-</ul>
+</ul> {% endcomment %}
 
-{% endblock  %} {% endcomment %}
+{% endblock  %}
 
 
 {% block trading %}
+<nav class="navbar fixed-top navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-white" aria-current="page" href="{% url "main:index" %}">Домашняя страница</a>
+                </li>
+                <li>
+                    <a class="nav-link text-white" href="{% url "admin:index" %}">Админ панель</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'process' %}">В обработке</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'done' %}">Собран</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'delivery' %}">В пути</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'all' %}">Все</a>
+                </li>
+            </ul>
+        </div>
+        <form class="d-flex" role="search" action="{% url "myadmin:search" %}" method="get">
+            <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success text-white" type="submit">Поиск</button>
+        </form>
+    </div>
+</nav>
 <!-- Оформленные заказы -->
 {% comment %} {% cache 60 usero_rders user.id %} {% endcomment %}
 <div class="col-md-12">

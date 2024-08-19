@@ -17,7 +17,6 @@ from carts.models import Cart
 from carts.utils import get_user_carts, get_endng
 from common.mixins import CacheMixin
 from goods.models import Categories
-import orders
 from orders.models import Order, OrderItem
 from users.forms import ProfileForm, UserLoginForm, UserRegistrationForm
 from users.models import User

@@ -11,7 +11,7 @@ $(document).ready(function () {
 
         // Берем элемент счетчика в значке корзины и берем оттуда значение
         var goodsInCartCount = $("#goods-in-cart-count");
-        var cartCount = parseFloat(goodsInCartCount.text() || 0);
+        
         var cartCount = parseFloat(goodsInCartCount.text() || 0);
 
         // Получаем id товара из атрибута data-product-id
@@ -167,6 +167,7 @@ $(document).ready(function () {
 
     $(document).on("change", ".number", function () {
         var change = parseFloat($(this).val());
+        
         var cartID = $(this).data("cart-id");
         var url = $(this).data("cart-change-url");
         alert("Выбрано " + change + " ед.");
@@ -298,12 +299,12 @@ $(document).ready(function () {
         $('#exampleModal_1').modal('show');
     });
 
+
     $(document).on("click", ".modalButton_0", function () {
-        // Берем ссылку на контроллер django из атрибута data-order-payment-url
-        var url = $(this).data("order-payment-url");
-        // Берем id корзины из атрибута data-order-id
+
+        var url = $(this).data("order-status-url");
         var orderID = $(this).data("order-id");
-        var bttnName = $(this).text();
+        var status = $(this).data("order-status");
 
         // делаем post запрос через ajax не перезагружая страницу
         $.ajax({
@@ -312,7 +313,7 @@ $(document).ready(function () {
             url: url,
             data: {
                 order_id: orderID,
-                bttnName: bttnName,
+                status: status,
                 csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
                 },
             success: function (data) {
@@ -321,11 +322,8 @@ $(document).ready(function () {
                 orderItemsContainer.html(data.order_items_html);
             },
         });
-
-        $('#exampleModal_1').appendTo('body');
-
-        $('#exampleModal_1').modal('show');
     });
+
 
     // Собыите клик по кнопке закрыть окна корзины
     $('#exampleModal_1 .btn-close').click(function () {

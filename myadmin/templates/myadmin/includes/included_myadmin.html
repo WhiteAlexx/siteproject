@@ -56,18 +56,20 @@
                         </tbody>
                     </table>
                     {% if order.status == 'В обработке' %}
-                        <button type="submit" class="btn btn-dark modalButton_0" id="modalButton_0" 
+                        <button type="button" class="btn btn-dark modalButton_0"  id="modalButton_0"
                             aria-expanded="false"
-                            data-order-id="{{ order.id }}" 
-                            data-order-payment-url="{% url "myadmin:order_done" %}">
+                            data-order-status-url="{% url "myadmin:order_done" %}"
+                            data-order-id="{{ order.id }}"
+                            data-order-status="{{ order.status }}">
                             {% csrf_token %}
                             Собрать</button>
                     {% endif %}
                     {% if order.status == 'Собран' %}
-                        <button type="submit" class="btn btn-dark modalButton_0" id="modalButton_0" 
+                        <button type="button" class="btn btn-dark modalButton_0"  id="modalButton_0"
                             aria-expanded="false"
-                            data-order-id="{{ order.id }}" 
-                            data-order-payment-url="{% url "myadmin:order_done" %}">
+                            data-order-status-url="{% url "myadmin:order_done" %}"
+                            data-order-id="{{ order.id }}"
+                            data-order-status="{{ order.status }}">
                             {% csrf_token %}
                             Отправить</button>
                     {% endif %}
