@@ -30,74 +30,76 @@
     <header>
         <nav class="navbar fixed-top navbar-expand-lg bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url "main:index" %}"><img src="{% static "deps/favicon/favicon-32x32.png" %}" alt="..."></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" aria-current="page" href="{% url "main:index" %}">Домашняя страница</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Каталог {{ user_name }}
-                            </a>
-                            <ul class="dropdown-menu bg-dark">
-                                {% cache 60 catalog %}
-                                <li><a class="nav-link text-white" href="{% url "catalog:index" 'is_neo' %}">Новинки</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-
-                                {% for category in categories %}
-                                <li>
-                                    <a class="nav-link text-white" href="{% url "catalog:index" category.slug %}">{{ category.name }}</a>
-                                </li>
-                                {% endfor %}
-                                
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="nav-link text-white" href="{% url "catalog:index" 'tovary' %}">Все товары</a></li>
-                                {% endcache %}
-                            </ul>
-                        </li>
-                        {% comment %} {% if user.groups_id == 1 %} {% endcomment %}
-                        <li class="nav-item">
-                            <a class="nav-link text-white" aria-current="page" href="{% url "shipping:index" %}">Заказать в пути</a>
-                        </li>
-                        {% comment %} {% endif %} {% endcomment %}
-                        <li class="nav-item">
-                            <a class="nav-link text-white" aria-current="page" href="{% url "user:users_cart" %}">Корзина</a>
-                        </li>
-                        {% if not user.is_authenticated %}
+                    <a class="navbar-brand" href="{% url "main:index" %}"><img src="{% static "deps/favicon/favicon-32x32.png" %}" alt="..."></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link text-white" aria-current="page" href="{% url "users:login" %}">Войти</a>
+                                <a class="nav-link text-white" aria-current="page" href="{% url "main:index" %}">Домашняя страница</a>
                             </li>
-                        {% else %}
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-white" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    Мой профиль {{ user_name }}
+                                    Каталог {{ user_name }}
                                 </a>
                                 <ul class="dropdown-menu bg-dark">
-                                    <li><a class="nav-link text-white" href="{% url "users:profile" %}">Кабинет</a></li>
-                                    {% if user.is_superuser %}
-                                        <li><a class="nav-link text-white" href="{% url "admin:index" %}">Админ панель</a></li>
-                                        <li><a class="nav-link text-white" href="{% url "myadmin:myadmin" 'process' %}">Собрать заказы</a></li>
-                                    {% endif %}
+                                    {% cache 60 catalog %}
+                                    <li><a class="nav-link text-white" href="{% url "catalog:index" 'is_neo' %}">Новинки</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="nav-link text-white" href="{% url "user:logout" %}">Выйти</a></li>
+
+                                    {% for category in categories %}
+                                    <li>
+                                        <a class="nav-link text-white" href="{% url "catalog:index" category.slug %}">{{ category.name }}</a>
+                                    </li>
+                                    {% endfor %}
+                                    
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="nav-link text-white" href="{% url "catalog:index" 'tovary' %}">Все товары</a></li>
+                                    {% endcache %}
                                 </ul>
-                            
                             </li>
-                        {% endif %}
-                    </ul>
+                            {% comment %} {% if user.groups_id == 1 %} {% endcomment %}
+                            <li class="nav-item">
+                                <a class="nav-link text-white" aria-current="page" href="{% url "shipping:index" %}">Заказать в пути</a>
+                            </li>
+                            {% comment %} {% endif %} {% endcomment %}
+                            <li class="nav-item">
+                                <a class="nav-link text-white" aria-current="page" href="{% url "user:users_cart" %}">Корзина</a>
+                            </li>
+                            {% if not user.is_authenticated %}
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" aria-current="page" href="{% url "users:login" %}">Войти</a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-white" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Мой профиль {{ user_name }}
+                                    </a>
+                                    <ul class="dropdown-menu bg-dark">
+                                        <li><a class="nav-link text-white" href="{% url "users:profile" %}">Кабинет</a></li>
+                                        {% if user.is_superuser %}
+                                            <li><a class="nav-link text-white" href="{% url "admin:index" %}">Админ панель</a></li>
+                                            <li><a class="nav-link text-white" href="{% url "myadmin:myadmin" 'process' %}">Собрать заказы</a></li>
+                                        {% endif %}
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="nav-link text-white" href="{% url "user:logout" %}">Выйти</a></li>
+                                    </ul>
+                                
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
                 <form class="d-flex" role="search" action="{% url "catalog:search" %}" method="get">
                     <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">

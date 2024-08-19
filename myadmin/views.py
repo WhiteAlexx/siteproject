@@ -67,7 +67,7 @@ class MyAdminView(LoginRequiredMixin, TemplateView):
             if query:
                 orders = q_search(query)
             elif status == "all":
-                orders = super().get_queryset().all().prefetch_related(
+                orders = Order.objects.all().prefetch_related(
                     Prefetch(
                         "orderitem_set",
                         queryset=OrderItem.objects.select_related("product")
