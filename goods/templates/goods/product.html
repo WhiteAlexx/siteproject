@@ -124,13 +124,13 @@
                                 <a href="{% url "carts:cart_add_low" %}" class="btn btn-dark add-to-cart disabled"
                                     data-product-id="{{ product.id }}" data-count-res="{{ residual }}">
                                     {% csrf_token %}
-                                    Добавить в корзину {{ residual|floatformat:2 }} {{product.unit}}
+                                    Добавить в корзину {{ residual }} {{product.unit}}
                                 </a>
                             {% else %}
                                 <a href="{% url "carts:cart_add_low" %}" class="btn btn-dark add-to-cart"
                                     data-product-id="{{ product.id }}" data-count-res="{{ residual }}">
                                     {% csrf_token %}
-                                    Добавить в корзину {{ residual|floatformat:2 }} {{product.unit}}
+                                    Добавить в корзину {{ residual }} {{product.unit}}
                                 </a>
                             {% endif %}
                         </div>
@@ -142,13 +142,13 @@
                                 <a href="{% url "carts:cart_add" %}" class="btn btn-dark add-to-cart disabled"
                                     data-product-id="{{ product.id }}" data-count-res="{{ residual }}">
                                     {% csrf_token %}
-                                    Добавить в корзину {{ residual|floatformat:2 }} {{product.unit}}
+                                    Добавить в корзину {{ residual }} {{product.unit}}
                                 </a>
                             {% else %}
                                 <a href="{% url "carts:cart_add" %}" class="btn btn-dark add-to-cart"
                                     data-product-id="{{ product.id }}" data-count-res="{{ residual }}">
                                     {% csrf_token %}
-                                    Добавить в корзину {{ residual|floatformat:2 }} {{product.unit}}
+                                    Добавить в корзину {{ residual }} {{product.unit}}
                                 </a>
                             {% endif %}
                         </div>

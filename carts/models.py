@@ -8,18 +8,28 @@ from users.models import User
 # Create your models here.
 class CartQueryset(models.QuerySet):
 
-    def total_price(self):
-        carts = Cart.objects.filter(select_buy='True')
+    def total_price(self, request):
+        if request.user.is_authenticated:
+            carts = Cart.objects.filter(user=request.user).filter(select_buy='True')
+            return sum(cart.products_price() for cart in carts)
+        if not request.session.session_key:
+            request.session.create()
+        carts = Cart.objects.filter(session_key=request.session.session_key).filter(select_buy='True')
         return sum(cart.products_price() for cart in carts)
 
-    def select_quantity(self):
+    def select_quantity(self, request):
         if self:
-            carts = Cart.objects.filter(select_buy='True')
+            if request.user.is_authenticated:
+                carts = Cart.objects.filter(user=request.user).filter(select_buy='True')
+                return sum(cart.quantity for cart in carts)
+            if not request.session.session_key:
+                request.session.create()
+            carts = Cart.objects.filter(session_key=request.session.session_key).filter(select_buy='True')
             return sum(cart.quantity for cart in carts)
 
         return 0
 
-    def total_quantity(self):
+    def total_quantity(self, request):
         if self:
             return sum(cart.quantity for cart in self)
 

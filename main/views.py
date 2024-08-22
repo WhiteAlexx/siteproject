@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 
 from goods.models import Categories, Products
+from carts.utils import get_user_carts, get_endng, get_select_quantity, get_total_price
 from orders.models import Order
 
 
@@ -14,6 +15,9 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Домашняя'
+        context['select_quantity'] = get_select_quantity(self.request)
+        context['total_price'] = get_total_price(self.request)
+        context['tovar'] = get_endng(self.request)
         context['categories'] = Categories.objects.exclude(slug__contains='tovary')
         return context
 

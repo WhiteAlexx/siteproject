@@ -14,7 +14,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, TemplateView, UpdateView
 
 from carts.models import Cart
-from carts.utils import get_user_carts, get_endng
+from carts.utils import get_user_carts, get_endng, get_select_quantity, get_total_price
 from common.mixins import CacheMixin
 from goods.models import Categories
 from orders.models import Order, OrderItem
@@ -104,6 +104,9 @@ class UserProfileView(LoginRequiredMixin, CacheMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Кабинет'
+        context['select_quantity'] = get_select_quantity(self.request)
+        context['total_price'] = get_total_price(self.request)
+        context['tovar'] = get_endng(self.request)
         context['categories'] = Categories.objects.exclude(slug__contains='tovary')
 
         # orders = cache.get(f'orders_for_user_{self.request.user.id}')
@@ -127,6 +130,8 @@ class UserCartView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Корзина товаров'
+        context['select_quantity'] = get_select_quantity(self.request)
+        context['total_price'] = get_total_price(self.request)
         context['tovar'] = get_endng(self.request)
         context['categories'] = Categories.objects.exclude(slug__contains='tovary')
         return context

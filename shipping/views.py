@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
 from goods.models import Categories, Products
+from carts.utils import get_user_carts, get_endng, get_select_quantity, get_total_price
 
 
 class ShippingView(ListView):
@@ -20,6 +21,9 @@ class ShippingView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Заказать в пути'
+        context['select_quantity'] = get_select_quantity(self.request)
+        context['total_price'] = get_total_price(self.request)
+        context['tovar'] = get_endng(self.request)
         context['categories'] = Categories.objects.exclude(slug__contains='tovary')
         # context['slug_url'] = 'get_queryset.category_slug'
         return context
@@ -54,6 +58,9 @@ class ProductView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = self.object.name
+        context['select_quantity'] = get_select_quantity(self.request)
+        context['total_price'] = get_total_price(self.request)
+        context['tovar'] = get_endng(self.request)
         context['categories'] = Categories.objects.exclude(slug__contains='tovary')
         return context
 

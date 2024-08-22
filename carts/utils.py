@@ -23,7 +23,7 @@ def get_user(request):
 
 def get_endng(request):
     user_cart = get_user_carts(request)
-    num = user_cart.select_quantity()
+    num = user_cart.select_quantity(request)
     endng = list(num2words(num, lang='ru'))[-1]
 
     if endng == 'н':
@@ -32,3 +32,11 @@ def get_endng(request):
         return 'товаров на сумму'
     else:
         return 'товара на сумму'
+
+def get_select_quantity(request):
+    user_cart = get_user_carts(request)
+    return user_cart.select_quantity(request)
+
+def get_total_price(request):
+    user_cart = get_user_carts(request)
+    return user_cart.total_price(request)
