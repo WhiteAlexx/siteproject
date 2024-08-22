@@ -131,6 +131,13 @@ h3 {
     box-shadow: 7px 5px 8px 1px black;
 }
 
+/* footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 0;
+} */
+
 footer,
 .btn-outline-primary {
     background: rgba(0, 0, 0, 0.440)

@@ -70,7 +70,7 @@ class CreateOrderView(LoginRequiredMixin, FormView):
                             total_cost += cost
 
                             if product.quantity < quantity and product.category.name != 'Товары в пути' and product.is_residual is False:
-                                raise ValidationError(f'Недостаточное количество товара {name} на складе\
+                                raise ValidationError(f'Недостаточное количество товара {name} на складе.\
                                                     В наличии - {product.quantity}')
 
                             OrderItem.objects.create(
@@ -105,7 +105,7 @@ class CreateOrderView(LoginRequiredMixin, FormView):
                     return redirect('user:profile')
         except ValidationError as e:
             messages.success(self.request, str(e))
-            return redirect('cart:order')
+            return redirect('user:users_cart')
 
     def form_invalid(self, form):
         messages.error(self.request, 'Заполните все обязательные поля')

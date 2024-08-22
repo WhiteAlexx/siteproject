@@ -19,10 +19,8 @@ class Order(models.Model):
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания заказа")
     telnmbr = models.DecimalField(max_digits=11, decimal_places=0, verbose_name="Номер телефона")
     adres = models.CharField(max_length=250, null=True, blank=True, verbose_name="Адрес доставки")
-    is_paid = models.BooleanField(default=False, verbose_name="Оплачено")
-    status = models.CharField(max_length=50, default='Ожидает оплаты',
-                              choices=(('Ожидает оплаты', 'Ожидает оплаты'),
-                                       ('В обработке', 'В обработке'),
+    status = models.CharField(max_length=50, default='В обработке',
+                              choices=(('В обработке', 'В обработке'),
                                        ('Собран', 'Собран'),
                                        ('В пути', 'В пути'),
                                        ('Доставлено', 'Доставлено'),
@@ -44,7 +42,7 @@ class OrderItem(models.Model):
     product = models.ForeignKey(to=Products, on_delete=models.SET_DEFAULT, null=True, verbose_name="Товар", default=None)
     name = models.CharField(max_length=150, verbose_name="Название")
     price = models.DecimalField(max_digits=7, decimal_places=2, verbose_name="Цена")
-    quantity = models.DecimalField(max_digits=7, decimal_places=2, verbose_name="Количество")
+    quantity = models.IntegerField(default=0, verbose_name="Количество")
     unit = models.CharField(max_length=10, blank=True, null=True, verbose_name='Единица измерения')
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name="Дата продажи")
 

@@ -30,11 +30,11 @@ class OrderItemAdmin(admin.ModelAdmin):
 
 class OrderTabulareAdmin(admin.TabularInline):
     model = Order
-    fields = ("status", "is_paid", "created_timestamp",)
+    fields = ("status", "created_timestamp",)
 
-    search_fields = ("id", "is_paid", "created_timestamp",)
+    search_fields = ("id", "created_timestamp",)
     readonly_fields = ("created_timestamp",)
-    list_filter = ("status", "is_paid", "created_timestamp",)
+    list_filter = ("status", "created_timestamp",)
     extra = 0
 
 
@@ -45,7 +45,7 @@ class OrderAdmin(admin.ModelAdmin):
 
     search_fields = ("id",)
     readonly_fields = ("created_timestamp",)
-    list_filter = ("status", "is_paid",)
+    list_filter = ("status",)
 
     inlines = (OrderItemTabulareAdmin,)
 

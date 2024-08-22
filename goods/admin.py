@@ -18,7 +18,7 @@ class ProductsAdmin(admin.ModelAdmin):
     save_on_top = True
     save_as = True
 
-    prepopulated_fields = {'slug': ('name',)}
+    prepopulated_fields = {'slug': ('name', 'id')}
 
     # list_display = ['name', 'discount_mid', 'discount_low']
     # list_editable = ['discount_mid', 'discount_low']

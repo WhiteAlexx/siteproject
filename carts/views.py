@@ -16,7 +16,7 @@ class CartAddView(CartMixin, View):
     def post(self, request):
 
         product_id = request.POST.get("product_id")
-        count_res = float(request.POST.get("count_res"))
+        count_res = request.POST.get("count_res")
         product = Products.objects.get(id=product_id)
 
         cart = self.get_cart(request, product=product)
@@ -51,7 +51,7 @@ class CartAddMidView(CartMixin, View):
     def post(self, request):
 
         product_id = request.POST.get("product_id")
-        count_res = float(request.POST.get("count_res"))
+        count_res = request.POST.get("count_res")
         product = Products.objects.get(id=product_id)
 
         cart = self.get_cart(request, product=product)
@@ -86,7 +86,7 @@ class CartAddLowView(CartMixin, View):
     def post(self, request):
 
         product_id = request.POST.get("product_id")
-        count_res = float(request.POST.get("count_res"))
+        count_res = request.POST.get("count_res")
         product = Products.objects.get(id=product_id)
 
         cart = self.get_cart(request, product=product)
@@ -97,7 +97,7 @@ class CartAddLowView(CartMixin, View):
                                     session_key=request.session.session_key if not request.user.is_authenticated else None,
                                     product=product, quantity=count_res)
             else:
-                cart.quantity += float(product.count_for_low)
+                cart.quantity += int(product.count_for_low)
             cart. save()
         else:
             if product.is_residual:
@@ -107,7 +107,7 @@ class CartAddLowView(CartMixin, View):
             else:
                 Cart.objects.create(user=request.user if request.user.is_authenticated else None,
                                     session_key=request.session.session_key if not request.user.is_authenticated else None,
-                                    product=product, quantity=float(product.count_for_low))
+                                    product=product, quantity=product.count_for_low)
 
         response_data = {
             'cart_items_html': self.render_cart(request),
@@ -125,7 +125,7 @@ class CartChangeView(CartMixin, View):
         cart.quantity = request.POST.get('quantity')
         cart.save()
 
-        quantity = float(cart.quantity)
+        quantity = int(cart.quantity)
 
         response_data = {
             'quantity': quantity,
@@ -141,7 +141,7 @@ class CartRemoveView(CartMixin, View):
         cart_id = request.POST.get('cart_id')
         cart = self.get_cart(request, cart_id=cart_id)
 
-        quantity = float(cart.quantity)
+        quantity = int(cart.quantity)
         cart. delete()
 
         user_cart = get_user_carts(request)

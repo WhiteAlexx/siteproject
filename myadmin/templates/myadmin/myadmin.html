@@ -88,14 +88,9 @@
 </nav>
 <!-- Оформленные заказы -->
 {% comment %} {% cache 60 usero_rders user.id %} {% endcomment %}
-<div class="col-md-12">
-<<<<<<< HEAD
-    <div class=" bg-white bg-opacity-50 mb-4 mx-2 rounded custom-shadow">
-        <h3 class="text-center text-black mb-4">Заказы</h3>
-=======
+<div class="col-md-12 pt-4">
     <div class=" bg-white bg-opacity-50 rounded custom-shadow">
         <h3 class="text-center text-black">Заказы</h3>
->>>>>>> 4e404a2f15d21f0c31aebb40d87a56a5ed01b2fd
         <!-- Разметка заказов -->
         <div class="container-fluid" id="order-items-container">
             {% include "myadmin/includes/included_myadmin.html" %}

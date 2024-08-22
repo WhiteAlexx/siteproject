@@ -12,13 +12,13 @@ $(document).ready(function () {
         // Берем элемент счетчика в значке корзины и берем оттуда значение
         var goodsInCartCount = $("#goods-in-cart-count");
         
-        var cartCount = parseFloat(goodsInCartCount.text() || 0);
+        var cartCount = parseInt(goodsInCartCount.text() || 0);
 
         // Получаем id товара из атрибута data-product-id
         var product_id = $(this).data("product-id");
-        var count_mid = parseFloat($(this).data("count-mid"));
-        var count_low = parseFloat($(this).data("count-low"));
-        var count_res = parseFloat($(this).data("count-res"));
+        var count_mid = parseInt($(this).data("count-mid"));
+        var count_low = parseInt($(this).data("count-low"));
+        var count_res = parseInt($(this).data("count-res"));
         // Из атрибута href берем ссылку на контроллер django
         var add_to_cart_url = $(this).attr("href");
 
@@ -82,7 +82,7 @@ $(document).ready(function () {
 
         // Берем элемент счетчика в значке корзины и берем оттуда значение
         var goodsInCartCount = $("#goods-in-cart-count");
-        var cartCount = parseFloat(goodsInCartCount.text() || 0);
+        var cartCount = parseInt(goodsInCartCount.text() || 0);
 
         // Получаем id корзины из атрибута data-cart-id
         var cart_id = $(this).data("cart-id");
@@ -137,7 +137,7 @@ $(document).ready(function () {
         // Ищем ближайшеий input с количеством 
         var $input = $(this).closest('.input-group').find('.number');
         // Берем значение количества товара
-        var currentValue = parseFloat($input.val());
+        var currentValue = parseInt($input.val());
         // Если количества больше одного, то только тогда делаем -1
         if (currentValue > 1) {
             $input.val(currentValue - 1);
@@ -156,7 +156,7 @@ $(document).ready(function () {
         // Ищем ближайшеий input с количеством 
         var $input = $(this).closest('.input-group').find('.number');
         // Берем значение количества товара
-        var currentValue = parseFloat($input.val());
+        var currentValue = parseInt($input.val());
 
         $input.val(currentValue + 1);
 
@@ -166,7 +166,7 @@ $(document).ready(function () {
     });
 
     $(document).on("change", ".number", function () {
-        var change = parseFloat($(this).val());
+        var change = parseInt($(this).val());
         
         var cartID = $(this).data("cart-id");
         var url = $(this).data("cart-change-url");
@@ -195,7 +195,7 @@ $(document).ready(function () {
 
                 // Изменяем количество товаров в корзине
                 var goodsInCartCount = $("#goods-in-cart-count");
-                var cartCount = parseFloat(goodsInCartCount.text() || 0);
+                var cartCount = parseInt(goodsInCartCount.text() || 0);
                 cartCount += change;
                 // goodsInCartCount.text(cartCount);
 
