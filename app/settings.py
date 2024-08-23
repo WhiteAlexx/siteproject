@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-b7_loh@dhttzq@wy6)=g1k2c3g%g$ibzm_j#oto3jf-@(^coxc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['whitealexx-siteproject-f13c.twc1.net']
 
@@ -154,9 +154,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-    ]
+
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static'
+#     ]
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
