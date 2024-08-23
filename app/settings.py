@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
-from django.conf.global_settings import STATIC_ROOT
+# from django.conf.global_settings import STATIC_ROOT
 
 # from django.conf.global_settings import AUTH_USER_MODEL, LOGIN_REDIRECT_URL, LOGIN_URL
 
@@ -161,11 +161,11 @@ STATICFILES_DIRS = [
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-INTERNAL_IPS = [
-    # ...
-    "46.19.66.100",
-    # ...
-]
+# INTERNAL_IPS = [
+#     # ...
+#     "46.19.66.100",
+#     # ...
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
