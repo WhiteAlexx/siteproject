@@ -32,7 +32,7 @@ SECRET_KEY = SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['whitealexx-siteproject-f13c.twc1.net/']
 
 
 # Application definition
@@ -103,10 +103,10 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'corner',
-        'USER': 'corner',
-        'PASSWORD': '1940CorneR!($^)',
-        'HOST': '192.168.0.0',
+        'NAME': 'default_db',
+        'USER': 'gen_user',
+        'PASSWORD': '1940CorneR!($^',
+        'HOST': '192.168.0.4',
         'PORT': '24',
     }
 }
