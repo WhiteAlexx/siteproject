@@ -160,7 +160,7 @@ STATIC_ROOT = '/opt/build/static'
 #     ]
 
 MEDIA_URL = 'media/'
-# MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # INTERNAL_IPS = [
 #     # ...
