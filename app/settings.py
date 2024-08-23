@@ -103,11 +103,11 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': '192.168.0.0',
+        'HOST': '192.168.0.4',
         'NAME': 'default_db',
         'USER': 'gen_user',
         'PASSWORD': '1940CorneR!($^',
-        'PORT': '24',
+        # 'PORT': '24',
     }
 }
 
@@ -160,7 +160,7 @@ STATIC_ROOT = '/opt/build/static'
 #     ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = '/opt/build/media'
 
 # INTERNAL_IPS = [
 #     # ...
