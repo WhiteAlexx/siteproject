@@ -93,23 +93,23 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'HOST': '192.168.0.4',
-#         'NAME': 'default_db',
-#         'USER': 'gen_user',
-#         'PASSWORD': '1940CorneR!($^',
-#         # 'PORT': '24',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': '147.45.160.90',
+        'NAME': 'default_db',
+        'USER': 'gen_user',
+        'PASSWORD': '1940CorneR!($^',
+        # 'PORT': '24',
+    }
+}
 
 CACHES = {
     "default": {
