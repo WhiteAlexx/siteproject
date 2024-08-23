@@ -107,7 +107,7 @@ DATABASES = {
         'USER': 'gen_user',
         'PASSWORD': '1940CorneR!($^',
         'HOST': '192.168.0.4',
-        'PORT': '24',
+        # 'PORT': '24',
     }
 }
 
