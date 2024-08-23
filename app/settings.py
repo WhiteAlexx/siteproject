@@ -103,11 +103,11 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
+        'HOST': '192.168.0.4',
         'NAME': 'default_db',
         'USER': 'gen_user',
         'PASSWORD': '1940CorneR!($^',
-        'HOST': '192.168.0.4',
-        # 'PORT': '24',
+        'PORT': '24',
     }
 }
 
@@ -152,14 +152,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = '/opt/build/static'
 
 # STATICFILES_DIRS = [
 #     BASE_DIR / 'static'
 #     ]
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # INTERNAL_IPS = [
