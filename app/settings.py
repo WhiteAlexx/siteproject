@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
-# from django.conf.global_settings import STATIC_ROOT
+from django.conf.global_settings import STATIC_ROOT
 
 # from django.conf.global_settings import AUTH_USER_MODEL, LOGIN_REDIRECT_URL, LOGIN_URL
 
@@ -153,14 +153,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-# STATIC_ROOT = 'opt/build/static/'
+STATIC_ROOT = BASE_DIR / 'static/'
 
 # STATICFILES_DIRS = [
 #     BASE_DIR / 'static'
 #     ]
 
 MEDIA_URL = 'media/'
-# MEDIA_ROOT = BASE_DIR / 'media/'
+MEDIA_ROOT = BASE_DIR / 'media/'
 
 # INTERNAL_IPS = [
 #     # ...
