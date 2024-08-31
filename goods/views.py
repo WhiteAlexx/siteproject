@@ -8,6 +8,7 @@ from django.views.generic import DetailView, ListView
 
 from carts.models import Cart
 from carts.utils import get_user_carts, get_endng, get_select_quantity, get_total_price
+from common.mixins import get_context_categories
 from goods.models import Categories, Products
 from goods.utils import q_search
 
@@ -59,7 +60,7 @@ class CatalogView(ListView):
         context['total_price'] = get_total_price(self.request)
         context['tovar'] = get_endng(self.request)
         context['slug_url'] = self.kwargs.get('category_slug')
-        context['categories'] = Categories.objects.exclude(slug__contains='tovary')
+        context['categories'] = get_context_categories()
         return context
 
     def auto_update_is_neo(self):
@@ -100,7 +101,7 @@ class ProductView(DetailView):
         context['select_quantity'] = get_select_quantity(self.request)
         context['total_price'] = get_total_price(self.request)
         context['tovar'] = get_endng(self.request)
-        context['categories'] = Categories.objects.exclude(slug__contains='tovary')
+        context['categories'] = get_context_categories()
         carts = Cart.objects.filter(product=self.object.id)
         context['list_quantity'] = [str(int(cart.quantity)) for cart in carts]
         return context

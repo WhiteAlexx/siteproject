@@ -9,7 +9,7 @@ from django.shortcuts import redirect
 
 from myadmin.mixins import AdminMixin
 from myadmin.utils import q_search
-from common.mixins import CacheMixin
+from common.mixins import CacheMixin, get_context_categories
 from goods.models import Categories
 from orders.models import Order, OrderItem
 from users.models import User
@@ -18,37 +18,6 @@ from users.models import User
 
 class MyAdminView(LoginRequiredMixin, TemplateView):
     template_name = 'myadmin/myadmin.html'
-
-    # def get_queryset(self):
-    #     user = self.request.user
-    #     if user.is_superuser:
-    #         status = self.kwargs.get('order_status')
-
-    #         query = self.request.GET.get("q")
-
-    #         if status == 'process':
-    #             status = 'В обработке'
-    #         elif status == 'done':
-    #             status = 'Собран'
-    #         elif status == 'delivery':
-    #             status = 'В пути'
-
-    #         if query:
-    #             orders = q_search(query)
-    #         elif status == "all":
-    #             orders = super().get_queryset().all().prefetch_related(
-    #                 Prefetch(
-    #                     "orderitem_set",
-    #                     queryset=OrderItem.objects.select_related("product")
-    #                 )
-    #             ).order_by("id")
-    #         else:
-    #             orders = get_orders(status)
-
-    #         return orders
-
-    #     else:
-    #         return redirect('user:login')
 
     def get_context_data(self, **kwargs):
         user = self.request.user
@@ -118,3 +87,14 @@ def get_orders(status):
                     queryset=OrderItem.objects.select_related("product")
                 )
             ).order_by("id")
+
+
+class MyAdminGoods(LoginRequiredMixin, TemplateView):
+    template_name = 'myadmin/goods.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = get_context_categories()
+        context['title'] = 'Товары'
+
+        return context

@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
+from common.mixins import get_context_categories
 from goods.models import Categories, Products
 from carts.utils import get_user_carts, get_endng, get_select_quantity, get_total_price
 from orders.models import Order
@@ -18,12 +19,12 @@ class IndexView(TemplateView):
         context['select_quantity'] = get_select_quantity(self.request)
         context['total_price'] = get_total_price(self.request)
         context['tovar'] = get_endng(self.request)
-        context['categories'] = Categories.objects.exclude(slug__contains='tovary')
+        context['categories'] = get_context_categories()
         return context
 
 # def index(request):
 
-#     categories = Categories.objects.exclude(slug__contains='tovary')  #Фильтр без все и в пути
+#     categories = get_context_categories()  #Фильтр без все и в пути
 #     #product = Products.objects.exclude(category__name__icontains='в пути')
 
 #     context: dict[str, str] = {

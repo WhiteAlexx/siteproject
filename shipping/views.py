@@ -4,6 +4,7 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
+from common.mixins import get_context_categories
 from goods.models import Categories, Products
 from carts.utils import get_user_carts, get_endng, get_select_quantity, get_total_price
 
@@ -24,7 +25,7 @@ class ShippingView(ListView):
         context['select_quantity'] = get_select_quantity(self.request)
         context['total_price'] = get_total_price(self.request)
         context['tovar'] = get_endng(self.request)
-        context['categories'] = Categories.objects.exclude(slug__contains='tovary')
+        context['categories'] = get_context_categories()
         # context['slug_url'] = 'get_queryset.category_slug'
         return context
 
@@ -61,7 +62,7 @@ class ProductView(DetailView):
         context['select_quantity'] = get_select_quantity(self.request)
         context['total_price'] = get_total_price(self.request)
         context['tovar'] = get_endng(self.request)
-        context['categories'] = Categories.objects.exclude(slug__contains='tovary')
+        context['categories'] = get_context_categories()
         return context
 
 # def product(request, product_id=False, product_slug=False):

@@ -6,7 +6,7 @@ from num2words import num2words
 
 from carts.mixins import CartMixin
 from carts.models import Cart
-from carts.utils import get_user, get_user_carts, get_endng
+from carts.utils import get_select_quantity, get_total_price, get_user, get_user_carts, get_endng
 from goods.models import Products
 from orders.forms import CreateOrderForm
 
@@ -177,14 +177,21 @@ def cart_select(request):
 
     user_cart = get_user_carts(request)
     tovar = get_endng(request)
+    select_quantity = get_select_quantity(request)
+    total_price = get_total_price(request)
+
 
     if request.user.is_authenticated:
         user_user = get_user(request)
         cart_items_html = render_to_string(
-            "carts/includes/included_cart.html", {"carts": user_cart, "tovar": tovar, "form": user_user}, request=request)
+            "carts/includes/included_cart.html", {
+                "carts": user_cart, "select_quantity": select_quantity, "total_price": total_price, 
+                "tovar": tovar, "form": user_user}, request=request)
     else:
         cart_items_html = render_to_string(
-            "carts/includes/included_cart.html", {"carts": user_cart, "tovar": tovar}, request=request)
+            "carts/includes/included_cart.html", {
+                "carts": user_cart, "select_quantity": select_quantity, "total_price": total_price, 
+                "tovar": tovar}, request=request)
 
     response_data = {
         "cart_items_html": cart_items_html,

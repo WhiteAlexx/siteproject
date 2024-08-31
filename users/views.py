@@ -15,7 +15,7 @@ from django.views.generic import CreateView, TemplateView, UpdateView
 
 from carts.models import Cart
 from carts.utils import get_user_carts, get_endng, get_select_quantity, get_total_price
-from common.mixins import CacheMixin
+from common.mixins import CacheMixin, get_context_categories
 from goods.models import Categories
 from orders.models import Order, OrderItem
 from users.forms import ProfileForm, UserLoginForm, UserRegistrationForm
@@ -53,7 +53,7 @@ class UserLoginView(LoginView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Авторизация'
-        context['categories'] = Categories.objects.exclude(slug__contains='tovary')
+        context['categories'] = get_context_categories()
         return context
 
 
@@ -80,7 +80,7 @@ class UserRegistrationView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Регистрация'
-        context['categories'] = Categories.objects.exclude(slug__contains='tovary')
+        context['categories'] = get_context_categories()
         return context
 
 
@@ -107,7 +107,7 @@ class UserProfileView(LoginRequiredMixin, CacheMixin, UpdateView):
         context['select_quantity'] = get_select_quantity(self.request)
         context['total_price'] = get_total_price(self.request)
         context['tovar'] = get_endng(self.request)
-        context['categories'] = Categories.objects.exclude(slug__contains='tovary')
+        context['categories'] = get_context_categories()
 
         # orders = cache.get(f'orders_for_user_{self.request.user.id}')
         # if not orders:
@@ -133,7 +133,7 @@ class UserCartView(TemplateView):
         context['select_quantity'] = get_select_quantity(self.request)
         context['total_price'] = get_total_price(self.request)
         context['tovar'] = get_endng(self.request)
-        context['categories'] = Categories.objects.exclude(slug__contains='tovary')
+        context['categories'] = get_context_categories()
         return context
 
 

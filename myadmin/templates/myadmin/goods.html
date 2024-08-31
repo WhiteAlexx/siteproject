@@ -67,8 +67,28 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" aria-current="page" href="{% url "main:index" %}">Домашняя страница</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" aria-current="page" href="#">Товары</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Каталог {{ user_name }}
+                    </a>
+                    <ul class="dropdown-menu bg-dark overflow-auto navbar-nav-scroll" id="navbarScroll">
+                        <li><a class="nav-link text-white" href="№">Новинки</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        {% for category in categories %}
+                        <li>
+                            <a class="nav-link text-white" href="№">{{ category.name }}</a>
+                        </li>
+                        {% endfor %}
+                        
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="nav-link text-white" href="№">Все товары</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a class="nav-link text-white" href="{% url "admin:index" %}">Админ панель</a>
