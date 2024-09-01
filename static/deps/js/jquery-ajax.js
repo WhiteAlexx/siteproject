@@ -331,3 +331,33 @@ $(document).ready(function () {
     });
 
 });
+
+
+$(document).on("change", ".item", function () {
+    var field = $(this).data("product-field");
+    if (field == "quantity") {
+        var change = parseInt($(this).val());
+    } else {
+        var change = parseFloat($(this).val());
+    }
+    var productID = $(this).data("product-id");
+    var url = $(this).data("product-change-url");
+
+    $.ajax({
+
+        type: "POST",
+        url: url,
+        data: {
+            product_id: productID,
+            change: change,
+            field: field,
+            csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+            },
+        success: function (data) {
+
+            var productItemsContainer = $("#product-items-container");
+            productItemsContainer.html(data.item_html);
+            alert("Save " + field + " = " + change + " for product " + productID);
+        },
+    });
+});

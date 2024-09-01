@@ -133,3 +133,35 @@ class MyAdminGoods(LoginRequiredMixin, ListView):
 
         return context
 
+
+# class MyAdminChangeGoods(LoginRequiredMixin, View):
+@login_required
+def changeitem(request):
+    user = request.user
+    if user.is_superuser:
+
+        product_id = request.POST.get("product_id")
+        product = Products.objects.get(id=product_id)
+
+        field = request.POST.get("field")
+        change = request.POST.get("change")
+
+        if field == "quantity":
+            product.quantity = change
+        elif field == "price":
+            product.price = change
+        elif field == "price_mid":
+            product.price_mid = change
+        elif field == "price_low":
+            product.price_low = change
+        product.save()
+
+        goods = Products.objects.all()
+
+        item_html = render_to_string(
+            "myadmin/includes/included_goods.html", {"goods": goods}, request=request)
+
+        response_data = {
+            "item_html": item_html,
+        }
+        return JsonResponse(response_data)
