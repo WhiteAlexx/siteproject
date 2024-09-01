@@ -1,59 +1,215 @@
 {% extends "base.html" %}
 {% load static %}
 {% load cache %}
+{% load goods_tags %}
 
-
-
-{% block filters %}
-
-{% comment %} <ul class="navbar-nav bg-dark">
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-white" href="#" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            Покупатели
-        </a>
-        <ul class="dropdown-menu bg-dark">
-            {% cache 60 catalog %}
-            {% for user in users %}
-                <li>
-                    <a class="nav-link text-white" href="{% url "myadmin:myadmin" 'user.id' %}">{{user.first_name}} {{user.last_name}}</a>
-                </li>
-            {% endfor %}
-            
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-            <li><a class="nav-link text-white" href="{% url "myadmin:myadmin" %}">Все</a></li>
-            {% endcache %}
-        </ul>
-    </li>
-</ul> {% endcomment %}
-
-{% comment %} <ul class="navbar-nav bg-dark">
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-white" href="#" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            Статус
-        </a>
-        <ul class="dropdown-menu bg-dark">
-            {% cache 60 catalog %}
-            {% for order in orders %}
-            <li>
-                <a class="nav-link text-white" href="#{% url "myadmin:myadmin" order.user.id %}">{{order.status}}</a>
-            </li>
-            {% endfor %}
-            
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-            <li><a class="nav-link text-white" href="#{% url "myadmin:myadmin" 'all' %}">Все</a></li>
-            {% endcache %}
-        </ul>
-    </li>
-</ul> {% endcomment %}
-
+{% block admin_js %}
+<script src="/admin/jsi18n/"></script>
+<script src="{% static "admin/js/vendor/jquery/jquery.js" %}"></script>
+<script src="{% static "admin/js/jquery.init.js" %}"></script>
+<script src="{% static "admin/js/core.js" %}"></script>
+<script src="{% static "admin/js/admin/RelatedObjectLookups.js" %}"></script>
+<script src="{% static "admin/js/actions.js" %}"></script>
+<script src="{% static "admin/js/urlify.js" %}"></script>
+<script src="{% static "admin/js/prepopulate.js" %}"></script>
+<script src="{% static "admin/js/vendor/xregexp/xregexp.js" %}"></script>
 {% endblock  %}
 
+{% block filters %}
+<div class="offcanvas offcanvas-start text-bg-dark" style="width: 555px" data-bs-backdrop="static" tabindex="-1" 
+    id="staticBackdrop" aria-labelledby="staticBackdropLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="staticBackdropLabel">Новый товар</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
+    </div>
+    <div class="offcanvas-body text-end">
+        <form action="/admin/goods/products/add/" enctype="multipart/form-data" method="post" id="products_form" novalidate="">
+            {% csrf_token %}
+
+            <div class="submit-row pt-4">
+                <input type="submit" value="Сохранить" class="default" name="_save">
+                {% comment %} <input type="submit" value="Сохранить и добавить другой объект" name="_addanother"> {% endcomment %}
+                {% comment %} <input type="submit" value="Сохранить и продолжить редактирование" name="_continue"> {% endcomment %}
+            </div>
+
+            <div class="form-row field-name field-slug p-5">
+                <div class="flex-container form-multiline">
+                    <div class="flex-container fieldBox field-name">
+                        <label class="required" for="id_name">Название:</label>
+                        <input type="text" name="name" class="vTextField" maxlength="150" required="" id="id_name">
+                    </div>
+                    <div class="flex-container fieldBox field-slug">
+                        <label class="inline" for="id_slug">URL:</label>
+                        <input type="text" name="slug" class="vTextField" maxlength="200" id="id_slug">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row field-category field-is_neo pt-4">
+                <div class="flex-container form-multiline">
+                    <div class="flex-container fieldBox field-category">
+                        <label class="required" for="id_category">Категория:</label>
+                        <div class="related-widget-wrapper pt-2" data-model-ref="Категорию">
+                            <select name="category" required="" id="id_category">
+                                <option value="" selected="">---------</option>
+                                {% for category in categories %}
+                                    <option value="category.id">{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                            {% comment %} <a class="related-widget-wrapper-link change-related" id="change_id_category" 
+                                data-href-template="/admin/goods/categories/__fk__/change/?_to_field=id&amp;_popup=1" 
+                                data-popup="yes" title="Изменить выбранный объект типа " Категорию""="">
+                                <img src="/static/admin/img/icon-changelink.svg" alt="Изменить"></a> {% endcomment %}
+                            <a class="related-widget-wrapper-link add-related" id="add_id_category" 
+                                data-popup="yes" href="/admin/goods/categories/add/?_to_field=id&amp;_popup=1" 
+                                title="Добавить ещё один объект типа " Категорию""="">
+                                <img src="/static/admin/img/icon-addlink.svg" alt="Добавить"></a>
+                            {% comment %} <a class="related-widget-wrapper-link delete-related" id="delete_id_category" 
+                                data-href-template="/admin/goods/categories/__fk__/delete/?_to_field=id&amp;_popup=1" 
+                                data-popup="yes" title="Удалить выбранный объект типа " Категорию""="">
+                                <img src="/static/admin/img/icon-deletelink.svg" alt="Удалить"></a> {% endcomment %}
+                            {% comment %} <a class="related-widget-wrapper-link view-related" id="view_id_category" 
+                                data-href-template="/admin/goods/categories/__fk__/change/?_to_field=id" 
+                                title="Просмотреть выбранный объект типа " Категорию""="">
+                                <img src="/static/admin/img/icon-viewlink.svg" alt="Просмотреть"></a> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-container fieldBox field-is_neo pt-2">
+                    <input type="checkbox" name="is_neo" id="id_is_neo" checked="">
+                    <label class="vCheckboxLabel inline" for="id_is_neo">В новинки</label>
+                </div>
+            </div>
+
+            <div class="form-row field-price field-discount pt-4">
+                <div class="flex-container form-multiline">
+                    <div class="flex-container fieldBox field-price">
+                        <label class="required" for="id_price">Цена:</label>
+                        <input type="number" name="price" value="0" step="0.01" required="" id="id_price">
+                    </div>
+                    <div class="flex-container fieldBox field-discount pt-2">
+                        <label class="required inline" for="id_discount">Скидка в %:</label>
+                        <input type="number" name="discount" value="0" step="0.01" required="" id="id_discount">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row field-price_mid field-count_for_mid field-discount_mid pt-4">
+                <div class="flex-container form-multiline">
+                    <div class="flex-container fieldBox field-price_mid">
+                        <label class="required" for="id_price_mid">Цена мелкий опт:</label>
+                        <input type="number" name="price_mid" value="0" step="0.01" required="" id="id_price_mid">
+                    </div>
+                    <div class="flex-container fieldBox field-count_for_mid pt-2">
+                        <label class="required inline" for="id_count_for_mid">Единиц товара для мелкого опта:</label>
+                        <input type="number" name="count_for_mid" value="1" class="vIntegerField" required="" id="id_count_for_mid">
+                    </div>
+                    <div class="flex-container fieldBox field-discount_mid pt-2">
+                        <label class="required inline" for="id_discount_mid">Скидка в %:</label>
+                        <input type="number" name="discount_mid" value="0" step="0.01" required="" id="id_discount_mid">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row field-price_low field-count_for_low field-discount_low pt-4">
+                <div class="flex-container form-multiline">
+                    <div class="flex-container fieldBox field-price_low">
+                        <label class="required" for="id_price_low">Цена опт:</label>
+                        <input type="number" name="price_low" value="0" step="0.01" required="" id="id_price_low">
+                    </div>
+                    <div class="flex-container fieldBox field-count_for_low pt-2">
+                        <label class="required inline" for="id_count_for_low">Единиц товара для опта:</label>
+                        <input type="number" name="count_for_low" value="1" class="vIntegerField" required="" id="id_count_for_low">
+                    </div>
+                    <div class="flex-container fieldBox field-discount_low pt-2">
+                        <label class="required inline" for="id_discount_low">Скидка в %:</label>
+                        <input type="number" name="discount_low" value="0" step="0.01" required="" id="id_discount_low">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row field-quantity field-unit pt-4">
+                <div class="flex-container form-multiline">
+                    <div class="flex-container fieldBox field-quantity">
+                        <label class="required" for="id_quantity">Количество:</label>
+                        <input type="number" name="quantity" value="0" class="vIntegerField" required="" id="id_quantity">
+                    </div>
+                    <div class="flex-container fieldBox field-unit pt-2">
+                        <label class="required inline" for="id_unit">Единица измерения:</label>
+                        <input type="text" name="unit" class="vTextField" maxlength="10" required="" id="id_unit">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row field-description pt-4">
+                <div class="flex-container">
+                    <label for="id_description">Описание:</label>
+                    <textarea name="description" cols="47" rows="7" class="vLargeTextField" id="id_description"></textarea>
+                </div>
+            </div>
+
+            <div class="form-row field-image field-image_1 field-image_2 pt-4">
+                <div class="flex-container form-multiline">
+                    <div class="flex-container fieldBox field-image">
+                        <label for="id_image">Изображение 1:</label>
+                        {% comment %} {% if item.image %}
+                            <img src="{{ item.image.url }}"
+                            class="border img-thumbnail" style="width: 100px" alt="{{ item.name }}">
+                        {% endif %} {% endcomment %}
+                        <input type="file" name="image" accept="image/*" id="id_image">
+                    </div>
+                    <div class="flex-container fieldBox field-image_1 pt-2">
+                        <label class="inline" for="id_image_1">Изображение 2:</label>
+                        {% comment %} {% if item.image_1 %}
+                            <img src="{{ item.image_1.url }}"
+                            class="border img-thumbnail" style="width: 100px" alt="{{ item.name }}">
+                        {% endif %} {% endcomment %}
+                        <input type="file" name="image_1" accept="image/*" id="id_image_1">
+                    </div>
+                    <div class="flex-container fieldBox field-image_2 pt-2">
+                        <label class="inline" for="id_image_2">Изображение 3:</label>
+                        {% comment %} {% if item.image_2 %}
+                            <img src="{{ item.image_2.url }}"
+                            class="border img-thumbnail" style="width: 100px" alt="{{ item.name }}">
+                        {% endif %} {% endcomment %}
+                        <input type="file" name="image_2" accept="image/*" id="id_image_2">
+                    </div>
+                </div>
+                {% if form.image.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show">{{form.image.errors}}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-row field-residual field-is_residual pt-4">
+                <div class="flex-container form-multiline">
+                    <div class="flex-container fieldBox field-residual">
+                        <label for="id_residual">Остатки (ЦЕЛЫЕ, вносить через ПРОБЕЛ):</label>
+                        <input type="text" name="residual" class="vTextField" maxlength="100" id="id_residual">
+                    </div>
+                    <div class="flex-container fieldBox field-is_residual">
+                        <input type="checkbox" name="is_residual" id="id_is_residual"><label class="vCheckboxLabel inline" for="id_is_residual">В остатках</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="submit-row pt-5">
+                <input type="submit" value="Сохранить" class="default" name="_save">
+                {% comment %} <input type="submit" value="Сохранить и добавить другой объект" name="_addanother"> {% endcomment %}
+                {% comment %} <input type="submit" value="Сохранить и продолжить редактирование" name="_continue"> {% endcomment %}
+            </div>
+            <script id="django-admin-form-add-constants" src="{% static "admin/js/change_form.js" %}" data-model-name="products" async="">
+            </script>
+            <script id="django-admin-prepopulated-fields-constants" src="{% static "admin/js/prepopulate_init.js" %}" 
+                data-prepopulated-fields="[
+                    {&quot;id&quot;: &quot;#id_slug&quot;, &quot;name&quot;: &quot;slug&quot;, 
+                    &quot;dependency_ids&quot;: [&quot;#id_name&quot;], &quot;dependency_list&quot;: [&quot;name&quot;], 
+                    &quot;maxLength&quot;: 200, &quot;allowUnicode&quot;: false}]">
+            </script>
+
+        </form>
+    </div>
+</div>
+{% endblock  %}
 
 {% block trading %}
 <nav class="navbar fixed-top navbar-expand-lg bg-dark">
@@ -73,58 +229,332 @@
                         Каталог {{ user_name }}
                     </a>
                     <ul class="dropdown-menu bg-dark overflow-auto navbar-nav-scroll" id="navbarScroll">
-                        <li><a class="nav-link text-white" href="№">Новинки</a></li>
+                        <li><a class="nav-link text-white" href="{% url "myadmin:goods" 'is_neo' %}">Новинки</a></li>
+                        <li><a class="nav-link text-white" href="{% url "myadmin:goods" 'v-puti' %}">В пути</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
 
                         {% for category in categories %}
                         <li>
-                            <a class="nav-link text-white" href="№">{{ category.name }}</a>
+                            <a class="nav-link text-white" href="{% url "myadmin:goods" category.slug %}">{{ category.name }}</a>
                         </li>
                         {% endfor %}
                         
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="nav-link text-white" href="№">Все товары</a></li>
+                        <li><a class="nav-link text-white" href="{% url "myadmin:goods" 'all' %}">Все товары</a></li>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'process' %}">Заказы</a>
                 </li>
                 <li>
                     <a class="nav-link text-white" href="{% url "admin:index" %}">Админ панель</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'process' %}">В обработке</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'done' %}">Собран</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'delivery' %}">В пути</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'all' %}">Все</a>
-                </li>
             </ul>
-            <form class="d-flex" role="search" action="{% url "myadmin:search" %}" method="get">
+            <form class="d-flex" role="search" action="{% url "catalog:search" %}" method="get">
                 <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success text-white" type="submit">Поиск</button>
             </form>
+            <button type="button" class="btn btn-dark" 
+                data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">Новый товар</button>
         </div>
     </div>
 </nav>
-<!-- Оформленные заказы -->
-{% comment %} {% cache 60 usero_rders user.id %} {% endcomment %}
-<div class="col-md-12 pt-4">
-    <div class=" bg-white bg-opacity-50 rounded custom-shadow">
-        <h3 class="text-center text-black">Заказы</h3>
-        <!-- Разметка заказов -->
-        <div class="container-fluid" id="order-items-container">
-            {% include "myadmin/includes/included_myadmin.html" %}
-        </div>
-        <!-- Закончилась разметка заказов -->
-    </div>
+
+
+<div class="table-responsive">
+    <table class="table table-dark table-hover">
+        <thead>
+            <tr>
+                <th>Фото</th>
+                <th>Товар</th>
+                <th>Количество</th>
+                <th>Цена</th>
+                <th>Цена м. опт</th>
+                <th>Цена опт</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in goods %}
+            <tr>
+                <td class="text-start">
+                    {% if item.image %}
+                        <img src="{{ item.image.url }}" class="rounded img-thumbnail bg-dark bg-opacity-50" 
+                            style="width: 50px" data-bs-toggle="modal" data-bs-target="#imageModal{{ item.id }}" alt="{{ item.name }}">
+                    {% endif %}
+                </td>
+                <td><a class="text-white" href="#offcanvasProduct" 
+                    data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop{{ item.id }}" aria-controls="staticBackdrop">
+                    {{ item.name }}</a></td>
+                <td>{{ item.quantity }} {{ item.unit }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.price_mid }}</td>
+                <td>{{ item.price_low }}</td>                
+            </tr>
+            <div class="offcanvas offcanvas-start text-bg-dark" style="width: 555px" data-bs-backdrop="static" tabindex="-1" 
+                id="staticBackdrop{{ item.id }}" aria-labelledby="staticBackdropLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="staticBackdropLabel">{{ item.name }}</h5>
+                    {% comment %} <button type="button" class="btn btn-light">Копировать</button> {% endcomment %}
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
+                </div>
+                <div class="offcanvas-body text-end">
+                    <form action="/admin/goods/products/{{item.id}}/change/" enctype="multipart/form-data" method="post" id="products_form" novalidate="">
+                        {% csrf_token %}
+
+                        <div class="submit-row pt-4">
+                            <input type="submit" value="Сохранить" class="default" name="_save">
+                            <input type="submit" value="Сохранить как новый объект" name="_saveasnew">
+                            {% comment %} <input type="submit" value="Сохранить и добавить другой объект" name="_addanother"> {% endcomment %}
+                            {% comment %} <input type="submit" value="Сохранить и продолжить редактирование" name="_continue"> {% endcomment %}
+                        </div>
+
+                        <div class="form-row field-name field-slug p-5">
+                            <div class="flex-container form-multiline">
+                                <div class="flex-container fieldBox field-name">
+                                    <label class="required" for="id_name">Название:</label>
+                                    <input type="text" name="name" value="{{ item.name }}" class="vTextField" maxlength="150" required="" id="id_name">
+                                </div>
+                                <div class="flex-container fieldBox field-slug">
+                                    <label class="inline" for="id_slug">URL:</label>
+                                    <input type="text" name="slug" value="{{ item.slug }}" class="vTextField" maxlength="200" id="id_slug">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row field-category field-is_neo">
+                            <div class="flex-container form-multiline">
+                                <div class="flex-container fieldBox field-category">
+                                    <label class="required" for="id_category">Категория:</label>
+                                    <div class="related-widget-wrapper pt-2" data-model-ref="Категорию">
+                                        <select name="category" required="" id="id_category">
+                                            <option value="{{ item.category.name }}" selected="">{{ item.category.name }}</option>
+                                            {% for category in categories %}
+                                                <option value="{{ category.id }}">{{ category.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        {% comment %} <a class="related-widget-wrapper-link change-related" id="change_id_category" 
+                                            data-href-template="/admin/goods/categories/__fk__/change/?_to_field=id&amp;_popup=1" 
+                                            data-popup="yes" title="Изменить выбранный объект типа " Категорию""="">
+                                            <img src="/static/admin/img/icon-changelink.svg" alt="Изменить"></a> {% endcomment %}
+                                        <a class="related-widget-wrapper-link add-related" id="add_id_category" 
+                                            data-popup="yes" href="/admin/goods/categories/add/?_to_field=id&amp;_popup=1" 
+                                            title="Добавить ещё один объект типа " Категорию""="">
+                                            <img src="/static/admin/img/icon-addlink.svg" alt="Добавить"></a>
+                                        {% comment %} <a class="related-widget-wrapper-link delete-related" id="delete_id_category" 
+                                            data-href-template="/admin/goods/categories/__fk__/delete/?_to_field=id&amp;_popup=1" 
+                                            data-popup="yes" title="Удалить выбранный объект типа " Категорию""="">
+                                            <img src="/static/admin/img/icon-deletelink.svg" alt="Удалить"></a> {% endcomment %}
+                                        {% comment %} <a class="related-widget-wrapper-link view-related" id="view_id_category" 
+                                            data-href-template="/admin/goods/categories/__fk__/change/?_to_field=id" 
+                                            title="Просмотреть выбранный объект типа " Категорию""="">
+                                            <img src="/static/admin/img/icon-viewlink.svg" alt="Просмотреть"></a> {% endcomment %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex-container fieldBox field-is_neo pt-2">
+                                    {% if item.is_neo %}
+                                        <input type="checkbox" name="is_neo" id="id_is_neo" checked>
+                                    {% else %}
+                                        <input type="checkbox" name="is_neo" id="id_is_neo">
+                                    {% endif %}
+                                    <label class="vCheckboxLabel inline" for="id_is_neo">В новинки</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row field-price field-discount pt-4">
+                            <div class="flex-container form-multiline">
+                                <div class="flex-container fieldBox field-price">
+                                    <label class="required" for="id_price">Цена:</label>
+                                    <input type="number" name="price" value="{{ item.price | floatformat }}" step="0.01" required="" id="id_price">
+                                </div>
+                                <div class="flex-container fieldBox field-discount pt-2">
+                                    <label class="required inline" for="id_discount">Скидка в %:</label>
+                                    <input type="number" name="discount" value="{{ item.discount | floatformat }}" step="0.01" required="" id="id_discount">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row field-price_mid field-count_for_mid field-discount_mid pt-4">
+                            <div class="flex-container form-multiline">
+                                <div class="flex-container fieldBox field-price_mid">
+                                    <label class="required" for="id_price_mid">Цена мелкий опт:</label>
+                                    <input type="number" name="price_mid" value="{{ item.price_mid | floatformat }}" step="0.01" required="" id="id_price_mid">
+                                </div>
+                                <div class="flex-container fieldBox field-count_for_mid pt-2">
+                                    <label class="required inline" for="id_count_for_mid">Единиц товара для мелкого опта:</label>
+                                    <input type="number" name="count_for_mid" value="{{ item.count_for_mid }}" class="vIntegerField" required="" id="id_count_for_mid">
+                                </div>
+                                <div class="flex-container fieldBox field-discount_mid pt-2">
+                                    <label class="required inline" for="id_discount_mid">Скидка в %:</label>
+                                    <input type="number" name="discount_mid" value="{{ item.discount_mid | floatformat }}" step="0.01" required="" id="id_discount_mid">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row field-price_low field-count_for_low field-discount_low pt-4">
+                            <div class="flex-container form-multiline">
+                                <div class="flex-container fieldBox field-price_low">
+                                    <label class="required" for="id_price_low">Цена опт:</label>
+                                    <input type="number" name="price_low" value="{{ item.price_low | floatformat }}" step="0.01" required="" id="id_price_low">
+                                </div>
+                                <div class="flex-container fieldBox field-count_for_low pt-2">
+                                    <label class="required inline" for="id_count_for_low">Единиц товара для опта:</label>
+                                    <input type="number" name="count_for_low" value="{{ item.count_for_low }}" class="vIntegerField" required="" id="id_count_for_low">
+                                </div>
+                                <div class="flex-container fieldBox field-discount_low pt-2">
+                                    <label class="required inline" for="id_discount_low">Скидка в %:</label>
+                                    <input type="number" name="discount_low" value="{{ item.discount_low | floatformat }}" step="0.01" required="" id="id_discount_low">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row field-quantity field-unit pt-4">
+                            <div class="flex-container form-multiline">
+                                <div class="flex-container fieldBox field-quantity">
+                                    <label class="required" for="id_quantity">Количество:</label>
+                                    <input type="number" name="quantity" value="{{ item.quantity }}" class="vIntegerField" required="" id="id_quantity">
+                                </div>
+                                <div class="flex-container fieldBox field-unit pt-2">
+                                    <label class="required inline" for="id_unit">Единица измерения:</label>
+                                    <input type="text" name="unit" value="{{ item.unit }}" class="vTextField" maxlength="10" required="" id="id_unit">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row field-description pt-4">
+                            <div class="flex-container">
+                                <label for="id_description">Описание:</label>
+                                <textarea name="description" cols="47" rows="7" 
+                                    class="vLargeTextField" id="id_description">{{ item.description }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-row field-image field-image_1 field-image_2 pt-4">
+                            <div class="flex-container form-multiline">
+                                <div class="flex-container fieldBox field-image">
+                                    <label for="id_image">Изображение 1:</label>
+                                    {% if item.image %}
+                                        <img src="{{ item.image.url }}"
+                                        class="border img-thumbnail" style="width: 100px" alt="{{ item.name }}">
+                                    {% endif %}
+                                    <input type="file" name="image" accept="image/*" id="id_image">
+                                </div>
+                                <div class="flex-container fieldBox field-image_1 pt-2">
+                                    <label class="inline" for="id_image_1">Изображение 2:</label>
+                                    {% if item.image_1 %}
+                                        <img src="{{ item.image_1.url }}"
+                                        class="border img-thumbnail" style="width: 100px" alt="{{ item.name }}">
+                                    {% endif %}
+                                    <input type="file" name="image_1" accept="image/*" id="id_image_1">
+                                </div>
+                                <div class="flex-container fieldBox field-image_2 pt-2">
+                                    <label class="inline" for="id_image_2">Изображение 3:</label>
+                                    {% if item.image_2 %}
+                                        <img src="{{ item.image_2.url }}"
+                                        class="border img-thumbnail" style="width: 100px" alt="{{ item.name }}">
+                                    {% endif %}
+                                    <input type="file" name="image_2" accept="image/*" id="id_image_2">
+                                </div>
+                            </div>
+                            {% if form.image.errors %}
+                                <div class="alert alert-danger alert-dismissible fade show">{{form.image.errors}}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-row field-residual field-is_residual pt-4">
+                            <div class="flex-container form-multiline">
+                                <div class="flex-container fieldBox field-residual">
+                                    <label for="id_residual">Остатки (ЦЕЛЫЕ, вносить через ПРОБЕЛ):</label>
+                                    {% if item.is_residual %}
+                                        <input type="text" name="residual" value="{{ item.residual }}" 
+                                        class="vTextField" maxlength="100" id="id_residual">
+                                    {% else %}
+                                        <input type="text" name="residual" value="" 
+                                        class="vTextField" maxlength="100" id="id_residual">
+                                    {% endif %}
+                                </div>
+                                <div class="flex-container fieldBox field-is_residual">
+                                    {% if item.is_residual %}
+                                        <input type="checkbox" name="is_residual" id="id_is_residual" checked>
+                                    {% else %}
+                                        <input type="checkbox" name="is_residual" id="id_is_residual">
+                                    {% endif %}
+                                    <label class="vCheckboxLabel inline" for="id_is_residual">В остатках</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="submit-row pt-5">
+                            <input type="submit" value="Сохранить" class="default" name="_save">
+                            <input type="submit" value="Сохранить как новый объект" name="_saveasnew">
+                            <a href="/admin/goods/products/{{ item.id }}/delete/" class="deletelink">Удалить</a>
+                            {% comment %} <input type="submit" value="Сохранить и добавить другой объект" name="_addanother"> {% endcomment %}
+                            {% comment %} <input type="submit" value="Сохранить и продолжить редактирование" name="_continue"> {% endcomment %}
+                        </div>
+                        <script id="django-admin-form-add-constants" src="{% static "admin/js/change_form.js" %}" async="">
+                        </script>
+                        <script id="django-admin-prepopulated-fields-constants" src="{% static "admin/js/prepopulate_init.js" %}"
+                            data-prepopulated-fields="[
+                                {&quot;id&quot;: &quot;#id_slug&quot;, &quot;name&quot;: &quot;slug&quot;, 
+                                &quot;dependency_ids&quot;: [&quot;#id_name&quot;], &quot;dependency_list&quot;: [&quot;name&quot;], 
+                                &quot;maxLength&quot;: 200, &quot;allowUnicode&quot;: false}]">
+                        </script>
+
+                    </form>
+                </div>
+            </div>
+
+            <!-- Увеличить изображение в модальном окне -->
+            <div class="modal fade" id="imageModal{{ item.id }}" tabindex="-1"
+                aria-labelledby="imageModal1Label" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-black" id="imageModal1Label">{{ item.name }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Закрыть"></button>
+                        </div>
+                        <div class="modal-body">
+                            {% if item.image %}
+                                <img src="{{ item.image.url }}" class="img-fluid" alt="{{ item.name }}">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
-{% comment %} {% endcache %} {% endcomment %}
+
+
+<!-- Пагинация -->
+{% if goods %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center my-4">
+            <div class="custom-shadow d-flex">
+                <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+                <a class="page-link" href="{% if page_obj.has_previous %}?{% change_params page=page_obj.previous_page_number %}{% else %}#{% endif %}">Назад</a>
+                </li>
+                {% for page in page_obj.paginator.page_range %}
+                    {% if page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %}
+                        <li class="page-item {% if page_obj.number == page %} active {% endif %}">
+                            <a class="page-link" href="?{% change_params page=page %}">{{ page }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+                    <a class="page-link" href="{% if page_obj.has_next %}?{% change_params page=page_obj.next_page_number %}{% else %}#{% endif %}">Вперед</a>
+                </li>
+            </div>
+        </ul>
+    </nav>
+{% endif %}
 
 {% endblock  %}

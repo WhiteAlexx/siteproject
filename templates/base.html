@@ -15,6 +15,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{% static "deps/favicon/favicon-32x32.png" %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static "deps/favicon/favicon-16x16.png" %}">
     <link rel="manifest" href="{% static "deps/favicon/site.webmanifest" %}">
+    {% block admin_js %}{% endblock  %}
     <script
         type="text/javascript"
         src="https://vk.com/js/api/openapi.js?168"
@@ -86,9 +87,9 @@
                                 <ul class="dropdown-menu bg-dark">
                                     <li><a class="nav-link text-white" href="{% url "users:profile" %}">Кабинет</a></li>
                                     {% if user.is_superuser %}
-                                        <li><a class="nav-link text-white" href="{% url "admin:index" %}">Админ панель</a></li>
-                                        <li><a class="nav-link text-white" href="{% url "myadmin:myadmin" 'process' %}">Собрать заказы</a></li>
-                                        <li><a class="nav-link text-white" href="#">Товары</a></li>
+                                    <li><a class="nav-link text-white" href="{% url "myadmin:goods" 'all' %}">Товары</a></li>
+                                    <li><a class="nav-link text-white" href="{% url "myadmin:myadmin" 'process' %}">Заказы</a></li>
+                                    <li><a class="nav-link text-white" href="{% url "admin:index" %}">Админ панель</a></li>
                                     {% endif %}
                                     <li>
                                         <hr class="dropdown-divider">

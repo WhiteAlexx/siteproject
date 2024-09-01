@@ -68,9 +68,9 @@
                         </div>
                         <div class="modal-body">
                             {% if product.image %}
-                                <img src="{{ product.image.url }}" class="img-fluid" alt="{{product.name}}" alt="{{ product.name }}">
+                                <img src="{{ product.image.url }}" class="img-fluid" alt="{{product.name}}">
                             {% else %}
-                                <img src="{% static "deps/images/Not found image.png" %}" class="img-fluid" alt="{{product.name}}" alt="{{ product.name }}">
+                                <img src="{% static "deps/images/Not found image.png" %}" class="img-fluid" alt="{{product.name}}">
                             {% endif %}
                         </div>
                     </div>
