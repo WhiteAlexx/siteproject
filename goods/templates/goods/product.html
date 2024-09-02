@@ -158,11 +158,14 @@
             {% else %}
                 {% if user.groups_id == 1 %}
                     {% if product.discount_low %}
-                        <p><s>Цена {{product.price_low}} Р/{{product.unit}}</s></p>
-                        <p><strong>Цена {{product.sell_price_low}} Р/{{product.unit}}</strong></p>
-                        <span class="badge bg-warning text-dark">Скидка {{product.discount_low}}%</span>
+                        <p><strong>Возьмите {{ product.count_for_low }} {{product.unit}} 
+                            и получите цену <s>{{product.price_low}} Р/{{product.unit}}</s>
+                            {{product.sell_price_low}} Р/{{product.unit}}
+                        </strong></p>
                     {% else %}
-                        <p><strong>Цена {{product.price_low}} Р/{{product.unit}}</strong></p>
+                        <p><strong>Возьмите {{ product.count_for_low }} {{product.unit}} 
+                            и получите цену {{product.price_low}} Р/{{product.unit}}
+                        </strong></p>
                     {% endif %}
                     {% if not product.quantity %}
                         <span class="badge bg-danger text-dark">Нет в наличии</span>
