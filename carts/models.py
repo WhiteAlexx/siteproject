@@ -54,7 +54,7 @@ class Cart(models.Model):
 
     def products_price(self):
         if self.user:
-            if self.user.groups.name == 'Опт':
+            if self.user.groups.name == 'Опт' and self.quantity >= self.product.count_for_low:
                 return round(self.product.sell_price_low() * self.quantity, 2)
             if self.quantity >= self.product.count_for_mid:
                 return round(self.product.sell_price_mid() * self.quantity, 2)
