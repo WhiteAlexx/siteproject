@@ -11,7 +11,9 @@
             <th>Кол-во</th>
             <th>Цена</th>
             <th>Цена м. опт</th>
+            <th>Мин. м. опт (ед)</th>
             <th>Цена опт</th>
+            <th>Мин. опт (ед)</th>
         </tr>
     </thead>
     <tbody>
@@ -35,8 +37,14 @@
                     <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.price_mid }}"
                         data-product-id="{{ item.id }}" data-product-field="price_mid"
                         data-product-change-url="{% url "myadmin:change_goods" %}"></td>
+                    <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.count_for_mid }}"
+                        data-product-id="{{ item.id }}" data-product-field="count_for_mid"
+                        data-product-change-url="{% url "myadmin:change_goods" %}"></td>
                     <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.price_low }}"
                         data-product-id="{{ item.id }}" data-product-field="price_low"
+                        data-product-change-url="{% url "myadmin:change_goods" %}"></td>
+                    <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.count_for_low }}"
+                        data-product-id="{{ item.id }}" data-product-field="count_for_low"
                         data-product-change-url="{% url "myadmin:change_goods" %}"></td>
             </tr>
 

@@ -3,7 +3,7 @@ from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 from orders.models import Order
 
 
-def q_search(query):
+def q_search_orders(query):
 
     if query.isdigit() and len(query) <= 5:
         return Order.objects.filter(id=int(query))

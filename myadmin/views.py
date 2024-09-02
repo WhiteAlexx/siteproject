@@ -9,7 +9,8 @@ from django.template.loader import render_to_string
 from django.shortcuts import redirect
 
 from myadmin.mixins import AdminMixin
-from myadmin.utils import q_search
+from myadmin.utils import q_search_orders
+from goods.utils import q_search
 from common.mixins import CacheMixin, get_context_categories
 from goods.models import Categories, Products
 from orders.models import Order, OrderItem
@@ -35,7 +36,7 @@ class MyAdminView(LoginRequiredMixin, TemplateView):
                 status = 'В пути'
 
             if query:
-                orders = q_search(query)
+                orders = q_search_orders(query)
             elif status == "all":
                 orders = Order.objects.all().prefetch_related(
                     Prefetch(
@@ -152,8 +153,12 @@ def changeitem(request):
             product.price = change
         elif field == "price_mid":
             product.price_mid = change
+        elif field == "count_for_mid":
+            product.count_for_mid = change
         elif field == "price_low":
             product.price_low = change
+        elif field == "count_for_low":
+            product.count_for_low = change
         product.save()
 
         goods = Products.objects.all()
