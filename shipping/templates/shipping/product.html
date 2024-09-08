@@ -115,11 +115,15 @@
         <div class="card-body">
             {% if user.groups_id == 1 %}
                 {% if product.discount_low %}
-                    <p><s>Цена {{product.price_low}} Р/{{product.unit}}</s></p>
-                    <p><strong>Цена {{product.sell_price_low}} Р/{{product.unit}}</strong></p>
+                    <p><strong>От {{ product.count_for_low }} {{product.unit}} 
+                        цена <s>{{product.price_low}} </s>
+                        {{product.sell_price_low}} Р/{{product.unit}}
+                    </strong></p>
                     <span class="badge bg-warning text-dark">Скидка {{product.discount_low}}%</span>
                 {% else %}
-                    <p><strong>Цена {{product.price_low}} Р/{{product.unit}}</strong></p>
+                    <p><strong>От {{ product.count_for_low }} {{product.unit}} 
+                        цена {{product.price_low}} Р/{{product.unit}}
+                    </strong></p>
                 {% endif %}
                 <a href="{% url "carts:cart_add_low" %}" class="btn btn-dark add-to-cart"
                     data-product-id="{{ product.id }}">
@@ -130,21 +134,25 @@
                 <div class="d-flex justify-content-around">
                     <div>
                         {% if product.discount_mid %}
-                            <p><strong>Возьмите {{ product.count_for_mid }} {{product.unit}} 
-                                и получите цену <s>{{product.price_mid}} Р/{{product.unit}}</s>
+                            <p><strong>От {{ product.count_for_mid }} {{product.unit}} 
+                                цена <s>{{product.price_mid}} </s>
                                 {{product.sell_price_mid}} Р/{{product.unit}}
                             </strong></p>
+                            <span class="badge bg-warning m text-dark">-{{ product.discount_mid }}% с оптовой цены</span>
                         {% else %}
-                            <p><strong>Возьмите {{ product.count_for_mid }} {{product.unit}} 
-                                и получите цену {{product.price_mid}} Р/{{product.unit}}
+                            <p><strong>От {{ product.count_for_mid }} {{product.unit}} 
+                                цена {{product.price_mid}} Р/{{product.unit}}
                             </strong></p>
                         {% endif %}
                         {% if product.discount %}
-                            <p><s>Цена {{product.price}} Р/{{product.unit}}</s></p>
+                            <p><s>Цена {{product.price}} </s></p>
                             <p><strong>Цена {{product.sell_price}} Р/{{product.unit}}</strong></p>
                             <span class="badge bg-warning text-dark">Скидка {{product.discount}}%</span>
                         {% else %}
                             <p><strong>Цена {{product.price}} Р/{{product.unit}}</strong></p>
+                        {% endif %}
+                        {% if product.count_for > 1 %}
+                            <p>Минимальный заказ {{ product.count_for }} {{ product.unit }}</p>
                         {% endif %}
                         <a href="{% url "carts:cart_add" %}" class="btn btn-dark add-to-cart"
                             data-product-id="{{ product.id }}">
@@ -152,9 +160,6 @@
                             Добавить в корзину
                         </a>
                     </div>
-                    {% if product.discount_mid %}
-                        <span class="badge bg-warning m text-dark">-{{product.discount_mid}}% с оптовой цены</span>
-                    {% endif %}
                 </div>
 
             {% endif %}

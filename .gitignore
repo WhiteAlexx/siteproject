@@ -14,7 +14,7 @@ zzzTRASH.txt
 
 #django stuff
 # db.sqlite3
-# media/
+media/
 favicon/
 icons/
 images/

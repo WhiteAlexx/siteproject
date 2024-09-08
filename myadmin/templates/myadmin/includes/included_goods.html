@@ -10,6 +10,7 @@
             <th>Товар</th>
             <th>Кол-во</th>
             <th>Цена</th>
+            <th>Мин. (ед)</th>
             <th>Цена м. опт</th>
             <th>Мин. м. опт (ед)</th>
             <th>Цена опт</th>
@@ -33,6 +34,9 @@
                         data-product-change-url="{% url "myadmin:change_goods" %}"></td>
                     <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.price }}"
                         data-product-id="{{ item.id }}" data-product-field="price"
+                        data-product-change-url="{% url "myadmin:change_goods" %}"></td>
+                    <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.count_for }}"
+                        data-product-id="{{ item.id }}" data-product-field="count_for"
                         data-product-change-url="{% url "myadmin:change_goods" %}"></td>
                     <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.price_mid }}"
                         data-product-id="{{ item.id }}" data-product-field="price_mid"
@@ -85,7 +89,7 @@
                                     <label class="required" for="id_category">Категория:</label>
                                     <div class="related-widget-wrapper pt-2" data-model-ref="Категорию">
                                         <select name="category" required="" id="id_category">
-                                            <option value="{{ item.category.name }}" selected="">{{ item.category.name }}</option>
+                                            <option value="{{ item.category.id }}" selected="{{ item.category.name }}">{{ item.category.name }}</option>
                                             {% for category in categories %}
                                                 <option value="{{ category.id }}">{{ category.name }}</option>
                                             {% endfor %}
@@ -121,11 +125,15 @@
                             </div>
                         </div>
 
-                        <div class="form-row field-price field-discount pt-4">
+                        <div class="form-row field-price field-count_for field-discount pt-4">
                             <div class="flex-container form-multiline">
                                 <div class="flex-container fieldBox field-price">
                                     <label class="required" for="id_price">Цена:</label>
                                     <input type="number" name="price" value="{{ item.price | floatformat }}" step="0.01" required="" id="id_price">
+                                </div>
+                                <div class="flex-container fieldBox field-count_for pt-2">
+                                    <label class="required inline" for="id_count_for">Минимум единиц товара:</label>
+                                    <input type="number" name="count_for" value="{{ item.count_for }}" class="vIntegerField" required="" id="id_count_for">
                                 </div>
                                 <div class="flex-container fieldBox field-discount pt-2">
                                     <label class="required inline" for="id_discount">Скидка в %:</label>

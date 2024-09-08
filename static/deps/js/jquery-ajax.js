@@ -138,8 +138,9 @@ $(document).ready(function () {
         var $input = $(this).closest('.input-group').find('.number');
         // Берем значение количества товара
         var currentValue = parseInt($input.val());
-        // Если количества больше одного, то только тогда делаем -1
-        if (currentValue > 1) {
+        var cart_product_min = $(this).data("cart-product-min");
+        // Если количества больше минимума, то только тогда делаем -1
+        if (currentValue > cart_product_min) {
             $input.val(currentValue - 1);
             // Запускаем функцию определенную ниже
             // с аргументами (id карты, новое количество, количество уменьшилось или прибавилось, url)
@@ -357,7 +358,7 @@ $(document).on("change", ".item", function () {
 
             var productItemsContainer = $("#product-items-container");
             productItemsContainer.html(data.item_html);
-            alert("Save " + field + " = " + change + " for product " + productID);
+            
         },
     });
 });

@@ -30,7 +30,7 @@ class Products(models.Model):
     price_mid = models.DecimalField(default=0, max_digits=7, decimal_places=2, verbose_name="Цена мелкий опт")
     price_low = models.DecimalField(default=0, max_digits=7, decimal_places=2, verbose_name="Цена опт")
 
-    count_for = models.IntegerField(default=1, verbose_name="Единиц товара")
+    count_for = models.IntegerField(default=1, verbose_name="Минимум единиц товара")
     count_for_mid = models.IntegerField(default=1, verbose_name="Единиц товара для мелкого опта")
     count_for_low = models.IntegerField(default=1, verbose_name="Единиц товара для опта")
 

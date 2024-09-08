@@ -97,7 +97,7 @@ class MyAdminGoods(LoginRequiredMixin, ListView):
     # queryset = Products.objects.all().order_by('-id')
     template_name = 'myadmin/goods.html'
     context_object_name = 'goods'
-    paginate_by = 20
+    paginate_by = 25
 
     def get_queryset(self):
         category_slug = self.kwargs.get('category_slug')
@@ -151,6 +151,8 @@ def changeitem(request):
             product.quantity = change
         elif field == "price":
             product.price = change
+        elif field == "count_for":
+            product.count_for = change
         elif field == "price_mid":
             product.price_mid = change
         elif field == "count_for_mid":

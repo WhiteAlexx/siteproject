@@ -81,11 +81,15 @@
                 </div>
             </div>
 
-            <div class="form-row field-price field-discount pt-4">
+            <div class="form-row field-price field-count_for field-discount pt-4">
                 <div class="flex-container form-multiline">
                     <div class="flex-container fieldBox field-price">
                         <label class="required" for="id_price">Цена:</label>
                         <input type="number" name="price" value="0" step="0.01" required="" id="id_price">
+                    </div>
+                    <div class="flex-container fieldBox field-count_for pt-2">
+                        <label class="required inline" for="id_count_for">Минимум единиц товара:</label>
+                        <input type="number" name="count_for" value="1" class="vIntegerField" required="" id="id_count_for">
                     </div>
                     <div class="flex-container fieldBox field-discount pt-2">
                         <label class="required inline" for="id_discount">Скидка в %:</label>

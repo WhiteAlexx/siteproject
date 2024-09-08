@@ -38,7 +38,7 @@ class ProductsAdmin(admin.ModelAdmin):
     fields = [
         ('name', 'slug'),
         ('category', 'is_neo'),
-        ('price', 'discount'),
+        ('price', 'count_for', 'discount'),
         ('price_mid', 'count_for_mid', 'discount_mid'),
         # ('price_low', 'discount_low'),
         ('price_low', 'count_for_low', 'discount_low'),
