@@ -96,11 +96,13 @@
                             {% else %}
                                 <button type="button" class="btn btn-dark btn-sm decrement"
                                     data-cart-id="{{ cart.id }}" 
-                                    data-cart-change-url="{% url "carts:cart_change" %}">
+                                    data-cart-change-url="{% url "carts:cart_change" %}"
+                                    data-cart-product-min="{{ cart.product.count_for }}">
                                     {% csrf_token %}-</button>
                                 <input type="text" class="form-control number" value="{{ cart.quantity }}"
                                     id="numField" data-cart-id="{{ cart.id }}" 
-                                    data-cart-change-url="{% url "carts:cart_change" %}">
+                                    data-cart-change-url="{% url "carts:cart_change" %}"
+                                    data-cart-product-min="{{ cart.product.count_for }}">
                                 <button type="button" class="btn btn-dark btn-sm increment"
                                     data-cart-id="{{ cart.id }}" 
                                     data-cart-change-url="{% url "carts:cart_change" %}">

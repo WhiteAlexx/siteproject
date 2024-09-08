@@ -171,6 +171,9 @@ $(document).ready(function () {
         
         var cartID = $(this).data("cart-id");
         var url = $(this).data("cart-change-url");
+        var cart_product_min = $(this).data("cart-product-min");
+        if (change < cart_product_min) {
+            change = cart_product_min;}
         alert("Выбрано " + change + " ед.");
         updateCart(cartID, change, change, url);
     });
