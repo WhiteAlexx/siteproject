@@ -46,7 +46,19 @@
                     <img src="{% static "deps/images/Not found image.png" %}"
                     class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1" alt="{{ product.name }}">
                 {% endif %}
+                <span class="favorite material-icons-outlined position-absolute top-0 end-0"
+                    data-product-id="{{ product.id }}">
+                    {% if product in favorites %}
+                        <img class="del-to-fav" src="{% static "deps/icons/favorite_24dp_EA3323.svg" %}"
+                            data-product-id="{{ product.id }}" data-url="{% url "favorites:favorite_del" %}">
+                        {% else %}
+                        <img class="add-to-fav" src="{% static "deps/icons/favorite_border_24dp_5F6368.svg" %}"
+                            data-product-id="{{ product.id }}" data-url="{% url "favorites:favorite_add" %}">
+                    {% endif %}
+                </span>
             </div>
+            
+
             <div class="col-md-8 ">
                 <p class="product_id mt-3">id: {{ product.display_id }}</p>
                 <h5 class="card-title">{{product.name}}</h5>

@@ -87,6 +87,10 @@ h3 {
     margin: auto auto;
 }
 
+.custom-tooltip {
+    --bs-tooltip-bg: var(--bs-primary);
+}
+
 .badge.bg-warning.text-dark {
     position: absolute;
     top: 10px;
