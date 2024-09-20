@@ -125,8 +125,8 @@
                     <div class="container">
                         <div class="accordion" id="accordionExample">
                             {% for order in orders %}
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="heading{{ order.id }}">
+                            <div class="accordion-item pb-2">
+                                <h2 class="accordion-header pb-1" id="heading{{ order.id }}">
                                     <button class="accordion-button {% if order != orders.0 %}collapsed{% endif %}" type="button" 
                                         data-bs-toggle="collapse" data-bs-target="#collapse{{ order.id }}" aria-expanded="false" 
                                         aria-controls="collapse{{ order.id }}">
@@ -134,13 +134,17 @@
                                         Статус: <strong class="mx-2">{{order.status}} |
                                         Общая стоимость: {{order.total_cost}}</strong>
                                     </button>
-                                    {% if order.status == 'Ожидает оплаты' %}
-                                        <button type="submit" class="btn btn-dark modalButton_1" id="modalButton_1" 
+                                    {% if order.status == 'Ожидает оплаты' and order.link %}
+                                        {% comment %} <button type="submit" class="btn btn-dark modalButton_1" id="modalButton_1" 
                                             aria-expanded="false"
                                             data-order-id="{{ order.id }}" 
                                             data-order-payment-url="{% url "users:payment" %}">
                                             {% csrf_token %}
-                                            Оплатить</button>
+                                            Оплатить</button> {% endcomment %}
+                                            <a href="{{ order.link }}">
+                                                <button type="button" class="btn btn-dark">
+                                            {% csrf_token %}
+                                            Оплатить</button></a>
                                     {% endif %}
                                 </h2>
                                 <div id="collapse{{ order.id }}" class="accordion-collapse collapse {% if order == orders.0 %}show{% endif %}" aria-labelledby="heading{{ order.id }}" data-bs-parent="#accordionExample">

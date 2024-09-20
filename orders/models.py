@@ -19,13 +19,15 @@ class Order(models.Model):
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания заказа")
     telnmbr = models.DecimalField(max_digits=11, decimal_places=0, verbose_name="Номер телефона")
     adres = models.CharField(max_length=250, null=True, blank=True, verbose_name="Адрес доставки")
-    status = models.CharField(max_length=50, default='В обработке',
-                              choices=(('В обработке', 'В обработке'),
+    status = models.CharField(max_length=50, default='Ожидает оплаты',
+                              choices=(('Ожидает оплаты', 'Ожидает оплаты'),
+                                       ('В обработке', 'В обработке'),
                                        ('Собран', 'Собран'),
                                        ('В пути', 'В пути'),
                                        ('Доставлено', 'Доставлено'),
                                        ),
                               verbose_name="Статус заказа")
+    link = models.CharField(max_length=350, null=True, blank=True, verbose_name="Ссылка на оплату")
     total_cost = models.DecimalField(default=0.00, max_digits=11, decimal_places=2, verbose_name="Стоимость")
 
     class Meta:
