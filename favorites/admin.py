@@ -18,7 +18,7 @@ class FavoriteTabAdmin(admin.TabularInline):
 class FavoriteAdmin(admin.ModelAdmin):
     list_display = ['user_display', 'product_display', 'created_timestamp',]
     # list_editable = ['product_display',]
-    list_filter = ['user', 'product__name', 'created_timestamp',]
+    list_filter = ['user', 'created_timestamp',]
 
     def user_display(self, obj):
         if obj.user:
@@ -26,7 +26,7 @@ class FavoriteAdmin(admin.ModelAdmin):
         return "Анонимный пользователь"
 
     def product_display(self, obj):
-        return str(obj.product.name)
+        return str(obj.product.name) + "-id-" + str(obj.product.id)
 
     def unit_display(self, obj):
         return str(obj.product.unit)

@@ -43,7 +43,7 @@ class CatalogView(ListView):
             goods = super().get_queryset().filter(is_neo=True)
         elif category_slug == 'favorites':
             favorites = get_favorite(self.request)
-            goods = super().get_queryset().filter(name__in=list(favorite.product.name for favorite in favorites))
+            goods = super().get_queryset().filter(id__in=list(favorite.product.id for favorite in favorites))
         elif query:
             goods = q_search(query)
         else:
@@ -66,7 +66,7 @@ class CatalogView(ListView):
         context['slug_url'] = self.kwargs.get('category_slug')
         context['categories'] = get_context_categories()
         favorites = get_favorite(self.request)
-        context['favorites'] = list(favorite.product.name for favorite in favorites)
+        context['favorites'] = list(favorite.product.id for favorite in favorites)
         return context
 
     def auto_update_is_neo(self):
@@ -109,7 +109,7 @@ class ProductView(DetailView):
         context['tovar'] = get_endng(self.request)
         context['categories'] = get_context_categories()
         favorites = get_favorite(self.request)
-        context['favorites'] = list(favorite.product.name for favorite in favorites)
+        context['favorites'] = list(favorite.product.id for favorite in favorites)
         carts = Cart.objects.filter(product=self.object.id)
         context['list_quantity'] = [str(int(cart.quantity)) for cart in carts]
         return context

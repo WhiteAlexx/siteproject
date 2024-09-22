@@ -47,7 +47,7 @@
                     class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1" alt="{{ product.name }}">
                 {% endif %}
                 <span class="favorite material-icons-outlined position-absolute top-0 end-0">
-                    {% if product.name in favorites %}
+                    {% if product.id in favorites %}
                         <a id="{{ product.id }}" href="{% url "favorites:favorite_del" %}" class="del-to-fav"
                         data-product-id="{{ product.id }}">
                             {% csrf_token %}
