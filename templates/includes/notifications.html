@@ -3,10 +3,10 @@
 
 <!-- Для non_field_erors  -->
 {% if form.non_field_errors %}
-    <div class="container mt-4">
+    <div class="container mt-4 pt-5" style="z-index: 100;">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="alert alert-danger alert-dismissible fade show custom-shadow" role="alert">
+                <div class="alert alert-danger alert-dismissible fade show custom-shadow" role="alert" style="z-index: 100;">
                     {{form.non_field_errors}}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
@@ -16,33 +16,33 @@
 {% endif %}
 
 <!-- Оповещения в формах -->
-{% comment %} <div class="alert alert-danger alert-dismissible fade show">Оишбка</div> {% endcomment %}
+<div class="alert alert-danger alert-dismissible fade show" style="z-index: 200;">Оишбка</div>
 
 <!-- Для оповещений -->
-<div class="container pt-5">
+<div class="container mt-4" style="z-index: 1100;">
     <div class="row justify-content-center">
         <div class="col-md-6">
             {% if messages %}
                 {% for message in messages %}
                     {% if message.tags == 'success' %}
                     <div id="notification" 
-                        class="position-fixed start-50 translate-middle-x alert alert-success fade show custom-shadow" 
-                        role="alert">
+                        class="position-fixed start-50 translate-middle-x z-1100 alert alert-success fade show custom-shadow" 
+                        role="alert" style="z-index: 1100;">
                         {{ message }}
                     </div>
                     {% endif %}
                     {% if message.tags == 'warning' %}
                     <div id="notification" 
-                        class="position-fixed start-50 translate-middle-x alert alert-danger fade show custom-shadow" 
-                        role="alert">
+                        class="position-fixed start-50 translate-middle-x z-1100 alert alert-danger fade show custom-shadow" 
+                        role="alert" style="z-index: 1100;">
                         {{ message }}
                     </div>
                     {% endif %}
                 {% endfor %}
             {% else %}
             <div id="jq-notification" 
-                class="position-fixed start-50 translate-middle-x alert alert-success fade show custom-shadow" 
-                style="display: none;" role="alert">
+                class="position-fixed start-50 translate-middle-x z-1100 alert alert-success fade show custom-shadow" 
+                style="display: none; z-index: 1100;" role="alert">
             </div>
             {% endif %}
         </div>

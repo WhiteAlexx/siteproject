@@ -10,4 +10,4 @@ def get_favorite(request, product=None, favorite_id=None):
         query_kwargs['product'] = product
     if favorite_id:
         query_kwargs['id'] = favorite_id
-    return Favorite.objects.filter(**query_kwargs).first()
+    return Favorite.objects.filter(**query_kwargs)

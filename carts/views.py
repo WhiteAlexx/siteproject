@@ -40,6 +40,7 @@ class CartAddView(CartMixin, View):
                                     product=product, quantity=product.count_for)
 
         response_data = {
+            "message": "Товар добавлен в корзину",
             'cart_items_html': self.render_cart(request),
         }
 
@@ -75,6 +76,7 @@ class CartAddMidView(CartMixin, View):
                                     product=product, quantity=product.count_for_mid)
 
         response_data = {
+            "message": "Товар добавлен в корзину",
             'cart_items_html': self.render_cart(request),
         }
 
@@ -110,6 +112,7 @@ class CartAddLowView(CartMixin, View):
                                     product=product, quantity=product.count_for_low)
 
         response_data = {
+            "message": "Товар добавлен в корзину",
             'cart_items_html': self.render_cart(request),
         }
 
@@ -128,6 +131,7 @@ class CartChangeView(CartMixin, View):
         quantity = int(cart.quantity)
 
         response_data = {
+            "message": "Количество изменено",
             'quantity': quantity,
             'cart_items_html': self.render_cart(request),
         }
@@ -151,6 +155,7 @@ class CartRemoveView(CartMixin, View):
             clss = 0
 
         response_data = {
+            "message": "Товар удален из корзины",
             'quantity': quantity,
             'clss': clss,
             'cart_items_html': self.render_cart(request),

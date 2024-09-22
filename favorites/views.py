@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.http import JsonResponse
 from django.views import View
 
 from favorites.utils import get_favorite
@@ -15,14 +15,18 @@ class FavoriteAddView(View):
 
         favorite = get_favorite(request, product=product)
 
-        # if favorite:
-        #     favorite.delete()
         if not favorite:
             Favorite.objects.create(user=request.user if request.user.is_authenticated else None,
                                     session_key=request.session.session_key if not request.user.is_authenticated else None,
                                     product=product)
 
-        return get_favorite(request)
+        response_data = {
+            "message": f"{product.name} добавлен в избранное",
+            # 'product': product.name,
+        }
+
+        return JsonResponse(response_data)
+
 
 class FavoriteDelView(View):
 
@@ -35,4 +39,9 @@ class FavoriteDelView(View):
         if favorite:
             favorite.delete()
 
-        return get_favorite(request)
+        response_data = {
+            "message": f"{product.name} удалён из избранного",
+            # 'product': product.name,
+        }
+
+        return JsonResponse(response_data)

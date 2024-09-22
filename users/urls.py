@@ -6,7 +6,12 @@ from users import views
 app_name = "users"
 
 urlpatterns = [
-    
+
+    path("login/", views.UserLoginView.as_view(), name="login"),
+    path("registration/", views.UserRegistrationView.as_view(), name="registration"),
+    path("profile/", views.UserProfileView.as_view(), name="profile"),
+    path('users-cart/', views.UserCartView.as_view(), name='users_cart'),
+    path("logout/", views.logout, name="logout"),
 
     # path("pass-reset/", views.pass_reset_form, name="pass_reset"),
     # path("pass-reset/done/", views.pass_reset_done, name="pass_reset_done"),
@@ -31,12 +36,6 @@ urlpatterns = [
         template_name="users/password_reset_complete.html",
         ),
         name="pass_reset_complete"),
-
-    path("login/", views.UserLoginView.as_view(), name="login"),
-    path("registration/", views.UserRegistrationView.as_view(), name="registration"),
-    path("profile/", views.UserProfileView.as_view(), name="profile"),
-    path('users-cart/', views.UserCartView.as_view(), name='users_cart'),
-    path("logout/", views.logout, name="logout"),
 
     path("payment/", views.payment, name="payment"),
 ]

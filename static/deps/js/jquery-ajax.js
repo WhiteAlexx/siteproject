@@ -37,13 +37,13 @@ $(document).ready(function () {
                 csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
             },
             success: function (data) {
-                // // Сообщение
-                // successMessage.html(data.message);
-                // successMessage.fadeIn(400);
-                // // Через 7сек убираем сообщение
-                // setTimeout(function () {
-                //     successMessage.fadeOut(400);
-                // }, 7000);
+                // Сообщение
+                successMessage.html(data.message);
+                successMessage.fadeIn(400);
+                // Через 7сек убираем сообщение
+                setTimeout(function () {
+                    successMessage.fadeOut(400);
+                }, 7000);
 
                 // Увеличиваем количество товаров в корзине (отрисовка в шаблоне)
                 if (count_mid > 0) {
@@ -99,13 +99,13 @@ $(document).ready(function () {
                 csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
             },
             success: function (data) {
-                // // Сообщение
-                // successMessage.html(data.message);
-                // successMessage.fadeIn(400);
-                // // Через 7сек убираем сообщение
-                // setTimeout(function () {
-                //     successMessage.fadeOut(400);
-                // }, 7000);
+                // Сообщение
+                successMessage.html(data.message);
+                successMessage.fadeIn(400);
+                // Через 7сек убираем сообщение
+                setTimeout(function () {
+                    successMessage.fadeOut(400);
+                }, 7000);
 
                 // Уменьшаем количество товаров в корзине (отрисовка)
                 cartCount -= data.quantity;
@@ -189,13 +189,13 @@ $(document).ready(function () {
             },
 
             success: function (data) {
-                //  // Сообщение
-                // successMessage.html(data.message);
-                // successMessage.fadeIn(400);
-                //  // Через 7сек убираем сообщение
-                // setTimeout(function () {
-                //      successMessage.fadeOut(400);
-                // }, 7000);
+                 // Сообщение
+                successMessage.html(data.message);
+                successMessage.fadeIn(400);
+                 // Через 7сек убираем сообщение
+                setTimeout(function () {
+                     successMessage.fadeOut(400);
+                }, 7000);
 
                 // Изменяем количество товаров в корзине
                 var goodsInCartCount = $("#goods-in-cart-count");
@@ -334,34 +334,113 @@ $(document).ready(function () {
         $('#exampleModal_1').modal('hide');
     });
 
-});
 
 
-$(document).on("change", ".item", function () {
-    var field = $(this).data("product-field");
-    if (field == "quantity") {
-        var change = parseInt($(this).val());
-    } else {
-        var change = parseFloat($(this).val());
-    }
-    var productID = $(this).data("product-id");
-    var url = $(this).data("product-change-url");
 
-    $.ajax({
+    $(document).on("change", ".item", function () {
+        var field = $(this).data("product-field");
+        if (field == "quantity") {
+            var change = parseInt($(this).val());
+        } else {
+            var change = parseFloat($(this).val());
+        }
+        var productID = $(this).data("product-id");
+        var url = $(this).data("product-change-url");
 
-        type: "POST",
-        url: url,
-        data: {
-            product_id: productID,
-            change: change,
-            field: field,
-            csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+        $.ajax({
+
+            type: "POST",
+            url: url,
+            data: {
+                product_id: productID,
+                change: change,
+                field: field,
+                csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+                },
+            success: function (data) {
+
+                var productItemsContainer = $("#product-items-container");
+                productItemsContainer.html(data.item_html);
+                
             },
-        success: function (data) {
+        });
+    });
 
-            var productItemsContainer = $("#product-items-container");
-            productItemsContainer.html(data.item_html);
-            
-        },
+    $(document).on("click", ".add-to-fav", function (e) {
+
+        // Блокируем его базовое действие
+        e.preventDefault();
+
+        var product_id = $(this).data("product-id");
+        var add_to_fav_url = $(this).attr("href");
+
+        document.getElementById('FavImg_' + product_id).src = '/static/deps/icons/favorite_24dp_EA3323.svg';
+        document.getElementById(product_id).className = "del-to-fav";
+        document.getElementById(product_id).href = "/favorites/favorite_del/";
+
+        // делаем post запрос через ajax не перезагружая страницу
+        $.ajax({
+            type: "POST",
+            url: add_to_fav_url,
+            data: {
+                product_id: product_id,
+                csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+            },
+            success: function (data) {
+                // Сообщение
+                successMessage.html(data.message);
+                successMessage.fadeIn(400);
+                // Через 7сек убираем сообщение
+                setTimeout(function () {
+                    successMessage.fadeOut(400);
+                }, 7000);
+                
+                // alert(data.product + " добавлен в избранное");
+
+            },
+
+            error: function (data) {
+                console.log("Ошибка при добавлении товара в избранное");
+            },
+        });
+    });
+
+    $(document).on("click", ".del-to-fav", function (e) {
+
+        // Блокируем его базовое действие
+        e.preventDefault();
+
+        var product_id = $(this).data("product-id");
+        var del_to_fav_url = $(this).attr("href");
+
+        document.getElementById('FavImg_' + product_id).src = '/static/deps/icons/favorite_border_24dp_5F6368.svg';
+        document.getElementById(product_id).className = "add-to-fav";
+        document.getElementById(product_id).href = "/favorites/favorite_add/";
+
+        // делаем post запрос через ajax не перезагружая страницу
+        $.ajax({
+            type: "POST",
+            url: del_to_fav_url,
+            data: {
+                product_id: product_id,
+                csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+            },
+            success: function (data) {
+                // Сообщение
+                successMessage.html(data.message);
+                successMessage.fadeIn(400);
+                // Через 7сек убираем сообщение
+                setTimeout(function () {
+                    successMessage.fadeOut(400);
+                }, 7000);
+                
+                // alert(data.product + " удалён из избранного");
+
+            },
+
+            error: function (data) {
+                console.log("Ошибка при удалении товара из избранного");
+            },
+        });
     });
 });

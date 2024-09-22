@@ -9,7 +9,8 @@ from django.urls import reverse_lazy
 from django.views.generic import FormView
 
 from carts.models import Cart, CartQueryset
-from carts.utils import get_user_carts
+from carts.utils import get_endng, get_select_quantity, get_total_price, get_user_carts
+from common.mixins import get_context_categories
 from orders.forms import CreateOrderForm
 from orders.models import Order, OrderItem, OrderitemQueryset
 
@@ -105,7 +106,7 @@ class CreateOrderView(LoginRequiredMixin, FormView):
                     return redirect('user:profile')
         except ValidationError as e:
             messages.success(self.request, str(e))
-            return redirect('user:users_cart')
+            return redirect('orders:create_order')
 
     def form_invalid(self, form):
         messages.error(self.request, 'Заполните все обязательные поля')
@@ -114,6 +115,10 @@ class CreateOrderView(LoginRequiredMixin, FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Оформление заказа'
+        context['select_quantity'] = get_select_quantity(self.request)
+        context['total_price'] = get_total_price(self.request)
+        context['tovar'] = get_endng(self.request)
+        context['categories'] = get_context_categories()
         # context['order'] = True
         return context
 
