@@ -9,19 +9,19 @@
 {% block miniatures %}
 
 <div class="row">
-    <div class="col-lg-8 col-md-2 col-sm-2 col-2 text-center">
+    <div class="col-lg-8 col-md-2 col-sm-2 col-2 pt-2">
         {% if product.image %}
             <img src="{{ product.image.url }}"
             class="border img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1" alt="{{ product.name }}">
         {% endif %}
     </div>
-    <div class="col-lg-8 col-md-2 col-sm-2 col-2 text-center">
+    <div class="col-lg-8 col-md-2 col-sm-2 col-2 pt-2">
         {% if product.image_1 %}
             <img src="{{ product.image_1.url }}"
             class="border img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal2" alt="{{ product.name }}">
         {% endif %}
     </div>
-    <div class="col-lg-8 col-md-2 col-sm-2 col-2 text-center">
+    <div class="col-lg-8 col-md-2 col-sm-2 col-2 pt-2">
         {% if product.image_2 %}
             <img src="{{ product.image_2.url }}"
             class="border img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal3" alt="{{ product.name }}">
@@ -34,7 +34,7 @@
 
 {% block trading %}
 
-<div class="container mt-5">
+<div class="container mt-2">
     <div class="card mb-4">
         <div class="row">
             <!-- Миниатюры -->
@@ -46,15 +46,30 @@
                     <img src="{% static "deps/images/Not found image.png" %}"
                     class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1" alt="{{ product.name }}">
                 {% endif %}
+                <span class="favorite material-icons-outlined position-absolute top-0 end-0">
+                    {% if product.id in favorites %}
+                        <a id="{{ product.id }}" href="{% url "favorites:favorite_del" %}" class="del-to-fav"
+                        data-product-id="{{ product.id }}">
+                            {% csrf_token %}
+                            <img id="FavImg_{{ product.id }}" src="{% static "deps/icons/favorite_24dp_EA3323.svg" %}">
+                        </a>
+                    {% else %}
+                        <a id="{{ product.id }}" href="{% url "favorites:favorite_add" %}" class="add-to-fav"
+                        data-product-id="{{ product.id }}">
+                            {% csrf_token %}
+                            <img id="FavImg_{{ product.id }}" src="{% static "deps/icons/favorite_border_24dp_5F6368.svg" %}">
+                        </a>
+                    {% endif %}
+                </span>
             </div>
             <div class="col-md-8 ">
                 <p class="product_id mt-3">id: {{ product.display_id }}</p>
                 <h5 class="card-title">{{product.name}}</h5>
 
-                {% if not product.is_residual %}
+                {% comment %} {% if not product.is_residual %}
                     <p class="product_id mt-3">{% if product.quantity %}Доступно {{product.quantity}}{{product.unit}}{% endif %}</p>
-                {% endif %}
-                <p class="card-text">{{product.description}}</p>
+                {% endif %} {% endcomment %}
+                <p class="card-text line-break text-start pt-4">{{product.description}}</p>
             </div>
             <!-- Увеличить изображение в модальном окне -->
             <div class="modal fade" id="imageModal1" tabindex="-1"

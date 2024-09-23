@@ -10,15 +10,32 @@
 
 {% for product in shipp %}
     {% comment %} {% if product.category.name == "Товары в пути" %} {% endcomment %}
-    <div class="col-lg-4 col-md-6 p-4">
-        <div class="card rounded">
+    <div class="col-lg-3 col-md-6 p-2">
+        <div class="card h-100 rounded">
             {% if product.image %}
                 <a href="{% url "shipping:product" product.slug %}"><img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}"></a>
             {% else %}
                 <a href="{% url "shipping:product" product.slug %}"><img src="{% static "deps/images/Not found image.png" %}" class="card-img-top" alt="{{ product.name }}"></a>
             {% endif %}
+
+            <span class="material-icons-outlined position-absolute top-0 end-0">
+                {% if product.id in favorites %}
+                    <a id="{{ product.id }}" href="{% url "favorites:favorite_del" %}" class="del-to-fav"
+                        data-product-id="{{ product.id }}">
+                        {% csrf_token %}
+                        <img id="FavImg_{{ product.id }}" src="{% static "deps/icons/favorite_24dp_EA3323.svg" %}">
+                    </a>
+                {% else %}
+                    <a id="{{ product.id }}" href="{% url "favorites:favorite_add" %}" class="add-to-fav"
+                        data-product-id="{{ product.id }}">
+                        {% csrf_token %}
+                        <img id="FavImg_{{ product.id }}" src="{% static "deps/icons/favorite_border_24dp_5F6368.svg" %}">
+                    </a>
+                {% endif %}
+            </span>
+            
             <div class="card-body">
-                <h5 class="card-title text-truncate"><a href="{% url "shipping:product" product.slug %}">{{product.name}}</a></h5>
+                <h6 class="card-title text-truncate"><a href="{% url "shipping:product" product.slug %}">{{product.name}}</a></h6>
 
                 {% if user.groups_id == 1 %}
                     {% if product.discount_low %}
@@ -28,13 +45,7 @@
                     {% else %}
                         <p><strong>Цена {{product.price_low}} Р/{{product.unit}}</strong></p>
                     {% endif %}
-                    <a href="{% url "carts:cart_add_low" %}" class="btn add-to-cart bg-light bg-opacity-25"
-                        data-product-id="{{ product.id }}">
-                        {% csrf_token %}
-                        <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
-                    </a>
                 {% else %}
-
                     {% if product.discount %}
                         <p><s>Цена {{product.price}} Р/{{product.unit}}</s></p>
                         <p><strong>Цена {{product.sell_price}} Р/{{product.unit}}</strong></p>
@@ -42,18 +53,27 @@
                     {% else %}
                         <p><strong>Цена {{product.price}} Р/{{product.unit}}</strong></p>
                     {% endif %}
+                    <p> </p>
+                    {% if product.discount_mid %}
+                        <span class="badge bg-warning m text-dark">-{{product.discount_mid}}% с оптовой цены</span>
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="card-footer">
+                {% if user.groups_id == 1 %}
+                    <a href="{% url "carts:cart_add_low" %}" class="btn add-to-cart bg-light bg-opacity-25"
+                        data-product-id="{{ product.id }}">
+                        {% csrf_token %}
+                        <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
+                    </a>
+                {% else %}
                     <a href="{% url "carts:cart_add" %}" class="btn add-to-cart bg-light bg-opacity-25"
                         data-product-id="{{ product.id }}">
                         {% csrf_token %}
                         <img class="mx-1" src="{% static "deps/icons/add_shopping_cart.svg" %}" alt="Catalog Icon" width="32" height="32">
                     </a>
-                    <p> </p>
-                    {% if product.discount_mid %}
-                        <span class="badge bg-warning m text-dark">-{{product.discount_mid}}% с оптовой цены</span>
-                    {% endif %}
-
                 {% endif %}
-            </div>
+            </div>    
         </div>
     </div>
     {% comment %} {% endif %} {% endcomment %}

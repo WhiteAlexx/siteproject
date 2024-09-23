@@ -7,13 +7,14 @@ from django.views.generic import DetailView, ListView
 from common.mixins import get_context_categories
 from goods.models import Categories, Products
 from carts.utils import get_user_carts, get_endng, get_select_quantity, get_total_price
+from favorites.utils import get_favorite
 
 
 class ShippingView(ListView):
 
     template_name = 'shipping/shipping.html'
     context_object_name = 'shipp'
-    paginate_by = 6
+    paginate_by = 20
 
     def get_queryset(self):
         shipp = Products.objects.filter(category__name__icontains='в пути')
@@ -26,6 +27,8 @@ class ShippingView(ListView):
         context['total_price'] = get_total_price(self.request)
         context['tovar'] = get_endng(self.request)
         context['categories'] = get_context_categories()
+        favorites = get_favorite(self.request)
+        context['favorites'] = list(favorite.product.id for favorite in favorites)
         # context['slug_url'] = 'get_queryset.category_slug'
         return context
 
@@ -63,6 +66,8 @@ class ProductView(DetailView):
         context['total_price'] = get_total_price(self.request)
         context['tovar'] = get_endng(self.request)
         context['categories'] = get_context_categories()
+        favorites = get_favorite(self.request)
+        context['favorites'] = list(favorite.product.id for favorite in favorites)
         return context
 
 # def product(request, product_id=False, product_slug=False):

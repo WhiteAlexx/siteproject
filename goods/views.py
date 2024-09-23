@@ -20,7 +20,7 @@ class CatalogView(ListView):
     # queryset = Products.objects.all().order_by('-id')
     template_name = 'goods/catalog.html'
     context_object_name = 'goods'
-    paginate_by = 8
+    paginate_by = 20
     # allow_empty = False     #Автоматически генерирует 'error404', если в категории нет товаров
 
     def get_queryset(self):

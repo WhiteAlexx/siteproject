@@ -66,13 +66,19 @@
 
 {% for product in goods %}
     {% if request.GET.q %}
-        <div class="col-lg-3 col-md-6 p-4">
+        <div class="col-lg-3 col-md-6 p-2">
             <div class="card h-100 rounded">
                 {% include "goods/includes/included_product_card.html" %}
             </div>
         </div>
-    {% elif product.category.name != "Товары в пути" and product.category.name != "Удаленные товары"%}
-        <div class="col-lg-3 col-md-6 p-4">
+    {% elif product.id in favorites %}
+        <div class="col-lg-3 col-md-6 p-2">
+            <div class="card h-100 rounded">
+                {% include "goods/includes/included_product_card.html" %}
+            </div>
+        </div>
+    {% elif product.category.name != "Товары в пути" and product.category.name != "Удаленные товары" %}
+        <div class="col-lg-3 col-md-6 p-2">
             <div class="card h-100 rounded">
                 {% include "goods/includes/included_product_card.html" %}
             </div>

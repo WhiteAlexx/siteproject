@@ -91,6 +91,10 @@ h3 {
     --bs-tooltip-bg: var(--bs-primary);
 }
 
+.line-break {
+    white-space: pre-line;
+}
+
 .badge.bg-warning.text-dark {
     position: absolute;
     top: 10px;
