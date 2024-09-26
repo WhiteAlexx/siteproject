@@ -18,6 +18,10 @@
     z-index: -1;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     font-size: 14px;
     font-family: Roboto Slab, serif;
@@ -26,8 +30,10 @@ body {
     background-attachment: fixed;
     background-position: center center;
     background-size: cover;
-    height: 100%;
     color: azure;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .dropdown-menu {
@@ -63,6 +69,7 @@ h3 {
     text-decoration: none;
     color: black;
 }
+
 .nav-link {
     color: azure;
 }
@@ -139,12 +146,13 @@ h3 {
     box-shadow: 7px 5px 8px 1px black;
 }
 
-/* footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    padding: 10px 0;
-} */
+section {
+    flex: 1 0 auto;
+}
+
+footer {
+    flex: 0 0 auto;
+}
 
 footer,
 .btn-outline-primary {
@@ -155,6 +163,19 @@ footer a {
     text-decoration: none;
     color: black;
 }
+
+.table-responsive {
+    overflow-y: auto;
+    height: 500px;
+}
+
+.table-responsive th {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
 .media-links {
     display: flex;
     justify-content: center;
