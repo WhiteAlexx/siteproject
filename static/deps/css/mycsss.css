@@ -54,6 +54,11 @@ h3 {
 .carousel-indicators [data-bs-target] {
     background-color: black;
 }
+
+.crtbtn {
+    z-index: 3;
+}
+
 .card {
     box-shadow: 7px 5px 8px 1px black;
     background: rgba(0, 0, 0, 0.440);

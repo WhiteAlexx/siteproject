@@ -3,7 +3,9 @@
 {% load cache %}
 
 {% block modal_cart %}
-{% include "includes/cart_button.html" %}
+<div class="position-fixed crtbtn">
+    {% include "includes/cart_button.html" %}
+</div>
 {% endblock  %}
 
 {% block trading %}

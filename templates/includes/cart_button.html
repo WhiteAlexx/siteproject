@@ -7,23 +7,21 @@
 {% endif %}
 {% tovar_endng request as tovar %}
 
-<div>
-    <button type="button" class="btn btn-dark btn-secondary d-flex mt-2 position-relative" id="modalButton"
-        aria-expanded="false">
-        <img class="mx-1" src="{% static "deps/icons/basket2-fill.svg" %}" alt="Catalog Icon" width="24"
-            height="24">
-        {% if carts %}
-            <span class="position-absolute top-0 start-100 translate-middle p-2 rounded-circle bg-danger" id="goods-in-cart-count">
-                <span class="visually-hidden">Товары в корзине</span>
-            </span>
-        {% else %}
-            <span class="position-absolute top-0 start-100 translate-middle p-2 rounded-circle" id="goods-in-cart-count">
-                <span class="visually-hidden">Товары в корзине</span>
-            </span>
-        {% endif %}
-        {% comment %} <span id="goods-in-cart-count">{{ carts.total_quantity }}</span> {% endcomment %}
-    </button>
-</div>
+<button type="button" class="btn btn-dark btn-secondary d-flex mt-2 position-relative" id="modalButton"
+    aria-expanded="false">
+    <img class="mx-1" src="{% static "deps/icons/basket2-fill.svg" %}" alt="Catalog Icon" width="24"
+        height="24">
+    {% if carts %}
+        <span class="position-absolute top-0 start-100 translate-middle p-2 rounded-circle bg-danger" id="goods-in-cart-count">
+            <span class="visually-hidden">Товары в корзине</span>
+        </span>
+    {% else %}
+        <span class="position-absolute top-0 start-100 translate-middle p-2 rounded-circle" id="goods-in-cart-count">
+            <span class="visually-hidden">Товары в корзине</span>
+        </span>
+    {% endif %}
+    {% comment %} <span id="goods-in-cart-count">{{ carts.total_quantity }}</span> {% endcomment %}
+</button>
 <!-- Разметка модального окна корзины -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">

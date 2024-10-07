@@ -2,26 +2,28 @@
 {% load static %}
 
 {% block modal_cart %}
-{% include "includes/cart_button.html" %}
+<div>
+    {% include "includes/cart_button.html" %}
+</div>
 {% endblock  %}
 
 
 {% block miniatures %}
 
 <div class="row">
-    <div class="col-lg-8 col-md-2 col-sm-2 col-2 pt-2">
+    <div class="col-lg-12 col-md-2 col-sm-2 col-2 pt-2">
         {% if product.image %}
             <img src="{{ product.image.url }}"
             class="border img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1" alt="{{ product.name }}">
         {% endif %}
     </div>
-    <div class="col-lg-8 col-md-2 col-sm-2 col-2 pt-2">
+    <div class="col-lg-12 col-md-2 col-sm-2 col-2 pt-2">
         {% if product.image_1 %}
             <img src="{{ product.image_1.url }}"
             class="border img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal2" alt="{{ product.name }}">
         {% endif %}
     </div>
-    <div class="col-lg-8 col-md-2 col-sm-2 col-2 pt-2">
+    <div class="col-lg-12 col-md-2 col-sm-2 col-2 pt-2">
         {% if product.image_2 %}
             <img src="{{ product.image_2.url }}"
             class="border img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal3" alt="{{ product.name }}">
