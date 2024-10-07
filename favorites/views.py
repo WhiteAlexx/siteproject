@@ -22,7 +22,6 @@ class FavoriteAddView(View):
 
         response_data = {
             "message": f"{product.name} добавлен в избранное",
-            # 'product': product.name,
         }
 
         return JsonResponse(response_data)
@@ -41,7 +40,6 @@ class FavoriteDelView(View):
 
         response_data = {
             "message": f"{product.name} удалён из избранного",
-            # 'product': product.name,
         }
 
         return JsonResponse(response_data)

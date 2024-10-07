@@ -1,15 +1,11 @@
 from datetime import timedelta, datetime
-from typing import Any
-from django.core.paginator import Paginator
-from django.db.models import QuerySet
 from django.db.models.base import Model as Model
-from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
 from carts.models import Cart
-from carts.utils import get_user_carts, get_endng, get_select_quantity, get_total_price
+from carts.utils import get_endng, get_select_quantity, get_total_price
 from common.mixins import get_context_categories
-from goods.models import Categories, Products
+from goods.models import Products
 from goods.utils import q_search
 from favorites.utils import get_favorite
 
@@ -17,7 +13,6 @@ from favorites.utils import get_favorite
 class CatalogView(ListView):
 
     model = Products
-    # queryset = Products.objects.all().order_by('-id')
     template_name = 'goods/catalog.html'
     context_object_name = 'goods'
     paginate_by = 20
@@ -59,6 +54,7 @@ class CatalogView(ListView):
         context['tovar'] = get_endng(self.request)
         context['slug_url'] = self.kwargs.get('category_slug')
         context['categories'] = get_context_categories()
+        context['user_name'] = self.request.user.username
         favorites = get_favorite(self.request)
         context['favorites'] = list(favorite.product.id for favorite in favorites)
         return context
@@ -66,8 +62,6 @@ class CatalogView(ListView):
 
 class ProductView(DetailView):
 
-    # model = Products
-    # slug_field = 'slug'
     template_name = 'goods/product.html'
     slug_url_kwarg = 'product_slug'
     context_object_name = 'product'
@@ -83,50 +77,9 @@ class ProductView(DetailView):
         context['total_price'] = get_total_price(self.request)
         context['tovar'] = get_endng(self.request)
         context['categories'] = get_context_categories()
+        context['user_name'] = self.request.user.username
         favorites = get_favorite(self.request)
         context['favorites'] = list(favorite.product.id for favorite in favorites)
         carts = Cart.objects.filter(product=self.object.id)
         context['list_quantity'] = [str(int(cart.quantity)) for cart in carts]
         return context
-
-# def catalog(request, category_slug=None):
-
-#     page = request.GET.get("page", 1)
-#     on_sale = request.GET.get("on_sale", None)
-#     order_by = request.GET.get("order_by", None)
-#     query = request.GET.get("q", None)
-
-#     if category_slug == "tovary":
-#         goods = Products.objects.exclude(category__slug__icontains='v-puti').exclude(category__slug__icontains='udalennye')
-#     elif query:
-#         goods = q_search(query)
-#     else:
-#         goods = Products.objects.filter(category__slug=category_slug)
-
-#     if on_sale:
-#         goods = goods.filter(discount__gt=0)
-
-#     if order_by and order_by != "default":
-#         goods = goods.order_by(order_by)
-
-#     paginator = Paginator(goods, 6)
-#     crrnt_pg = paginator.page(page)
-
-#     print(crrnt_pg.object_list)
-
-#     context = {
-#         "title": "Товары в наличии",
-#         "goods": crrnt_pg,
-#         "slug_url": category_slug,
-#     }
-#     return render(request, "goods/catalog.html", context)
-
-# def product(request, product_id=False, product_slug=False):
-
-#     if product_id:
-#         product = Products.objects.get(id=product_id)
-#     else:
-#         product = Products.objects.get(slug=product_slug)
-
-#     context = {"product": product}
-#     return render(request, "goods/product.html", context=context)

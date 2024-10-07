@@ -1,6 +1,4 @@
-from urllib import request
 from django.db import models
-from django.forms import BooleanField
 
 from goods.models import Products
 from users.models import User
@@ -34,6 +32,7 @@ class CartQueryset(models.QuerySet):
             return sum(cart.quantity for cart in self)
 
         return 0
+
 
 class Cart(models.Model):
 
@@ -71,10 +70,3 @@ class Cart(models.Model):
             return f'Корзина {self.user.username}{self.select_buy} | Товар {self.product.name} | Количество {self.quantity} | {self.product.unit}'
 
         return f'Анонимная корзина{self.select_buy} | Товар {self.product.name} | Количество {self.quantity} | {self.product.unit}'
-
-
-# def get_user_group(self):
-#     if self.user:
-#         return self.user.groups.name
-
-#     return None

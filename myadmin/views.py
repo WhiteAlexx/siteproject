@@ -2,19 +2,16 @@ from datetime import timedelta, datetime
 from django.db.models import Prefetch
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView
-from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.shortcuts import redirect
 
-from myadmin.mixins import AdminMixin
 from myadmin.utils import q_search_orders
 from goods.utils import q_search
-from common.mixins import CacheMixin, get_context_categories
-from goods.models import Categories, Products
+from common.mixins import get_context_categories
+from goods.models import Products
 from orders.models import Order, OrderItem
-from users.models import User
 
 # Create your views here.
 

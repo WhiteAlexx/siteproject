@@ -3,17 +3,12 @@ from django.contrib import admin
 from orders.models import Order, OrderItem
 
 # Register your models here.
-# admin.site.register(Order)
-# admin.site.register(OrderItem)
 
 class OrderItemTabulareAdmin(admin.TabularInline):
     model = OrderItem
     fields = "product", "name", "price", "quantity"
     search_fields = ("product", "name",)
     extra = 0
-
-    # def unit_display(self, obj):
-    #     return str(obj.product.unit)
 
 
 @admin.register(OrderItem)

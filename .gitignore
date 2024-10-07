@@ -9,11 +9,13 @@ cache/
 .vscode
 .idea
 zzzTRASH.txt
-# trash.py
+trash.py
 # 2gis_key
 
 #django stuff
 # db.sqlite3
+.env
+settings.py
 media/
 favicon/
 icons/
