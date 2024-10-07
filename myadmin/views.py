@@ -1,4 +1,4 @@
-import time
+from datetime import timedelta, datetime
 from django.db.models import Prefetch
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView
@@ -28,7 +28,9 @@ class MyAdminView(LoginRequiredMixin, TemplateView):
 
             query = self.request.GET.get("q")
 
-            if status == 'process':
+            if status == 'nonpay':
+                status = 'Ожидает оплаты'
+            elif status == 'process':
                 status = 'В обработке'
             elif status == 'done':
                 status = 'Собран'
@@ -60,10 +62,16 @@ def orderdone(request):
 
         order_id = request.POST.get("order_id")
         status = request.POST.get("status")
+        link = request.POST.get("link")
         order = Order.objects.get(id=order_id)
         # order = self.get_order(order_id=order_id)     #   => mixin
 
-        if status == 'В обработке':
+        if status == 'Ожидает оплаты':
+            order.link = link
+        elif status == 'payed':
+            status = 'Ожидает оплаты'
+            order.status = 'В обработке'
+        elif status == 'В обработке':
             order.status = 'Собран'
         elif status == 'Собран':
             order.status = 'В пути'
@@ -107,13 +115,7 @@ class MyAdminGoods(LoginRequiredMixin, ListView):
         if category_slug == "tovary":
             goods = super().get_queryset().exclude(category__slug__icontains='v-puti').exclude(category__slug__icontains='udalennye')
         elif category_slug == 'is_neo':
-            # сюда поставить проверку на месяц 2592000сек
-            query_create_date = super().get_queryset().filter(is_neo=True)
-            for product in query_create_date:
-
-                if time.time() - time.mktime(time.strptime(product.created_time_stamp.strftime("%Y-%m-%d %H:%M:%S"), "%Y-%m-%d %H:%M:%S")) > 2592000:
-                    product.is_neo = False
-                    product.save()
+            super().get_queryset().filter(created_time_stamp__lte=datetime.now() - timedelta(30)).update(is_neo=False)
             goods = super().get_queryset().filter(is_neo=True)
         elif category_slug == 'v-puti':
             goods = super().get_queryset().filter(category__slug__icontains='v-puti')

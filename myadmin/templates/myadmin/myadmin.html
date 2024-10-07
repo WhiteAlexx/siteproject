@@ -17,6 +17,9 @@
                     <a class="nav-link text-white" aria-current="page" href="{% url "main:index" %}">Домашняя страница</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'nonpay' %}">Ожидает оплаты</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'process' %}">В обработке</a>
                 </li>
                 <li class="nav-item">

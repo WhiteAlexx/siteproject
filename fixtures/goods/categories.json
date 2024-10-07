@@ -10,42 +10,6 @@
     },
     {
         "model": "goods.categories",
-        "pk": 5,
-        "fields": {
-            "name": "Распродажа",
-            "slug": "rasprodazha",
-            "image": "cats_images/1_An7jmQd.png"
-        }
-    },
-    {
-        "model": "goods.categories",
-        "pk": 6,
-        "fields": {
-            "name": "Популярное",
-            "slug": "populyarnoe",
-            "image": "cats_images/2_FF8461U.png"
-        }
-    },
-    {
-        "model": "goods.categories",
-        "pk": 7,
-        "fields": {
-            "name": "Новинки",
-            "slug": "novinki",
-            "image": "cats_images/3_467dnA4.png"
-        }
-    },
-    {
-        "model": "goods.categories",
-        "pk": 8,
-        "fields": {
-            "name": "Остатки",
-            "slug": "ostatki",
-            "image": "cats_images/4_75qQT8S.png"
-        }
-    },
-    {
-        "model": "goods.categories",
         "pk": 9,
         "fields": {
             "name": "Товары в пути",
@@ -64,10 +28,235 @@
     },
     {
         "model": "goods.categories",
-        "pk": 11,
+        "pk": 12,
         "fields": {
-            "name": "Залежалось );",
-            "slug": "zalezhalos",
+            "name": "Нитки",
+            "slug": "nitki",
+            "image": "cats_images/7031514463.jpeg"
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 13,
+        "fields": {
+            "name": "Резинки",
+            "slug": "rezinki",
+            "image": "cats_images/7037608258.jpeg"
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 14,
+        "fields": {
+            "name": "Нашивки",
+            "slug": "nashivki",
+            "image": "cats_images/7059350782.jpeg"
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 15,
+        "fields": {
+            "name": "Кружево неэластичное",
+            "slug": "kruzhevo-neelastichnoe",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 16,
+        "fields": {
+            "name": "Кружево эластичное",
+            "slug": "kruzhevo-elastichnoe",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 17,
+        "fields": {
+            "name": "Кружево хлопковое",
+            "slug": "kruzhevo-hlopkovoe",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 18,
+        "fields": {
+            "name": "Резинка боксерная",
+            "slug": "rezinka-boksernaya",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 19,
+        "fields": {
+            "name": "Резинка поясная",
+            "slug": "rezinka-poyasnaya",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 20,
+        "fields": {
+            "name": "Резина ажурная",
+            "slug": "rezina-azhurnaya",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 21,
+        "fields": {
+            "name": "Резинка окантовочная",
+            "slug": "rezinka-okantovochnaya",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 22,
+        "fields": {
+            "name": "Шнурки",
+            "slug": "shnurki",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 23,
+        "fields": {
+            "name": "Ножницы",
+            "slug": "nozhnicy",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 24,
+        "fields": {
+            "name": "Киперная лента",
+            "slug": "kipernaya-lenta",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 25,
+        "fields": {
+            "name": "Молнии",
+            "slug": "molnii",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 26,
+        "fields": {
+            "name": "Нитки наборы",
+            "slug": "nitki-nabory",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 27,
+        "fields": {
+            "name": "Фурнитура",
+            "slug": "furnitura",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 28,
+        "fields": {
+            "name": "Лампасы",
+            "slug": "lampasy",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 29,
+        "fields": {
+            "name": "Мелки",
+            "slug": "melki",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 30,
+        "fields": {
+            "name": "Пуговицы",
+            "slug": "pugovicy",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 31,
+        "fields": {
+            "name": "Бусины",
+            "slug": "businy",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 32,
+        "fields": {
+            "name": "Пришивная фурнитура",
+            "slug": "prishivnaya-furnitura",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 33,
+        "fields": {
+            "name": "Пуллеры",
+            "slug": "pullery",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 34,
+        "fields": {
+            "name": "Игольницы",
+            "slug": "igolnicy",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 35,
+        "fields": {
+            "name": "Шпульки",
+            "slug": "shpulki",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 36,
+        "fields": {
+            "name": "Лампы",
+            "slug": "lampy",
+            "image": ""
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 37,
+        "fields": {
+            "name": "Кнопки",
+            "slug": "knopki",
             "image": ""
         }
     }

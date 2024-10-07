@@ -89,7 +89,7 @@
                                     <li><a class="nav-link text-white" href="{% url "catalog:index" 'favorites' %}">Избранное</a></li>
                                     {% if user.is_superuser %}
                                     <li><a class="nav-link text-white" href="{% url "myadmin:goods" 'all' %}">Товары</a></li>
-                                    <li><a class="nav-link text-white" href="{% url "myadmin:myadmin" 'process' %}">Заказы</a></li>
+                                    <li><a class="nav-link text-white" href="{% url "myadmin:myadmin" 'nonpay' %}">Заказы</a></li>
                                     <li><a class="nav-link text-white" href="{% url "admin:index" %}">Админ панель</a></li>
                                     {% endif %}
                                     <li>

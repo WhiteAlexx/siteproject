@@ -29,27 +29,27 @@
                 <td><a class="text-white" href="#offcanvasProduct" 
                     data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop{{ item.id }}" aria-controls="staticBackdrop">
                     {{ item.name }}</a> {{ item.unit }}</td>
-                    <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.quantity }}"
-                        data-product-id="{{ item.id }}" data-product-field="quantity"
-                        data-product-change-url="{% url "myadmin:change_goods" %}"></td>
-                    <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.price }}"
-                        data-product-id="{{ item.id }}" data-product-field="price"
-                        data-product-change-url="{% url "myadmin:change_goods" %}"></td>
-                    <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.count_for }}"
-                        data-product-id="{{ item.id }}" data-product-field="count_for"
-                        data-product-change-url="{% url "myadmin:change_goods" %}"></td>
-                    <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.price_mid }}"
-                        data-product-id="{{ item.id }}" data-product-field="price_mid"
-                        data-product-change-url="{% url "myadmin:change_goods" %}"></td>
-                    <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.count_for_mid }}"
-                        data-product-id="{{ item.id }}" data-product-field="count_for_mid"
-                        data-product-change-url="{% url "myadmin:change_goods" %}"></td>
-                    <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.price_low }}"
-                        data-product-id="{{ item.id }}" data-product-field="price_low"
-                        data-product-change-url="{% url "myadmin:change_goods" %}"></td>
-                    <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.count_for_low }}"
-                        data-product-id="{{ item.id }}" data-product-field="count_for_low"
-                        data-product-change-url="{% url "myadmin:change_goods" %}"></td>
+                <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.quantity }}"
+                    data-product-id="{{ item.id }}" data-product-field="quantity"
+                    data-product-change-url="{% url "myadmin:change_goods" %}"></td>
+                <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.price }}"
+                    data-product-id="{{ item.id }}" data-product-field="price"
+                    data-product-change-url="{% url "myadmin:change_goods" %}"></td>
+                <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.count_for }}"
+                    data-product-id="{{ item.id }}" data-product-field="count_for"
+                    data-product-change-url="{% url "myadmin:change_goods" %}"></td>
+                <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.price_mid }}"
+                    data-product-id="{{ item.id }}" data-product-field="price_mid"
+                    data-product-change-url="{% url "myadmin:change_goods" %}"></td>
+                <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.count_for_mid }}"
+                    data-product-id="{{ item.id }}" data-product-field="count_for_mid"
+                    data-product-change-url="{% url "myadmin:change_goods" %}"></td>
+                <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.price_low }}"
+                    data-product-id="{{ item.id }}" data-product-field="price_low"
+                    data-product-change-url="{% url "myadmin:change_goods" %}"></td>
+                <td><input type="text" class="form-control-sm item" style="width: 70px" value="{{ item.count_for_low }}"
+                    data-product-id="{{ item.id }}" data-product-field="count_for_low"
+                    data-product-change-url="{% url "myadmin:change_goods" %}"></td>
             </tr>
 
             <div class="offcanvas offcanvas-start text-bg-dark" style="width: 555px" data-bs-backdrop="static" tabindex="-1" 
