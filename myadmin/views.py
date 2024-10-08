@@ -37,6 +37,7 @@ class MyAdminView(LoginRequiredMixin, TemplateView):
             if query:
                 orders = q_search_orders(query)
             elif status == "all":
+                status = 'Все'
                 orders = Order.objects.all().prefetch_related(
                     Prefetch(
                         "orderitem_set",
@@ -46,6 +47,7 @@ class MyAdminView(LoginRequiredMixin, TemplateView):
             else:
                 orders = get_orders(status)
         context = super().get_context_data(**kwargs)
+        context['status'] = status.upper()
         context['orders'] = orders
         context['title'] = 'Заказы'
 

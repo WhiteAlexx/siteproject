@@ -1,7 +1,7 @@
 from typing import Any
 from django.views.generic import TemplateView
 
-from common.mixins import get_context_categories
+from common.mixins import get_context_categories, get_context_user
 from carts.utils import get_endng, get_select_quantity, get_total_price
 
 
@@ -15,7 +15,7 @@ class IndexView(TemplateView):
         context['total_price'] = get_total_price(self.request)
         context['tovar'] = get_endng(self.request)
         context['categories'] = get_context_categories()
-        context['user_name'] = self.request.user.username
+        context['user_name'] = get_context_user(self.request)
         return context
 
 

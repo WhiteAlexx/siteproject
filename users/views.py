@@ -13,7 +13,7 @@ from django.views.generic import CreateView, TemplateView, UpdateView
 
 from carts.models import Cart
 from carts.utils import get_endng, get_select_quantity, get_total_price
-from common.mixins import CacheMixin, get_context_categories
+from common.mixins import CacheMixin, get_context_categories, get_context_user
 from orders.models import Order, OrderItem
 from users.forms import ProfileForm, UserLoginForm, UserRegistrationForm
 
@@ -50,7 +50,7 @@ class UserLoginView(LoginView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Авторизация'
         context['categories'] = get_context_categories()
-        context['user_name'] = self.request.user.username
+        context['user_name'] = get_context_user(self.request)
         return context
 
 
@@ -78,7 +78,7 @@ class UserRegistrationView(CreateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Регистрация'
         context['categories'] = get_context_categories()
-        context['user_name'] = self.request.user.username
+        context['user_name'] = get_context_user(self.request)
         return context
 
 
@@ -106,7 +106,7 @@ class UserProfileView(LoginRequiredMixin, CacheMixin, UpdateView):
         context['total_price'] = get_total_price(self.request)
         context['tovar'] = get_endng(self.request)
         context['categories'] = get_context_categories()
-        context['user_name'] = self.request.user.username
+        context['user_name'] = get_context_user(self.request)
 
         # orders = cache.get(f'orders_for_user_{self.request.user.id}')
         # if not orders:
@@ -133,7 +133,7 @@ class UserCartView(TemplateView):
         context['total_price'] = get_total_price(self.request)
         context['tovar'] = get_endng(self.request)
         context['categories'] = get_context_categories()
-        context['user_name'] = self.request.user.username
+        context['user_name'] = get_context_user(self.request)
         return context
 
 

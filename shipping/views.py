@@ -1,6 +1,6 @@
 from django.views.generic import DetailView, ListView
 
-from common.mixins import get_context_categories
+from common.mixins import get_context_categories, get_context_user
 from goods.models import Products
 from carts.utils import get_endng, get_select_quantity, get_total_price
 from favorites.utils import get_favorite
@@ -23,7 +23,7 @@ class ShippingView(ListView):
         context['total_price'] = get_total_price(self.request)
         context['tovar'] = get_endng(self.request)
         context['categories'] = get_context_categories()
-        context['user_name'] = self.request.user.username
+        context['user_name'] = get_context_user(self.request)
         favorites = get_favorite(self.request)
         context['favorites'] = list(favorite.product.id for favorite in favorites)
         return context
@@ -46,7 +46,7 @@ class ProductView(DetailView):
         context['total_price'] = get_total_price(self.request)
         context['tovar'] = get_endng(self.request)
         context['categories'] = get_context_categories()
-        context['user_name'] = self.request.user.username
+        context['user_name'] = get_context_user(self.request)
         favorites = get_favorite(self.request)
         context['favorites'] = list(favorite.product.id for favorite in favorites)
         return context

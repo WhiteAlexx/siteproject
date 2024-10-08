@@ -13,3 +13,7 @@ class CacheMixin:
 
 def get_context_categories():
     return Categories.objects.exclude(slug__contains='tovary').order_by('name')
+
+
+def get_context_user(request):
+    return request.user.username.upper()

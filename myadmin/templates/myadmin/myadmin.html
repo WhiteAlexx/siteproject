@@ -16,20 +16,28 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" aria-current="page" href="{% url "main:index" %}">Домашняя страница</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'nonpay' %}">Ожидает оплаты</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'process' %}">В обработке</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'done' %}">Собран</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'delivery' %}">В пути</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'all' %}">Все</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Статус заказа - {{ status }}
+                    </a>
+                    <ul class="dropdown-menu bg-dark overflow-auto navbar-nav-scroll" id="navbarScroll">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'nonpay' %}">Ожидает оплаты</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'process' %}">В обработке</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'done' %}">Собран</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'delivery' %}">В пути</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:myadmin" 'all' %}">Все</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" aria-current="page" href="{% url "myadmin:goods" 'all' %}">Товары</a>
@@ -49,7 +57,7 @@
 {% comment %} {% cache 60 usero_rders user.id %} {% endcomment %}
 <div class="col-md-12 pt-4">
     <div class=" bg-white bg-opacity-50 rounded custom-shadow">
-        <h3 class="text-center text-black">Заказы</h3>
+        <h3 class="text-center text-black">Заказы - {{ status }}</h3>
         <!-- Разметка заказов -->
         <div class="container-fluid" id="order-items-container">
             {% include "myadmin/includes/included_myadmin.html" %}
