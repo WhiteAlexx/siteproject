@@ -27,7 +27,7 @@ class Order(models.Model):
                                        ('Доставлено', 'Доставлено'),
                                        ),
                               verbose_name="Статус заказа")
-    link = models.CharField(max_length=350, null=True, blank=True, verbose_name="Ссылка на оплату")
+    link = models.URLField(max_length=350, null=True, blank=True, verbose_name="Ссылка на оплату")
     total_cost = models.DecimalField(default=0.00, max_digits=11, decimal_places=2, verbose_name="Стоимость")
 
     class Meta:

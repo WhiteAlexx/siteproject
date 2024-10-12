@@ -20,30 +20,29 @@ class Categories(models.Model):
 class Products(models.Model):
     name = models.CharField(max_length=150, verbose_name="Название")
     slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name="URL")
+    category = models.ForeignKey(to=Categories, on_delete=models.PROTECT, verbose_name="Категория")
+    is_neo = models.BooleanField(default=True, verbose_name='В новинки')
+    created_time_stamp = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
+
+    price = models.DecimalField(default=0, max_digits=7, decimal_places=2, verbose_name="Цена")
+    count_for = models.IntegerField(default=1, verbose_name="Минимум единиц товара")
+    discount = models.DecimalField(default=0, max_digits=4, decimal_places=2, verbose_name="Скидка в %")
+
+    price_mid = models.DecimalField(default=0, max_digits=7, decimal_places=2, verbose_name="Цена мелкий опт")
+    count_for_mid = models.IntegerField(default=1, verbose_name="Единиц товара для мелкого опта")
+    discount_mid = models.DecimalField(default=0, max_digits=4, decimal_places=2, verbose_name="Скидка в %")
+
+    price_low = models.DecimalField(default=0, max_digits=7, decimal_places=2, verbose_name="Цена опт")
+    count_for_low = models.IntegerField(default=1, verbose_name="Единиц товара для опта")
+    discount_low = models.DecimalField(default=0, max_digits=4, decimal_places=2, verbose_name="Скидка в %")
+
+    unit = models.CharField(max_length=10, verbose_name="Единица измерения")
+    quantity = models.IntegerField(default=0, verbose_name="Количество")
     description = models.TextField(blank=True, null=True, verbose_name="Описание")
 
     image = models.ImageField(upload_to="goods_images", blank=True, null=True, verbose_name="Изображение 1")
     image_1 = models.ImageField(upload_to="goods_images", blank=True, null=True, verbose_name="Изображение 2")
     image_2 = models.ImageField(upload_to="goods_images", blank=True, null=True, verbose_name="Изображение 3")
-
-    price = models.DecimalField(default=0, max_digits=7, decimal_places=2, verbose_name="Цена")
-    price_mid = models.DecimalField(default=0, max_digits=7, decimal_places=2, verbose_name="Цена мелкий опт")
-    price_low = models.DecimalField(default=0, max_digits=7, decimal_places=2, verbose_name="Цена опт")
-
-    count_for = models.IntegerField(default=1, verbose_name="Минимум единиц товара")
-    count_for_mid = models.IntegerField(default=1, verbose_name="Единиц товара для мелкого опта")
-    count_for_low = models.IntegerField(default=1, verbose_name="Единиц товара для опта")
-
-    discount = models.DecimalField(default=0, max_digits=4, decimal_places=2, verbose_name="Скидка в %")
-    discount_mid = models.DecimalField(default=0, max_digits=4, decimal_places=2, verbose_name="Скидка в %")
-    discount_low = models.DecimalField(default=0, max_digits=4, decimal_places=2, verbose_name="Скидка в %")
-
-    unit = models.CharField(max_length=10, verbose_name="Единица измерения")
-    quantity = models.IntegerField(default=0, verbose_name="Количество")
-    category = models.ForeignKey(to=Categories, on_delete=models.PROTECT, verbose_name="Категория")
-
-    created_time_stamp = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
-    is_neo = models.BooleanField(default=True, verbose_name='В новинки')
 
     is_residual = models.BooleanField(default=False, verbose_name='В остатках')
     residual = models.CharField(max_length=100, blank=True, null=True, verbose_name="Остатки (ЦЕЛЫЕ, вносить через ПРОБЕЛ)")
