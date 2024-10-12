@@ -3,7 +3,6 @@
 {% load cache %}
 
 
-
 {% block trading %}
 <nav class="navbar fixed-top navbar-expand-lg bg-dark">
     <div class="container-fluid">
@@ -54,7 +53,6 @@
     </div>
 </nav>
 <!-- Оформленные заказы -->
-{% comment %} {% cache 60 usero_rders user.id %} {% endcomment %}
 <div class="col-md-12 pt-4">
     <div class=" bg-white bg-opacity-50 rounded custom-shadow">
         <h3 class="text-center text-black">Заказы - {{ status }}</h3>
@@ -65,6 +63,5 @@
         <!-- Закончилась разметка заказов -->
     </div>
 </div>
-{% comment %} {% endcache %} {% endcomment %}
 
 {% endblock  %}
