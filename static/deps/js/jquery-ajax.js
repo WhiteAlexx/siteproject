@@ -309,6 +309,7 @@ $(document).ready(function () {
         var url = $(this).data("order-status-url");
         var orderID = $(this).data("order-id");
         var status = $(this).data("order-status");
+        var link = $("#link" + orderID).val();
 
         // делаем post запрос через ajax не перезагружая страницу
         $.ajax({
@@ -318,6 +319,7 @@ $(document).ready(function () {
             data: {
                 order_id: orderID,
                 status: status,
+                link: link,
                 csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
                 },
             success: function (data) {
@@ -326,6 +328,7 @@ $(document).ready(function () {
                 orderItemsContainer.html(data.order_items_html);
             },
         });
+    // }
     });
 
 
@@ -333,8 +336,6 @@ $(document).ready(function () {
     $('#exampleModal_1 .btn-close').click(function () {
         $('#exampleModal_1').modal('hide');
     });
-
-
 
 
     $(document).on("change", ".item", function () {
@@ -365,6 +366,7 @@ $(document).ready(function () {
             },
         });
     });
+
 
     $(document).on("click", ".add-to-fav", function (e) {
 

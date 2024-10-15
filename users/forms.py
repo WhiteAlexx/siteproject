@@ -13,18 +13,6 @@ class UserLoginForm(AuthenticationForm):
     username = forms.CharField()
     password = forms.CharField()
 
-    # username = forms.CharField(
-    #     label = 'Имя пользователя',
-    #     widget=forms.TextInput(attrs={"autofocus": True,
-    #                                   'class': 'form-control',
-    #                                   'placeholder': 'Введите ваше имя пользователя'})
-    # )
-    # password = forms.CharField(
-    #     label = 'Пароль',
-    #     widget=forms.PasswordInput(attrs={"autocomplete": "current-password",
-    #                                   'class': 'form-control',
-    #                                   'placeholder': 'Введите ваш пароль'})
-    # )
 
 class UserRegistrationForm(UserCreationForm):
 
@@ -49,18 +37,6 @@ class UserRegistrationForm(UserCreationForm):
     password1 = forms.CharField()
     password2 = forms.CharField()
 
-    # telnmbr = forms.DecimalField(
-    #     # widget=forms.NumberInput(
-    #     #     attrs={
-    #     #         "class": "form-control",
-    #     #         "placeholder": "Введите ваш номер телефона",
-    #     #     }
-    #     # )
-    #     max_value=11,
-    #     max_digits=11,
-    #     decimal_places=0
-    # )
-    # adres = forms.CharField()
 
 class ProfileForm(UserChangeForm):
     class Meta:
@@ -81,35 +57,3 @@ class ProfileForm(UserChangeForm):
     telnmbr = forms.DecimalField(max_digits=11, decimal_places=0)
     email = forms.CharField()
     adres = forms.CharField()
-
-    # image = forms.ImageField(
-    #     widget=forms.FileInput(attrs={"class": "form-control mt-3"}), required=False
-    # )
-    # first_name = forms.CharField(
-    #     widget=forms.TextInput(
-    #         attrs={
-    #             "class": "form-control",
-    #             "placeholder": "Введите ваше имя",
-    #         }
-    #     )
-    # )
-    # last_name = forms.CharField()
-
-
-# class UserPassResetForm(PasswordResetForm):
-
-#     class Meta:
-#         model = User
-#         fields = ['email',]
-
-#     email = forms.CharField()
-
-
-# class UserPassSetForm(SetPasswordForm):
-
-#     class Meta:
-#         model = User
-#         fields = ['new_password1', 'new_password2',]
-
-#     new_password1 = forms.CharField()
-#     new_password2 = forms.CharField()

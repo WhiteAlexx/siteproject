@@ -1,24 +1,11 @@
 {% load static %}
 
 
-
-{% if carts %}
-    {% comment %} <input type="checkbox" name="select_all" id="id_select_all" value='on' 
-        {% if request.POST.select_all == 'on' %}
-            checked
-        {% elif request.GET.select_all == 'on' %}
-            checked
-        {% else %}
-        {% endif %} 
-        checked>
-    <label class="text-black" for="id_select_all"><strong>Выбрать все</strong></label> {% endcomment %}
-{% else %}
+{% if not carts %}
     <h4 class="text-center mb-4 text-dark">Корзина еще не заполнена. Положите туда что-нибудь.</h4>
     <div class="col-lg-12 col-md-12 text-center mt-4">
         <a href="{% url "catalog:index" 'tovary' %}"><button type="button" class="btn btn-dark btn-lg my-5">Все товары</button></a>
-        {% comment %} {% if user.groups_id == 1 %} {% endcomment %}
         <a href="{% url "shipping:index" %}"><button type="button" class="btn btn-dark btn-lg my-5">В пути</button></a>
-        {% comment %} {% endif %} {% endcomment %}
     </div>
 {% endif %}
 
@@ -111,8 +98,6 @@
                         </div>
                     </div>
                     <div class="col p-0">
-                        {% comment %} {% if carts.total_price > 5000 %}
-                            <p class="text-black">{{ cart.product.unit }}  x  {{ cart.product.price_low }} Р/{{ cart.product.unit }}</p> {% endcomment %}
                         {% if user.groups_id == 1 and cart.quantity >= cart.product.count_for_low %}
                             <p class="text-black">{{ cart.product.unit }}  x  {{ cart.product.sell_price_low }} Р/{{ cart.product.unit }}</p>
                         {% elif cart.quantity >= cart.product.count_for_mid %}

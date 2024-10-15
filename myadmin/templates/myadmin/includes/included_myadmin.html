@@ -9,7 +9,8 @@
                 aria-controls="collapse{{ order.id }}">
                 Заказ № {{ order.id }} - {{ order.created_timestamp }} |
                 Статус: <strong class="mx-2">{{order.status}} |
-                Покупатель: {{order.user.last_name}} {{order.user.first_name}}</strong>
+                Покупатель: {{order.user.last_name}} {{order.user.first_name}}</strong> |
+                Стоимость: {{ order.total_cost }}
             </button>
         </h2>
         <div id="collapse{{ order.id }}" class="accordion-collapse collapse {% if order == orders.0 %}show{% endif %}" 
@@ -55,8 +56,26 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                    {% if order.status == 'Ожидает оплаты' %}
+                        <input type="text" class="form-control-sm" id="link{{ order.id }}" style="width: 250px" value="{{ order.link }}"
+                            >
+                        <button type="button" class="btn btn-dark modalButton_0 mt-2"  id="modalButton_0"
+                            aria-expanded="false"
+                            data-order-status-url="{% url "myadmin:order_done" %}"
+                            data-order-id="{{ order.id }}"
+                            data-order-status="{{ order.status }}">
+                            {% csrf_token %}
+                            Отправить ссылку</button>
+                        <button type="button" class="btn btn-dark modalButton_0 mt-2"  id="modalButton_0"
+                            aria-expanded="false"
+                            data-order-status-url="{% url "myadmin:order_done" %}"
+                            data-order-id="{{ order.id }}"
+                            data-order-status="payed">
+                            {% csrf_token %}
+                            Собрать</button>
+                    {% endif %}
                     {% if order.status == 'В обработке' %}
-                        <button type="button" class="btn btn-dark modalButton_0"  id="modalButton_0"
+                        <button type="button" class="btn btn-dark modalButton_0 pt-2"  id="modalButton_0"
                             aria-expanded="false"
                             data-order-status-url="{% url "myadmin:order_done" %}"
                             data-order-id="{{ order.id }}"
@@ -65,7 +84,7 @@
                             Собрать</button>
                     {% endif %}
                     {% if order.status == 'Собран' %}
-                        <button type="button" class="btn btn-dark modalButton_0"  id="modalButton_0"
+                        <button type="button" class="btn btn-dark modalButton_0 pt-2"  id="modalButton_0"
                             aria-expanded="false"
                             data-order-status-url="{% url "myadmin:order_done" %}"
                             data-order-id="{{ order.id }}"

@@ -2,19 +2,16 @@ from datetime import timedelta, datetime
 from django.db.models import Prefetch
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView
-from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.shortcuts import redirect
 
-from myadmin.mixins import AdminMixin
 from myadmin.utils import q_search_orders
 from goods.utils import q_search
-from common.mixins import CacheMixin, get_context_categories
-from goods.models import Categories, Products
+from common.mixins import get_context_categories
+from goods.models import Products
 from orders.models import Order, OrderItem
-from users.models import User
 
 # Create your views here.
 
@@ -28,7 +25,9 @@ class MyAdminView(LoginRequiredMixin, TemplateView):
 
             query = self.request.GET.get("q")
 
-            if status == 'process':
+            if status == 'nonpay':
+                status = 'Ожидает оплаты'
+            elif status == 'process':
                 status = 'В обработке'
             elif status == 'done':
                 status = 'Собран'
@@ -38,6 +37,7 @@ class MyAdminView(LoginRequiredMixin, TemplateView):
             if query:
                 orders = q_search_orders(query)
             elif status == "all":
+                status = 'Все'
                 orders = Order.objects.all().prefetch_related(
                     Prefetch(
                         "orderitem_set",
@@ -47,6 +47,7 @@ class MyAdminView(LoginRequiredMixin, TemplateView):
             else:
                 orders = get_orders(status)
         context = super().get_context_data(**kwargs)
+        context['status'] = status.upper()
         context['orders'] = orders
         context['title'] = 'Заказы'
 
@@ -60,10 +61,16 @@ def orderdone(request):
 
         order_id = request.POST.get("order_id")
         status = request.POST.get("status")
+        link = request.POST.get("link")
         order = Order.objects.get(id=order_id)
         # order = self.get_order(order_id=order_id)     #   => mixin
 
-        if status == 'В обработке':
+        if status == 'Ожидает оплаты':
+            order.link = link
+        elif status == 'payed':
+            status = 'Ожидает оплаты'
+            order.status = 'В обработке'
+        elif status == 'В обработке':
             order.status = 'Собран'
         elif status == 'Собран':
             order.status = 'В пути'

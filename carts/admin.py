@@ -1,10 +1,9 @@
 from django.contrib import admin
 
-from goods.models import Products
 from carts.models import Cart
 
 # Register your models here.
-#admin.site.register(Cart)
+
 class CartTabAdmin(admin.TabularInline):
     model = Cart
     fields = "product", "quantity", "created_timestamp"
